@@ -12,10 +12,12 @@
 import Vue from 'vue';
 import Component from 'vue-class-component';
 import Bar from '@/components/Bar.vue';
+import Footer from '@/components/Footer.vue';
 
 @Component({
   components: {
-    Bar
+    Bar,
+    Footer
   }
 })
 export default class Home extends Vue {}
