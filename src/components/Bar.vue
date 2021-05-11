@@ -1,6 +1,31 @@
 <template>
   <div>
-    <v-navigation-drawer v-model="mobile.drawer" v-if="isMobile" app />
+    <v-navigation-drawer v-model="mobile.drawer" v-if="isMobile" app>
+      <v-list nav dense>
+        <v-list-item-group active-class="blue--text text--accent-4">
+          <v-list-item @click="toIndex">
+            <v-list-item-icon>
+              <v-icon>mdi-home</v-icon>
+            </v-list-item-icon>
+            <v-list-item-title>Index</v-list-item-title>
+          </v-list-item>
+
+          <v-list-item @click="toTimeLine">
+            <v-list-item-icon>
+              <v-icon>mdi-antenna</v-icon>
+            </v-list-item-icon>
+            <v-list-item-title>TimeLine</v-list-item-title>
+          </v-list-item>
+
+          <v-list-item @click="toAbout">
+            <v-list-item-icon>
+              <v-icon>mdi-account</v-icon>
+            </v-list-item-icon>
+            <v-list-item-title>About</v-list-item-title>
+          </v-list-item>
+        </v-list-item-group>
+      </v-list>
+    </v-navigation-drawer>
 
     <v-app-bar color="blue darken-1" dark>
       <v-tool-bar>
@@ -47,5 +72,17 @@ export default class Bar extends Vue {
   mobile = {
     drawer: null
   };
+
+  toAbout(): void {
+    this.$router.push({ path: 'about' });
+  }
+
+  toIndex(): void {
+    this.$router.push({ path: 'index' });
+  }
+
+  toTimeLine(): void {
+    this.$router.push({ path: 'timeline' });
+  }
 }
 </script>

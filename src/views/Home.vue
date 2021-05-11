@@ -4,6 +4,7 @@
     <transition name="slide-x-transition" mode="out-in">
       <router-view />
     </transition>
+    <Footer />
   </v-app>
 </template>
 
