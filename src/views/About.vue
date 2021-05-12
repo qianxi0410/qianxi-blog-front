@@ -1,6 +1,10 @@
 <template>
   <div class="about">
-    <Parallax :src="src" />
+    <Parallax
+      :motto="parallax.motto"
+      :src="parallax.src"
+      :title="parallax.title"
+    />
     <h1>This is an about page</h1>
     <div style="height:1000px"></div>
   </div>
@@ -10,7 +14,7 @@
 import Component from 'vue-class-component';
 import Vue from 'vue';
 import Parallax from '@/components/Parallax.vue';
-import { AboutSrc } from '@/config/index';
+import { AboutSrc, AboutTitle, AboutMotto } from '@/config/index';
 
 @Component({
   components: {
@@ -18,6 +22,10 @@ import { AboutSrc } from '@/config/index';
   }
 })
 export default class About extends Vue {
-  src = AboutSrc;
+  parallax = {
+    src: AboutSrc,
+    title: AboutTitle,
+    motto: AboutMotto
+  };
 }
 </script>

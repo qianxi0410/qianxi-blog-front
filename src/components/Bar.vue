@@ -29,11 +29,11 @@
 
     <v-app-bar color="blue darken-1" dark ref="bar">
       <div>
-        <v-toolbar-title class="ml-3">千禧's blog</v-toolbar-title>
+        <v-toolbar-title class="ml-3">{{ blogName }}</v-toolbar-title>
       </div>
 
       <v-avatar class="ml-6">
-        <img src="@/assets/avatar.jpg" alt="John" />
+        <img src="@/assets/avatar.jpg" alt="qianxi" />
       </v-avatar>
 
       <v-spacer></v-spacer>
@@ -60,6 +60,7 @@
 <script lang="ts">
 import Component from 'vue-class-component';
 import Vue from 'vue';
+import { BlogName } from '@/config/index';
 
 @Component({
   computed: {
@@ -72,6 +73,8 @@ export default class Bar extends Vue {
   mobile = {
     drawer: null
   };
+
+  blogName = BlogName;
 
   toAbout(): void {
     this.$router.push({ path: 'about' });

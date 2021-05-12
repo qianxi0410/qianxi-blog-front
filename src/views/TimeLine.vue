@@ -1,6 +1,10 @@
 <template>
   <div class="about">
-    <Parallax :src="src" />
+    <Parallax
+      :motto="parallax.motto"
+      :src="parallax.src"
+      :title="parallax.title"
+    />
     <h1>This is an timeline page</h1>
   </div>
 </template>
@@ -9,7 +13,7 @@
 import Component from 'vue-class-component';
 import Vue from 'vue';
 import Parallax from '@/components/Parallax.vue';
-import { TimeLineSrc } from '@/config/index';
+import { TimeLineSrc, TimeLineTitle, TimeLineMotto } from '@/config/index';
 
 @Component({
   components: {
@@ -17,6 +21,10 @@ import { TimeLineSrc } from '@/config/index';
   }
 })
 export default class TimeLine extends Vue {
-  src = TimeLineSrc;
+  parallax = {
+    src: TimeLineSrc,
+    title: TimeLineTitle,
+    motto: TimeLineMotto
+  };
 }
 </script>

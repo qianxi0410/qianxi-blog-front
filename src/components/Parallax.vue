@@ -3,10 +3,10 @@
     <v-row align="center" justify="center">
       <v-col class="text-center" cols="12">
         <h1 class="display-1 font-weight-thin mb-4">
-          Vuetify
+          {{ title }}
         </h1>
         <h4 class="subheading">
-          Build your application today!
+          {{ motto }}
         </h4>
       </v-col>
     </v-row>
@@ -20,6 +20,14 @@ import Vue from 'vue';
 @Component({
   props: {
     src: {
+      type: String,
+      required: true
+    },
+    title: {
+      type: String,
+      required: true
+    },
+    motto: {
       type: String,
       required: true
     }
