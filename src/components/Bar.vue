@@ -27,10 +27,10 @@
       </v-list>
     </v-navigation-drawer>
 
-    <v-app-bar color="blue darken-1" dark>
-      <v-tool-bar>
+    <v-app-bar color="blue darken-1" dark ref="bar">
+      <div>
         <v-toolbar-title class="ml-3">千禧's blog</v-toolbar-title>
-      </v-tool-bar>
+      </div>
 
       <v-avatar class="ml-6">
         <img src="@/assets/avatar.jpg" alt="John" />
