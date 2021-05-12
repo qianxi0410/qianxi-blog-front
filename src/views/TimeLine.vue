@@ -9,6 +9,7 @@
 import Component from 'vue-class-component';
 import Vue from 'vue';
 import Parallax from '@/components/Parallax.vue';
+import { TimeLineSrc } from '@/config/index';
 
 @Component({
   components: {
@@ -16,6 +17,6 @@ import Parallax from '@/components/Parallax.vue';
   }
 })
 export default class TimeLine extends Vue {
-  src = 'https://cdn.vuetifyjs.com/images/parallax/material.jpg';
+  src = TimeLineSrc;
 }
 </script>
