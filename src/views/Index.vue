@@ -1,7 +1,7 @@
 <template>
   <div>
     <Parallax
-      :blur="true"
+      blur
       :motto="parallax.motto"
       :src="parallax.src"
       :title="parallax.title"
