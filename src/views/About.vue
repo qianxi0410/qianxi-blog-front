@@ -1,5 +1,5 @@
 <template>
-  <div class="about">
+  <div>
     <Parallax
       :motto="parallax.motto"
       :src="parallax.src"

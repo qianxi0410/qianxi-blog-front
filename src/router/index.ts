@@ -12,14 +12,22 @@ const routes: Array<RouteConfig> = [
     component: Home,
     children: [
       {
+        path: '',
+        name: 'Index',
+        component: () =>
+          import(/* webpackChunkName: "about" */ '../views/Index.vue')
+      },
+      {
         path: 'about',
         name: 'About',
-        component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
+        component: () =>
+          import(/* webpackChunkName: "about" */ '../views/About.vue')
       },
       {
         path: 'timeline',
         name: 'TimeLine',
-        component: () => import(/* webpackChunkName: "about" */ '../views/TimeLine.vue')
+        component: () =>
+          import(/* webpackChunkName: "about" */ '../views/TimeLine.vue')
       }
     ]
   }
