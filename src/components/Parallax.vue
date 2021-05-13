@@ -1,6 +1,12 @@
 <template>
   <div class="pic_container">
-    <v-parallax :height="height" dark ref="pic" :src="src" class="blur" />
+    <v-parallax
+      :height="height"
+      dark
+      :src="src"
+      ref="parallax"
+      :class="blur ? 'blur' : ''"
+    />
     <v-row align="center" justify="center" class="drag">
       <v-col class="text-center" cols="12">
         <h1 class="font-weight-thin mb-4 text-h3 text-lg-h2">
@@ -31,11 +37,20 @@ import Vue from 'vue';
     motto: {
       type: String,
       required: true
+    },
+    blur: {
+      type: Boolean,
+      required: true,
+      default: false
     }
   }
 })
 export default class Parallax extends Vue {
   height = 0;
+
+  $refs!: {
+    parallax: Element;
+  };
 
   handleHeight(): void {
     if (this.$vuetify.breakpoint.xs) {
