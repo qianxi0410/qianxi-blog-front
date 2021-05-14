@@ -27,7 +27,7 @@
       </v-list>
     </v-navigation-drawer>
 
-    <v-app-bar color="blue darken-1" dark ref="bar">
+    <v-app-bar color="primary" dark ref="bar">
       <div>
         <v-toolbar-title class="ml-3">{{ blogName }}</v-toolbar-title>
       </div>

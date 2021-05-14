@@ -35,8 +35,8 @@ a:after {
   right: -0.1em;
   bottom: 0;
   transition: top 200ms cubic-bezier(0, 0.8, 0.13, 1);
-  background-color: rgba(23, 182, 108, 0.5);
-  /* background-color: var(--v-primary-lighten5); */
+  background-color: var(--v-primary-base);
+  opacity: 0.2;
 }
 a:hover:after {
   top: 0%;

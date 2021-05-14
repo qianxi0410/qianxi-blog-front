@@ -11,7 +11,7 @@
       class="mb-10"
     >
       <template v-slot:activator>
-        <v-btn v-model="fab" color="blue darken-1" dark fab right>
+        <v-btn v-model="fab" color="primary" dark fab right>
           <v-icon v-if="fab">
             mdi-close
           </v-icon>
@@ -23,7 +23,7 @@
       <v-btn fab dark small color="green" @click="back2Top">
         <v-icon>mdi-chevron-up</v-icon>
       </v-btn>
-      <v-btn fab dark small color="indigo">
+      <v-btn fab dark small color="indigo" @click="toggleColorpick">
         <v-icon>mdi-plus</v-icon>
       </v-btn>
       <v-btn fab dark small color="red">
@@ -36,8 +36,13 @@
 <script lang="ts">
 import Component from 'vue-class-component';
 import Vue from 'vue';
+import { mapMutations } from 'vuex';
 
-@Component
+@Component({
+  methods: {
+    ...mapMutations('inner', ['toggleColorpick'])
+  }
+})
 export default class Back2Top extends Vue {
   fab = false;
 
