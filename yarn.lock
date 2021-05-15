@@ -9242,6 +9242,11 @@ vuetify@^2.4.0:
   resolved "https://registry.nlark.com/vuetify/download/vuetify-2.4.11.tgz?cache=0&sync_timestamp=1619620963788&other_urls=https%3A%2F%2Fregistry.nlark.com%2Fvuetify%2Fdownload%2Fvuetify-2.4.11.tgz#3aba19a32cd89c5dce523260f589cf95d90e2dce"
   integrity sha1-OroZoyzYnF3OUjJg9YnPldkOLc4=
 
+vuex-class@^0.3.2:
+  version "0.3.2"
+  resolved "https://registry.npm.taobao.org/vuex-class/download/vuex-class-0.3.2.tgz#c7e96a076c1682137d4d23a8dcfdc63f220e17a8"
+  integrity sha1-x+lqB2wWghN9TSOo3P3GPyIOF6g=
+
 vuex@^3.4.0:
   version "3.6.2"
   resolved "https://registry.npm.taobao.org/vuex/download/vuex-3.6.2.tgz#236bc086a870c3ae79946f107f16de59d5895e71"

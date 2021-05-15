@@ -36,17 +36,20 @@
 <script lang="ts">
 import Component from 'vue-class-component';
 import Vue from 'vue';
-import { mapMutations } from 'vuex';
+import { namespace } from 'vuex-class';
 
-@Component({
-  methods: {
-    ...mapMutations('inner', ['toggleColorpick'])
-  }
-})
+const inner = namespace('inner');
+
+@Component
 export default class Back2Top extends Vue {
   fab = false;
 
   show = false;
+
+  @inner.State('colorpickShow') isShow: boolean | undefined;
+
+  // eslint-disable-next-line @typescript-eslint/ban-types
+  @inner.Mutation('toggleColorpick') toggleColorpick: Function | undefined;
 
   scrollHandler(): void {
     const top =
@@ -54,6 +57,11 @@ export default class Back2Top extends Vue {
       document.documentElement.scrollTop ||
       document.body.scrollTop;
     this.show = top >= 400;
+
+    if (this.isShow) {
+      // eslint-disable-next-line @typescript-eslint/ban-types
+      (this.toggleColorpick as Function)();
+    }
   }
 
   mounted(): void {
