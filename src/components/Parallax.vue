@@ -2,12 +2,11 @@
   <div class="pic_container">
     <v-parallax
       :height="height"
-      dark
-      :src="src"
+      :src="this.$vuetify.theme.dark ? src[1] : src[0]"
       ref="parallax"
       :class="blur ? 'blur' : ''"
     />
-    <v-row align="center" justify="center" class="drag">
+    <v-row align="center" justify="center" class="drag text--primary">
       <v-col class="text-center" cols="12">
         <h1 class="font-weight-thin mb-4 text-h3 text-lg-h2">
           {{ title }}
@@ -27,7 +26,7 @@ import Vue from 'vue';
 @Component({
   props: {
     src: {
-      type: String,
+      type: Array,
       required: true
     },
     title: {
@@ -92,6 +91,5 @@ export default class Parallax extends Vue {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  color: white;
 }
 </style>

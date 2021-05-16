@@ -2,7 +2,7 @@
   <div>
     <v-navigation-drawer v-model="mobile.drawer" v-if="isMobile" app>
       <v-list nav dense>
-        <v-list-item-group active-class="blue--text text--accent-4">
+        <v-list-item-group active-class="primary--text text--accent-4">
           <v-list-item @click="toIndex">
             <v-list-item-icon>
               <v-icon>mdi-home</v-icon>
@@ -27,7 +27,7 @@
       </v-list>
     </v-navigation-drawer>
 
-    <v-app-bar color="primary" dark ref="bar">
+    <v-app-bar color="primary" class="accent--text" ref="bar">
       <div>
         <v-toolbar-title class="ml-3">{{ blogName }}</v-toolbar-title>
       </div>
@@ -39,7 +39,12 @@
       <v-spacer></v-spacer>
 
       <v-slide-y-transition>
-        <v-tabs v-if="!isMobile" right class="mr-10">
+        <v-tabs
+          v-if="!isMobile"
+          active-class="accent--text"
+          right
+          class="mr-10"
+        >
           <v-tabs-slider color="white" />
           <v-tab to="/index">Index</v-tab>
           <v-tab to="/timeline">TimeLine</v-tab>
@@ -89,3 +94,9 @@ export default class Bar extends Vue {
   }
 }
 </script>
+
+<style scoped>
+.bar {
+  color: teal;
+}
+</style>

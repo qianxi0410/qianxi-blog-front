@@ -11,23 +11,27 @@
       class="mb-10"
     >
       <template v-slot:activator>
-        <v-btn v-model="fab" color="primary" dark fab right>
+        <v-btn v-model="fab" color="primary" fab right>
           <v-icon v-if="fab">
             mdi-close
           </v-icon>
-          <v-icon v-else>
-            mdi-account-circle
-          </v-icon>
+          <v-icon v-else>mdi-code-tags</v-icon>
         </v-btn>
       </template>
-      <v-btn fab dark small color="green" @click="back2Top">
+      <v-btn fab small color="green" @click="back2Top">
         <v-icon>mdi-chevron-up</v-icon>
       </v-btn>
-      <v-btn fab dark small color="indigo" @click="toggleColorpick">
-        <v-icon>mdi-plus</v-icon>
+      <v-btn
+        fab
+        small
+        color="indigo"
+        v-if="!this.$vuetify.theme.dark"
+        @click="toggleColorpick"
+      >
+        <v-icon>mdi-format-color-highlight</v-icon>
       </v-btn>
-      <v-btn fab dark small color="red">
-        <v-icon>mdi-delete</v-icon>
+      <v-btn fab small color="cyan" @click="changeTheme">
+        <v-icon>mdi-theme-light-dark</v-icon>
       </v-btn>
     </v-speed-dial>
   </v-fab-transition>
@@ -62,6 +66,10 @@ export default class Back2Top extends Vue {
       // eslint-disable-next-line @typescript-eslint/ban-types
       (this.toggleColorpick as Function)();
     }
+  }
+
+  changeTheme(): void {
+    this.$vuetify.theme.dark = !this.$vuetify.theme.dark;
   }
 
   mounted(): void {

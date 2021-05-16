@@ -22,7 +22,8 @@ export default class Link extends Vue {}
 <style scss scoped>
 a {
   text-decoration: none;
-  color: #121314;
+  /* color: #121314; */
+  color: var(--v-accent-base);
   position: relative;
   margin-left: 0.3em;
   margin-right: 0.3em;

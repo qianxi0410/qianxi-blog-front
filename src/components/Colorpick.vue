@@ -4,7 +4,8 @@
       elevation="10"
       class="picker"
       dot-size="25"
-      v-show="isShow"
+      hide-inputs
+      v-if="isShow"
       swatches-max-height="200"
       v-model="value"
     ></v-color-picker>
@@ -22,6 +23,7 @@ const inner = namespace('inner');
   watch: {
     value(val: any): void {
       this.$vuetify.theme.themes.light.primary = val.hex;
+      // this.$vuetify.theme.themes.light.accent = val.hex;
     }
   }
 })

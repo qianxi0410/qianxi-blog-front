@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="top_container">
     <Parallax
       blur
       :motto="parallax.motto"
@@ -30,3 +30,15 @@ export default class Index extends Vue {
   };
 }
 </script>
+
+<style scoped>
+.top_container {
+  background-color: var(--v-secondary-base);
+  color: var(--v-accent-base);
+}
+
+::selection {
+  background: wheat;
+  color: var(--v-primary-base);
+}
+</style>
