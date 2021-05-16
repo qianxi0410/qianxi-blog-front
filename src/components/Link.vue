@@ -19,10 +19,9 @@ import Vue from 'vue';
 export default class Link extends Vue {}
 </script>
 
-<style scss scoped>
+<style scoped>
 a {
   text-decoration: none;
-  /* color: #121314; */
   color: var(--v-accent-base);
   position: relative;
   margin-left: 0.3em;

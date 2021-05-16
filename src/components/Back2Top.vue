@@ -50,10 +50,9 @@ export default class Back2Top extends Vue {
 
   show = false;
 
-  @inner.State('colorpickShow') isShow: boolean | undefined;
+  @inner.State('colorpickShow') isShow!: boolean;
 
-  // eslint-disable-next-line @typescript-eslint/ban-types
-  @inner.Mutation('toggleColorpick') toggleColorpick: Function | undefined;
+  @inner.Mutation('toggleColorpick') toggleColorpick!: () => void;
 
   scrollHandler(): void {
     const top =
@@ -63,8 +62,7 @@ export default class Back2Top extends Vue {
     this.show = top >= 400;
 
     if (this.isShow) {
-      // eslint-disable-next-line @typescript-eslint/ban-types
-      (this.toggleColorpick as Function)();
+      this.toggleColorpick();
     }
   }
 

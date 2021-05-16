@@ -17,20 +17,44 @@ import Component from 'vue-class-component';
 import Vue from 'vue';
 import { namespace } from 'vuex-class';
 
+type Color = {
+  alpha: number;
+  hex: string;
+  hexa: string;
+  hsla: {
+    h: number;
+    s: number;
+    l: number;
+    a: number;
+  };
+  hsva: {
+    h: number;
+    s: number;
+    v: number;
+    a: number;
+  };
+  hue: number;
+  rgba: {
+    r: number;
+    g: number;
+    b: number;
+    a: number;
+  };
+};
+
 const inner = namespace('inner');
 
 @Component({
   watch: {
-    value(val: any): void {
+    value(val: Color): void {
       this.$vuetify.theme.themes.light.primary = val.hex;
-      // this.$vuetify.theme.themes.light.accent = val.hex;
     }
   }
 })
 export default class Colorpick extends Vue {
-  value = {};
+  value: Color = {} as Color;
 
-  @inner.State('colorpickShow') isShow: boolean | undefined;
+  @inner.State('colorpickShow') isShow!: boolean;
 }
 </script>
 
