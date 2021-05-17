@@ -94,9 +94,3 @@ export default class Bar extends Vue {
   }
 }
 </script>
-
-<style scoped>
-.bar {
-  color: teal;
-}
-</style>

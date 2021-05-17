@@ -7,7 +7,7 @@
       right
       bottom
       fixed
-      transition="slide-y-reverse-transition"
+      transition="slide-x-transition"
       class="mb-10"
     >
       <template v-slot:activator>
@@ -60,6 +60,7 @@ export default class Back2Top extends Vue {
       document.documentElement.scrollTop ||
       document.body.scrollTop;
     this.show = top >= 400;
+    this.fab = false;
 
     if (this.isShow) {
       this.toggleColorpick();

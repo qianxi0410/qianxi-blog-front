@@ -53,6 +53,7 @@ export default class Link extends Vue {}
   color: var(--v-accent-base);
   position: relative;
 }
+
 .dark:after {
   content: '」';
   color: wheat;

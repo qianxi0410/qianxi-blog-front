@@ -6,8 +6,18 @@
       :src="parallax.src"
       :title="parallax.title"
     />
-    <h1>This is an index page</h1>
-    <div style="height:1000px"></div>
+    <v-container>
+      <PostCard
+        src="https://images.wallpaperscraft.com/image/sea_boat_rock_207575_1280x720.jpg"
+      />
+      <PostCard
+        src="https://images.wallpaperscraft.com/image/sea_boat_silhouette_169414_1600x1200.jpg"
+      />
+      <PostCard
+        src="https://images.wallpaperscraft.com/image/deer_planet_art_129712_1280x720.jpg"
+      />
+      <PostCard />
+    </v-container>
   </div>
 </template>
 
@@ -15,11 +25,13 @@
 import Component from 'vue-class-component';
 import Vue from 'vue';
 import Parallax from '@/components/Parallax.vue';
+import PostCard from '@/components/PostCard.vue';
 import { IndexSrc, IndexTitle, IndexMotto } from '@/config/index';
 
 @Component({
   components: {
-    Parallax
+    Parallax,
+    PostCard
   }
 })
 export default class Index extends Vue {
