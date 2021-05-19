@@ -7,16 +7,7 @@
       :title="parallax.title"
     />
     <v-container>
-      <PostCard
-        src="https://images.wallpaperscraft.com/image/sea_boat_rock_207575_1280x720.jpg"
-      />
-      <PostCard
-        src="https://images.wallpaperscraft.com/image/sea_boat_silhouette_169414_1600x1200.jpg"
-      />
-      <PostCard
-        src="https://images.wallpaperscraft.com/image/deer_planet_art_129712_1280x720.jpg"
-      />
-      <PostCard />
+      <PostCard :post="item" v-for="item in post" :key="item" />
     </v-container>
   </div>
 </template>
@@ -40,6 +31,25 @@ export default class Index extends Vue {
     title: IndexTitle,
     motto: IndexMotto
   };
+
+  post = [
+    {
+      src:
+        'https://images.wallpaperscraft.com/image/sea_boat_rock_207575_1280x720.jpg',
+      title: 'promise.js简要实现',
+      description: '简单实现了一个promise',
+      publishDate: '2021-05-19',
+      tags: ['vue', 'javascript']
+    },
+    {
+      src:
+        'https://images.wallpaperscraft.com/image/sea_boat_rock_207575_1280x720.jpg',
+      title: 'promise.js简要实现2',
+      description: '简单实现了一个promise',
+      publishDate: '2021-05-20',
+      tags: ['vue', 'javascript']
+    }
+  ];
 }
 </script>
 
