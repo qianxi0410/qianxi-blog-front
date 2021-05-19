@@ -7,7 +7,7 @@
       :title="parallax.title"
     />
     <v-container>
-      <PostCard :post="item" v-for="item in post" :key="item" />
+      <PostCard :post="item" v-for="(item, index) in post" :key="index" />
     </v-container>
   </div>
 </template>
@@ -34,18 +34,17 @@ export default class Index extends Vue {
 
   post = [
     {
-      src:
-        'https://images.wallpaperscraft.com/image/sea_boat_rock_207575_1280x720.jpg',
+      src: 'https://w.wallhaven.cc/full/z8/wallhaven-z8p9rj.jpg',
       title: 'promise.js简要实现',
       description: '简单实现了一个promise',
       publishDate: '2021-05-19',
       tags: ['vue', 'javascript']
     },
     {
-      src:
-        'https://images.wallpaperscraft.com/image/sea_boat_rock_207575_1280x720.jpg',
+      src: 'https://w.wallhaven.cc/full/28/wallhaven-281d5y.png',
       title: 'promise.js简要实现2',
-      description: '简单实现了一个promise',
+      description:
+        '简单实现了一个promise简单实现了一个promise简单实现了一个promise简单实现了一个promise简单实现了一个promise简单实现了一个promise简单实现了一个promise简单实现了一个promise简单实现了一个promise简单实现了一个promise',
       publishDate: '2021-05-20',
       tags: ['vue', 'javascript']
     }
