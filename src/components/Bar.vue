@@ -3,11 +3,11 @@
     <v-navigation-drawer v-model="mobile.drawer" v-if="isMobile" app>
       <v-list nav dense>
         <v-list-item-group active-class="primary--text text--accent-4">
-          <v-list-item @click="toIndex">
+          <v-list-item @click="toPosts">
             <v-list-item-icon>
               <v-icon>mdi-home</v-icon>
             </v-list-item-icon>
-            <v-list-item-title>Index</v-list-item-title>
+            <v-list-item-title>Posts</v-list-item-title>
           </v-list-item>
 
           <v-list-item @click="toTimeLine">
@@ -46,7 +46,7 @@
           class="mr-10"
         >
           <v-tabs-slider color="white" />
-          <v-tab to="/index">Index</v-tab>
+          <v-tab to="/posts">Posts</v-tab>
           <v-tab to="/timeline">TimeLine</v-tab>
           <v-tab to="/about">About</v-tab>
         </v-tabs>
@@ -85,8 +85,8 @@ export default class Bar extends Vue {
     this.$router.push({ path: 'about' });
   }
 
-  toIndex(): void {
-    this.$router.push({ path: 'index' });
+  toPosts(): void {
+    this.$router.push({ path: 'posts' });
   }
 
   toTimeLine(): void {

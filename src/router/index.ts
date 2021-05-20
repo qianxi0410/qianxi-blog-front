@@ -8,14 +8,15 @@ const routes: Array<RouteConfig> = [
   {
     path: '/',
     name: 'Home',
-    alias: '/index',
+    alias: '/posts',
+    redirect: 'posts',
     component: Home,
     children: [
       {
-        path: '',
-        name: 'Index',
+        path: 'posts',
+        name: 'Posts',
         component: () =>
-          import(/* webpackChunkName: "index" */ '../views/Index.vue')
+          import(/* webpackChunkName: "posts" */ '../views/Posts.vue')
       },
       {
         path: 'about',

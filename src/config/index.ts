@@ -1,6 +1,9 @@
 export const BlogName = "千禧's Blog";
 // export const Avatar = '@/assets/avatar.jpg'; bug todo
 
+// 每页展示的博文项目数量
+export const pageSize = 5;
+
 // index 1 is dark mode img
 export const IndexSrc = [
   'https://images.wallpaperscraft.com/image/anime_girl_sky_162368_1280x720.jpg',
