@@ -2,7 +2,9 @@
   <v-app>
     <Bar />
     <transition name="slide-x-transition" mode="out-in">
-      <router-view />
+      <keep-alive>
+        <router-view />
+      </keep-alive>
     </transition>
     <Colorpick />
 

@@ -83,6 +83,9 @@
 <script lang="ts">
 import Component from 'vue-class-component';
 import Vue from 'vue';
+import { namespace } from 'vuex-class';
+
+const inner = namespace('inner');
 
 @Component({
   props: {
@@ -98,6 +101,8 @@ export default class PostCard extends Vue {
   width = 0;
 
   show = true;
+
+  @inner.Mutation('setBlogId') setBlogId!: (id: number) => void;
 
   getImgSize(): void {
     if (this.$vuetify.breakpoint.name !== 'xs') {
@@ -125,6 +130,7 @@ export default class PostCard extends Vue {
   }
 
   handleRead(): void {
+    this.setBlogId(this.$props.post.id);
     this.$router.push({ path: `/post/${this.$props.post.title}` });
   }
 

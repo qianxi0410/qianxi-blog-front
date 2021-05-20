@@ -27,16 +27,22 @@ import Component from 'vue-class-component';
 import Vue from 'vue';
 import Parallax from '@/components/Parallax.vue';
 import PostCard from '@/components/PostCard.vue';
-import { IndexSrc, IndexTitle, IndexMotto, BlogName } from '@/config/index';
+import { IndexSrc, IndexTitle, IndexMotto } from '@/config/index';
+import { namespace } from 'vuex-class';
 
-// eslint-disable-next-line no-use-before-define
-@Component<Posts>({
+const inner = namespace('inner');
+
+@Component({
   components: {
     Parallax,
     PostCard
   }
 })
 export default class Posts extends Vue {
+  @inner.Mutation('setCurrentPage') setCurrentPage!: (page: number) => void;
+
+  @inner.Getter('getCurrentPage') getCurrentPage!: number;
+
   parallax = {
     src: IndexSrc,
     title: IndexTitle,
@@ -47,6 +53,7 @@ export default class Posts extends Vue {
 
   arr = [
     {
+      id: 0,
       src: 'https://w.wallhaven.cc/full/z8/wallhaven-z8p9rj.jpg',
       title: 'promise.js简要实现',
       description: '简单实现了一个promise',
@@ -54,6 +61,7 @@ export default class Posts extends Vue {
       tags: ['vue', 'javascript']
     },
     {
+      id: 1,
       src: 'https://w.wallhaven.cc/full/28/wallhaven-281d5y.png',
       title: 'promise.js简要实现2',
       description:
@@ -62,6 +70,7 @@ export default class Posts extends Vue {
       tags: ['vue', 'javascript']
     },
     {
+      id: 2,
       src: 'https://w.wallhaven.cc/full/rd/wallhaven-rddgwm.jpg',
       title: 'promise.js简要实现3',
       description: '简单实现了一个promise',
@@ -69,6 +78,7 @@ export default class Posts extends Vue {
       tags: ['vue', 'javascript']
     },
     {
+      id: 3,
       src: 'https://w.wallhaven.cc/full/72/wallhaven-7232p9.jpg',
       title: 'promise.js简要实现4',
       description:
@@ -81,12 +91,17 @@ export default class Posts extends Vue {
   post = this.arr.slice(0, 2);
 
   handleInput(): void {
-    document.title = `${BlogName} | # ${this.page}`;
+    this.setCurrentPage(this.page);
     if (this.page === 1) {
       this.post = this.arr.slice(0, 2);
     } else {
       this.post = this.arr.slice(2, 4);
     }
+  }
+
+  mounted(): void {
+    this.page = this.getCurrentPage;
+    this.handleInput();
   }
 }
 </script>
