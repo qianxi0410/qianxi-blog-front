@@ -15,7 +15,7 @@ const routes: Array<RouteConfig> = [
         path: '',
         name: 'Index',
         component: () =>
-          import(/* webpackChunkName: "about" */ '../views/Index.vue')
+          import(/* webpackChunkName: "index" */ '../views/Index.vue')
       },
       {
         path: 'about',
@@ -27,7 +27,13 @@ const routes: Array<RouteConfig> = [
         path: 'timeline',
         name: 'TimeLine',
         component: () =>
-          import(/* webpackChunkName: "about" */ '../views/TimeLine.vue')
+          import(/* webpackChunkName: "timeline" */ '../views/TimeLine.vue')
+      },
+      {
+        path: '/post/:postName',
+        name: 'PostDetail',
+        component: () =>
+          import(/* webpackChunkName: "PostDetail" */ '../views/PostDetail.vue')
       }
     ]
   }

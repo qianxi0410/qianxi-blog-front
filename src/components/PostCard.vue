@@ -64,6 +64,7 @@
                       class="mt-3 accent--text"
                       v-bind="attrs"
                       v-on="on"
+                      @click="handleRead"
                     >
                       <v-icon>mdi-read</v-icon>
                     </v-btn>
@@ -121,6 +122,10 @@ export default class PostCard extends Vue {
     } else {
       this.show = false;
     }
+  }
+
+  handleRead(): void {
+    this.$router.push({ path: `/post/${this.$props.post.title}` });
   }
 
   mounted(): void {
