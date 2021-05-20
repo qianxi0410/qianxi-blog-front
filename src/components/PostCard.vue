@@ -124,8 +124,14 @@ export default class PostCard extends Vue {
   }
 
   mounted(): void {
+    window.addEventListener('resize', this.getImgSize);
+
     this.getImgSize();
     this.handleLoad();
+  }
+
+  destroyed(): void {
+    window.removeEventListener('resize', this.getImgSize);
   }
 }
 </script>
