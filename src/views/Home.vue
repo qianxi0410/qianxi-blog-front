@@ -31,3 +31,5 @@ export default class Home extends Vue {
   colorShow = false;
 }
 </script>
+
+<style scoped></style>
