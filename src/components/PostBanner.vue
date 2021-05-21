@@ -1,19 +1,17 @@
 <template>
   <div class="pic_container">
-    <v-parallax
-      :height="height"
-      :src="this.$vuetify.theme.dark ? src[1] : src[0]"
-      ref="parallax"
-      :class="blur ? 'blur' : ''"
-    />
-    <v-row align="center" justify="center" class="drag text--primary">
+    <v-parallax :height="height" :src="src" :class="blur ? 'blur' : ''" />
+    <v-row align="center" justify="center" class="drag accent--text">
       <v-col class="text-center" cols="12">
-        <h1 class="font-weight-thin mb-4 text-h3 text-lg-h2">
+        <div class="font-weight-thin mb-4 text-h4 text-lg-h3">
           {{ title }}
-        </h1>
-        <h4 class="text-h6">
-          {{ motto }}
-        </h4>
+        </div>
+        <div class="font-weight-medium text-lg-subtitle-1 text-subtitle-2 mb-1">
+          {{ description }}
+        </div>
+        <div class="font-weight-regular">
+          {{ publishDate.toLocaleDateString() }}
+        </div>
       </v-col>
     </v-row>
   </div>
@@ -26,15 +24,20 @@ import Vue from 'vue';
 @Component({
   props: {
     src: {
-      type: Array,
+      type: String,
       required: true
     },
     title: {
       type: String,
       required: true
     },
-    motto: {
+    description: {
       type: String,
+      required: false,
+      default: ''
+    },
+    publishDate: {
+      type: Date,
       required: true
     },
     blur: {
@@ -44,12 +47,8 @@ import Vue from 'vue';
     }
   }
 })
-export default class Parallax extends Vue {
+export default class PostBanner extends Vue {
   height = 0;
-
-  $refs!: {
-    parallax: Element;
-  };
 
   handleHeight(): void {
     if (this.$vuetify.breakpoint.xs) {
@@ -59,9 +58,17 @@ export default class Parallax extends Vue {
     }
   }
 
+  back2Top(): void {
+    this.$vuetify.goTo(0, {
+      duration: 500,
+      easing: 'easeOutQuart'
+    });
+  }
+
   mounted(): void {
     window.addEventListener('resize', this.handleHeight);
     this.handleHeight();
+    this.back2Top();
   }
 
   destroyed(): void {

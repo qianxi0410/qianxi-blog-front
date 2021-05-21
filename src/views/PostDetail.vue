@@ -1,20 +1,21 @@
 <template>
   <div class="top_container">
-    <Parallax
+    <PostBanner
       blur
-      :motto="post.title"
-      :src="[post.src, post.src]"
+      :description="post.description"
+      :src="post.src"
       :title="post.title"
+      :publishDate="new Date()"
     />
-    <v-container> </v-container>
+    <v-container style="height:1000px"> </v-container>
   </div>
 </template>
 
 <script lang="ts">
 import Component from 'vue-class-component';
 import Vue from 'vue';
-import Parallax from '@/components/Parallax.vue';
 import PostCard from '@/components/PostCard.vue';
+import PostBanner from '@/components/PostBanner.vue';
 import { namespace } from 'vuex-class';
 import { BlogName } from '@/config/index';
 
@@ -22,7 +23,7 @@ const inner = namespace('inner');
 
 @Component({
   components: {
-    Parallax,
+    PostBanner,
     PostCard
   }
 })
@@ -32,7 +33,7 @@ export default class PostsDetail extends Vue {
   arr = [
     {
       src: 'https://w.wallhaven.cc/full/z8/wallhaven-z8p9rj.jpg',
-      title: 'promise.js简要实现',
+      title: 'promise 日记',
       description: '简单实现了一个promise',
       publishDate: '2021-05-19',
       tags: ['vue', 'javascript']
