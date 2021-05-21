@@ -16,6 +16,7 @@ import Vue from 'vue';
 import Parallax from '@/components/Parallax.vue';
 import PostCard from '@/components/PostCard.vue';
 import { namespace } from 'vuex-class';
+import { BlogName } from '@/config/index';
 
 const inner = namespace('inner');
 
@@ -65,6 +66,7 @@ export default class PostsDetail extends Vue {
 
   mounted(): void {
     this.post = this.arr[this.getBlogId];
+    document.title = `${BlogName} | ${(this.post as { title: string }).title}`;
   }
 }
 </script>
