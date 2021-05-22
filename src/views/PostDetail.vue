@@ -15,9 +15,7 @@
               {{ tag }}
             </v-chip>
           </v-chip-group>
-          <div class="mt-10">
-            <MarkdownItVue class="md-body" :content="content" />
-          </div>
+          <div class="mt-10"></div>
         </v-col>
         <v-col v-if="!this.$vuetify.breakpoint.xs">
           22
@@ -31,17 +29,14 @@
 import Component from 'vue-class-component';
 import Vue from 'vue';
 import PostBanner from '@/components/PostBanner.vue';
-import MarkdownItVue from 'markdown-it-vue';
 import { namespace } from 'vuex-class';
 import { BlogName } from '@/config/index';
-import 'markdown-it-vue/dist/markdown-it-vue.css';
 
 const inner = namespace('inner');
 
 @Component({
   components: {
     PostBanner
-    // MarkdownItVue
   }
 })
 export default class PostsDetail extends Vue {
@@ -88,9 +83,9 @@ export default class PostsDetail extends Vue {
   }
 
   content = `
-  > this is the vue 
-  
-  
+  > this is the vue
+
+
   \`\`\`js
     console.log('hello');
     const a = 2;
