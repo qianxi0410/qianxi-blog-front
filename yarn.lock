@@ -5995,6 +5995,11 @@ map-visit@^1.0.0:
   dependencies:
     object-visit "^1.0.0"
 
+markdown-it-container@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.npm.taobao.org/markdown-it-container/download/markdown-it-container-3.0.0.tgz#1d19b06040a020f9a827577bb7dbf67aa5de9a5b"
+  integrity sha1-HRmwYECgIPmoJ1d7t9v2eqXemls=
+
 markdown-it@^12.0.6:
   version "12.0.6"
   resolved "https://registry.npm.taobao.org/markdown-it/download/markdown-it-12.0.6.tgz#adcc8e5fe020af292ccbdf161fe84f1961516138"

@@ -1,0 +1,130 @@
+.dark {
+  font-size: calc(15px + 0.33vw);
+  -webkit-font-smoothing: antialiased;
+  font-family: fira-code;
+}
+
+.dark >>> ::selection {
+  background: wheat;
+  color: var(--v-primary-base);
+}
+
+.dark >>> h1 {
+  position: relative;
+  font-size: 2.2em;
+  font-weight: 700;
+  margin-top: 1.2em;
+  margin-bottom: 0.5em;
+}
+
+.dark >>> h2 {
+  position: relative;
+  font-size: 1.7em;
+  font-weight: 700;
+  margin-top: 1em;
+  margin-bottom: 0.5em;
+}
+
+.dark >>> h3 {
+  position: relative;
+  font-size: 1.375em;
+  font-weight: 700;
+  margin-top: 1em;
+  margin-bottom: 0.5em;
+}
+
+.dark >>> h4 {
+  position: relative;
+  font-size: 1.15em;
+  font-weight: 700;
+  margin-top: 1em;
+  margin-bottom: 0.5em;
+}
+
+.dark >>> h5 {
+  position: relative;
+  font-size: 0.95em;
+  font-weight: 700;
+  margin-top: 1em;
+  margin-bottom: 0.5em;
+}
+
+.dark >>> h6 {
+  position: relative;
+  font-size: 0.95em;
+  font-weight: 400;
+  margin-top: 1em;
+  margin-bottom: 0.5em;
+}
+
+.dark >>> h1:before,
+.dark >>> h2:before,
+.dark >>> h3:before,
+.dark >>> h4:before,
+.dark >>> h5:before,
+.dark >>> h6:before {
+  content: '#';
+  position: absolute;
+  left: -1em;
+  color: wheat;
+  font-weight: lighter;
+  display: none;
+}
+
+.dark >>> h1:hover:before,
+.dark >>> h2:hover:before,
+.dark >>> h3:hover:before,
+.dark >>> h4:hover:before,
+.dark >>> h5:hover:before,
+.dark >>> h6:hover:before {
+  display: block;
+}
+
+.dark >>> p {
+  text-indent: 2em;
+  font-size: 0.95em;
+  font-weight: 100;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+  text-align: justify;
+}
+
+.dark >>> strong {
+  font-weight: 700;
+}
+
+.dark >>> ul > li,
+.dark >>> ol > li {
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+  margin-left: 2em;
+}
+
+/* 超连接部分 */
+.dark >>> a {
+  text-decoration: none;
+  color: var(--v-accent-base);
+  position: relative;
+}
+
+.dark >>> a:after {
+  content: '」';
+  color: wheat;
+  opacity: 0.4;
+  transition: all 0.3s ease;
+}
+
+.dark >>> a:before {
+  content: '「';
+  color: wheat;
+  opacity: 0.4;
+  transition: all 0.3s ease;
+}
+
+.dark >>> a:hover:after {
+  opacity: 1;
+}
+
+.dark >>> a:hover:before {
+  opacity: 1;
+}

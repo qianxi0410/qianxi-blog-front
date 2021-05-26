@@ -67,7 +67,6 @@ export default class About extends Vue {
   font-size: calc(10px + 0.33vw);
   -webkit-font-smoothing: antialiased;
   padding: 5vh 10vw;
-  /* color: #121314; */
 }
 
 h1 {
