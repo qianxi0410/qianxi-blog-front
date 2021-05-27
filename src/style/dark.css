@@ -128,3 +128,11 @@
 .dark >>> a:hover:before {
   opacity: 1;
 }
+
+.dark >>> p > code {
+  color: wheat;
+}
+
+.dark >>> pre > code {
+  display: block;
+}
