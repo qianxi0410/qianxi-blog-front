@@ -4,7 +4,8 @@
 
 <script>
 import MarkdownIt from 'markdown-it';
-import Container from 'markdown-it-container';
+import hljs from 'highlight.js';
+import 'highlight.js/styles/atom-one-dark.css';
 
 export default {
   data() {
@@ -15,25 +16,30 @@ export default {
 
   mounted() {
     const md = new MarkdownIt();
-    md.use(Container, 'spoiler', {
-      validate(params) {
-        return params.trim().match(/^spoiler\s+(.*)$/);
-      },
-
-      render(tokens, idx) {
-        const m = tokens[idx].info.trim().match(/^spoiler\s+(.*)$/);
-
-        if (tokens[idx].nesting === 1) {
-          return `<details><summary>${md.utils.escapeHtml(m[1])}</summary>\n`;
+    md.set({
+      highlight(str, lang) {
+        if (lang && hljs.getLanguage(lang)) {
+          try {
+            const preCode = hljs.highlight(lang, str, true).value;
+            const lines = preCode.split(/\n/).slice(0, -1);
+            let html = lines.map(item => `<li>${item}</li>`).join('');
+            html = `<ol>${html}</ol>`;
+            if (lines.length) {
+              html += `<b class="name">${lang}</b>`;
+            }
+            return `<pre><code class="hljs">${html}</code></pre>`;
+          } catch (__) {
+            // to make eslint happy
+          }
         }
-        return '</details>\n';
+        const preCode = md.utils.escapeHtml(str);
+        const lines = preCode.split(/\n/).slice(0, -1);
+        let html = lines.map(item => `<li>${item}</li>`).join('');
+        html = `<ol>${html}</ol>`;
+        return `<pre><code class="hljs">${html}</code></pre>`;
       }
     });
     const tokens = md.render(`
-\`\`\`js
-console.log('ks');
-\`\`\`
-
 # csrf attack
 
 ## Overview
@@ -41,6 +47,19 @@ console.log('ks');
 **Cross-Site Request Forgery (CSRF)跨站请求伪造** \`is an attack that forces\` an end user to execute unwanted actions on a web application in which they’re currently authenticated. With a little help of social engineering (such as sending a link via email or chat), an attacker may trick the users of a web application into executing actions of the attacker’s choosing. If the victim is a normal user, a successful CSRF attack can force the user to perform state changing requests like transferring funds, changing their email address, and so forth. If the victim is an administrative account, CSRF can compromise the entire web application.
 
 ## Description
+
+\`\`\`go
+import "fmt"
+
+func main() {
+  fmt.Println("hello world")
+  ch := make(chan int)
+  go func() {
+    ch <- 1
+  }()
+}
+\`\`\`
+
 
 CSRF is an attack that tricks the victim into submitting a malicious request. It inherits the identity and privileges of the victim to perform an undesired function on the victim’s behalf. For most sites, browser requests automatically include any credentials associated with the site, such as the user’s session cookie, IP address, Windows domain credentials, and so forth. Therefore, if the user is currently authenticated to the site, the site will have no way to distinguish between the forged request sent by the victim and a legitimate request sent by the victim.
 
@@ -61,6 +80,9 @@ Remember that all cookies, even the _secret_ ones, will be submitted with every 
 ### Only accepting POST requests
 
 Applications can be developed to only accept POST requests for the execution of business logic. The misconception is that since the attacker cannot construct a malicious link, a CSRF attack cannot be executed. Unfortunately, this logic is incorrect. There are numerous methods in which an attacker can trick a victim into submitting a forged POST request, such as a simple form hosted in an attacker’s Website with hidden values. This form can be triggered automatically by JavaScript or can be triggered by the victim who thinks the form will do something else.
+
+![132132](https://w.wallhaven.cc/full/l3/wallhaven-l3zmwy.jpg)
+
 
 A number of flawed ideas for defending against CSRF attacks have been developed over time. Here are a few that we recommend you avoid.
 
