@@ -27,7 +27,7 @@ export default {
             if (lines.length) {
               html += `<b class="name">${lang}</b>`;
             }
-            return `<pre><code class="hljs">${html}</code></pre>`;
+            return `<pre><button class="btn" data-clipboard-snippet><img class="clippy" height="20" src="@/assets/clippy.svg" alt="Copy to clipboard"></button><code class="hljs">${html}</code></pre>`;
           } catch (__) {
             // to make eslint happy
           }
