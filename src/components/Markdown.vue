@@ -1,5 +1,8 @@
 <template>
-  <div class="dark" ref="dark" v-html="content"></div>
+  <div>
+    <div class="dark" v-html="content" v-if="this.$vuetify.theme.dark"></div>
+    <div class="light" v-html="content" v-else></div>
+  </div>
 </template>
 
 <script>
@@ -16,7 +19,7 @@ export default {
 
   mounted() {
     const md = new MarkdownIt();
-    md.set({
+    const highlight = {
       highlight(str, lang) {
         if (lang && hljs.getLanguage(lang)) {
           try {
@@ -38,7 +41,8 @@ export default {
         html = `<ol>${html}</ol>`;
         return `<pre><code class="hljs">${html}</code></pre>`;
       }
-    });
+    };
+    md.set(highlight);
     const tokens = md.render(`
 # csrf attack
 
@@ -53,6 +57,7 @@ import "fmt"
 
 func main() {
   fmt.Println("hello world")
+
   ch := make(chan int)
   go func() {
     ch <- 1
@@ -161,3 +166,4 @@ Fortunately, this request will **not** be executed by modern web browsers thanks
 </script>
 
 <style scoped src="../style/dark.css"></style>
+<style scoped src="../style/light.css"></style>
