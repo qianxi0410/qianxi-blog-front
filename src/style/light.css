@@ -137,7 +137,7 @@
 
 .light >>> pre > code {
   font-size: 0.8em;
-  color: rgb(19, 19, 17);
+  color: var(--v-primary-base);
   border-radius: 0.4em;
 }
 
@@ -175,4 +175,32 @@
   z-index: 10;
   color: #999;
   pointer-events: none;
+}
+
+.light >>> blockquote > p {
+  text-indent: 0em;
+  margin-left: -1em;
+  justify-content: center;
+  overflow-wrap: break-word;
+  text-align: justify;
+  margin-left: 1em;
+}
+
+.light >>> blockquote {
+  background-color: #dedee3;
+  font-size: 0.9em;
+  padding: 0.3em 0.1em;
+  padding-right: 1em;
+  position: relative;
+  border-radius: 0.3em;
+}
+
+.light >>> blockquote:before {
+  content: '';
+  background-color: var(--v-primary-base);
+  width: 0.3em;
+  position: absolute;
+  top: 0em;
+  height: 100%;
+  border-radius: 0.3em;
 }

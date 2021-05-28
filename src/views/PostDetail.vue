@@ -22,9 +22,7 @@
             <Markdown />
           </div>
         </v-col>
-        <v-col v-if="!this.$vuetify.breakpoint.xs">
-          22
-        </v-col>
+        <v-col v-if="!this.$vuetify.breakpoint.xs"> </v-col>
       </v-row>
     </v-container>
   </div>
