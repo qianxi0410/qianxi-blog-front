@@ -8,6 +8,7 @@
 <script>
 import MarkdownIt from 'markdown-it';
 import hljs from 'highlight.js';
+import markdownItAnchor from 'markdown-it-anchor';
 import 'highlight.js/styles/atom-one-dark.css';
 
 export default {
@@ -43,6 +44,7 @@ export default {
       }
     };
     md.set(highlight);
+    md.use(markdownItAnchor, {});
     const tokens = md.render(`
 > this is this is this is this is this is this is this is this is this is this is this is this is this is this is this is this is this is this is 
 
