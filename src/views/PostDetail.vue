@@ -19,10 +19,12 @@
             </v-chip>
           </v-chip-group>
           <div class="mt-10">
-            <Markdown />
+            <Markdown id="markdown" />
           </div>
         </v-col>
-        <v-col v-if="!this.$vuetify.breakpoint.xs"> </v-col>
+        <v-col v-if="!this.$vuetify.breakpoint.xs">
+          <Toc :toc="toc" />
+        </v-col>
       </v-row>
     </v-container>
   </div>
@@ -33,6 +35,7 @@ import Component from 'vue-class-component';
 import Vue from 'vue';
 import PostBanner from '@/components/PostBanner.vue';
 import Markdown from '@/components/Markdown.vue';
+import Toc from '@/components/Toc.vue';
 import { namespace } from 'vuex-class';
 import { BlogName } from '@/config/index';
 
@@ -41,7 +44,8 @@ const inner = namespace('inner');
 @Component({
   components: {
     PostBanner,
-    Markdown
+    Markdown,
+    Toc
   }
 })
 export default class PostsDetail extends Vue {
@@ -82,9 +86,25 @@ export default class PostsDetail extends Vue {
 
   post = {};
 
+  toc: Array<{ level: string; hook: string }> = [];
+
+  getToc(): void {
+    this.$nextTick(() => {
+      const container = document.querySelector('.dark');
+      const children = container?.childNodes;
+      // eslint-disable-next-line no-unused-expressions
+      children?.forEach(e => {
+        if (e.nodeName.includes('H')) {
+          this.toc.push({ level: e.nodeName.slice(1), hook: e.id });
+        }
+      });
+    });
+  }
+
   mounted(): void {
     this.post = this.arr[this.getBlogId];
     document.title = `${BlogName} | ${(this.post as { title: string }).title}`;
+    this.getToc();
   }
 }
 </script>
