@@ -6000,16 +6000,6 @@ markdown-it-anchor@^7.1.0:
   resolved "https://registry.npm.taobao.org/markdown-it-anchor/download/markdown-it-anchor-7.1.0.tgz?cache=0&sync_timestamp=1615043945278&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fmarkdown-it-anchor%2Fdownload%2Fmarkdown-it-anchor-7.1.0.tgz#30fb21497bf59e83ff4d1ddc052d821962e2489e"
   integrity sha1-MPshSXv1noP/TR3cBS2CGWLiSJ4=
 
-markdown-it-container@^3.0.0:
-  version "3.0.0"
-  resolved "https://registry.npm.taobao.org/markdown-it-container/download/markdown-it-container-3.0.0.tgz#1d19b06040a020f9a827577bb7dbf67aa5de9a5b"
-  integrity sha1-HRmwYECgIPmoJ1d7t9v2eqXemls=
-
-markdown-it-toc-done-right@^4.2.0:
-  version "4.2.0"
-  resolved "https://registry.npm.taobao.org/markdown-it-toc-done-right/download/markdown-it-toc-done-right-4.2.0.tgz#3ccdce22d5022ffae7b991d07261b1b1de5459d0"
-  integrity sha1-PM3OItUCL/rnuZHQcmGxsd5UWdA=
-
 markdown-it@^12.0.6:
   version "12.0.6"
   resolved "https://registry.npm.taobao.org/markdown-it/download/markdown-it-12.0.6.tgz#adcc8e5fe020af292ccbdf161fe84f1961516138"
