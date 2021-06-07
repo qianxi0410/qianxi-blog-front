@@ -20,6 +20,9 @@
 <script lang="ts">
 import Component from 'vue-class-component';
 import Vue from 'vue';
+import { namespace } from 'vuex-class';
+
+const inner = namespace('inner');
 
 @Component({
   props: {
@@ -52,12 +55,17 @@ import Vue from 'vue';
 export default class PostBanner extends Vue {
   height = 0;
 
+  @inner.Mutation('setPostBannerHeight') setPostBannerHeight!: (
+    n: number
+  ) => void;
+
   handleHeight(): void {
     if (this.$vuetify.breakpoint.xs) {
       this.height = window.innerHeight - 55;
     } else {
       this.height = window.innerHeight * (2 / 3);
     }
+    this.setPostBannerHeight(this.height);
   }
 
   back2Top(): void {

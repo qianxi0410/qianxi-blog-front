@@ -111,7 +111,7 @@ However, HTTPS should be considered a prerequisite for any preventative measures
 
 ## Examples
 
-#### How does the attack work?
+#### How does the attack work
 
 There are numerous ways in which an end user can be tricked into loading information from or submitting information to a web application. In order to execute an attack, we must first understand how to generate a valid malicious request for our victim to execute. Let us consider the following example: Alice wishes to transfer $100 to Bob using the _bank.com_ web application that is vulnerable to CSRF. Maria, an attacker, wants to trick Alice into sending the money to Maria instead. The attack will comprise the following steps:
 

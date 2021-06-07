@@ -50,6 +50,18 @@ class Inner extends VuexModule {
     document.title = `${BlogName} | # ${currentPage}`;
     return Number(currentPage);
   }
+
+  // 当前post-banner高度
+  public postBannerHeight = -1;
+
+  @Mutation
+  public setPostBannerHeight(h: number) {
+    this.postBannerHeight = h;
+  }
+
+  get getPostBannerHeight(): number {
+    return this.postBannerHeight;
+  }
 }
 
 export default Inner;
