@@ -86,7 +86,7 @@ export default class PostsDetail extends Vue {
 
   post = {};
 
-  toc: Array<{ level: string; hook: string }> = [];
+  toc: Array<{ level: string; hook: string; title: string }> = [];
 
   getToc(): void {
     this.$nextTick(() => {
@@ -95,7 +95,11 @@ export default class PostsDetail extends Vue {
       // eslint-disable-next-line no-unused-expressions
       children?.forEach(e => {
         if (e.nodeName.includes('H')) {
-          this.toc.push({ level: e.nodeName.slice(1), hook: e.id });
+          this.toc.push({
+            level: e.nodeName.slice(1),
+            hook: e.id,
+            title: e.textContent!
+          });
         }
       });
     });

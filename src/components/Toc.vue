@@ -6,13 +6,9 @@
         :key="index"
         :class="`pl-${(Number(item.level) - 2) * 3}`"
         class="mb-1"
+        @click="goTo(item.hook)"
       >
-        <a
-          :href="`#${item.hook}`"
-          :class="$vuetify.theme.dark ? 'dark-a' : 'light-a'"
-          class="v-toc-link d-block transition-swing text-decoration-none"
-          >{{ item.hook }}</a
-        >
+        {{ item.title }}
       </li>
     </ul>
   </div>
@@ -31,6 +27,15 @@ import Vue from 'vue';
   }
 })
 export default class Toc extends Vue {
+  goTo(id: string): void {
+    console.log(id);
+
+    this.$vuetify.goTo(`#${id}`, {
+      duration: 500,
+      easing: 'easeOutQuart'
+    });
+  }
+
   mounted(): void {
     console.log(this.$props.toc);
   }
@@ -40,6 +45,7 @@ export default class Toc extends Vue {
 <style scoped>
 ul li {
   list-style: none;
+  cursor: pointer;
 }
 
 .ul {

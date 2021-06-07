@@ -20,6 +20,7 @@ export default {
 
   mounted() {
     const md = new MarkdownIt();
+
     const highlight = {
       highlight(str, lang) {
         if (lang && hljs.getLanguage(lang)) {
@@ -44,7 +45,9 @@ export default {
       }
     };
     md.set(highlight);
-    md.use(markdownItAnchor, {});
+    md.use(markdownItAnchor, {
+      slugify: string => `${string.split(' ').join('-')}`
+    });
     const tokens = md.render(`
 > this is this is this is this is this is this is this is this is this is this is this is this is this is this is this is this is this is this is
 
