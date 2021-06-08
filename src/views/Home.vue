@@ -1,8 +1,17 @@
 <template>
   <v-app>
     <Bar />
+    <v-progress-linear
+      :value="progressPerCent"
+      v-show="progressShow"
+      class="progress"
+      buffer-value="0"
+      rounded
+      :color="this.$vuetify.theme.dark ? '#ffdead' : 'primary'"
+    ></v-progress-linear>
+
     <transition name="slide-x-transition" mode="out-in">
-      <router-view />
+      <router-view ref="view" />
     </transition>
     <Colorpick />
 
@@ -18,6 +27,9 @@ import Bar from '@/components/Bar.vue';
 import Footer from '@/components/Footer.vue';
 import Back2Top from '@/components/Back2Top.vue';
 import Colorpick from '@/components/Colorpick.vue';
+import { namespace } from 'vuex-class';
+
+const inner = namespace('inner');
 
 @Component({
   components: {
@@ -29,7 +41,42 @@ import Colorpick from '@/components/Colorpick.vue';
 })
 export default class Home extends Vue {
   colorShow = false;
+
+  progressShow = false;
+
+  progressPerCent = 0;
+
+  @inner.Getter('getPostBannerHeight') getPostBannerHeight!: number;
+
+  handleProgress(): void {
+    if (window.pageYOffset >= this.getPostBannerHeight) {
+      this.progressShow = true;
+      this.progressPerCent =
+        ((window.pageYOffset - this.getPostBannerHeight) /
+          (document.body.clientHeight -
+            this.getPostBannerHeight -
+            window.innerHeight)) *
+        100;
+    } else {
+      this.progressShow = false;
+    }
+  }
+
+  mounted(): void {
+    window.addEventListener('scroll', this.handleProgress);
+  }
+
+  destroyed(): void {
+    window.removeEventListener('scroll', this.handleProgress);
+  }
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+.progress {
+  height: 10em;
+  position: fixed;
+  top: 0;
+  z-index: 1;
+}
+</style>

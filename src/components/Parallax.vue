@@ -22,6 +22,9 @@
 <script lang="ts">
 import Component from 'vue-class-component';
 import Vue from 'vue';
+import { namespace } from 'vuex-class';
+
+const inner = namespace('inner');
 
 @Component({
   props: {
@@ -47,6 +50,10 @@ import Vue from 'vue';
 export default class Parallax extends Vue {
   height = 0;
 
+  @inner.Mutation('setPostBannerHeight') setPostBannerHeight!: (
+    n: number
+  ) => void;
+
   $refs!: {
     parallax: Element;
   };
@@ -57,6 +64,7 @@ export default class Parallax extends Vue {
     } else {
       this.height = window.innerHeight * (2 / 3);
     }
+    this.setPostBannerHeight(this.height);
   }
 
   mounted(): void {
