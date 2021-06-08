@@ -57,29 +57,6 @@
   margin-bottom: 0.5em;
 }
 
-.dark >>> h1:before,
-.dark >>> h2:before,
-.dark >>> h3:before,
-.dark >>> h4:before,
-.dark >>> h5:before,
-.dark >>> h6:before {
-  content: '#';
-  position: absolute;
-  left: -1em;
-  color: wheat;
-  font-weight: lighter;
-  display: none;
-}
-
-.dark >>> h1:hover:before,
-.dark >>> h2:hover:before,
-.dark >>> h3:hover:before,
-.dark >>> h4:hover:before,
-.dark >>> h5:hover:before,
-.dark >>> h6:hover:before {
-  display: block;
-}
-
 .dark >>> p {
   text-indent: 2em;
   font-size: 0.95em;
@@ -101,31 +78,31 @@
 }
 
 /* 超连接部分 */
-.dark >>> a {
+.dark >>> p a {
   text-decoration: none;
   color: var(--v-accent-base);
   position: relative;
 }
 
-.dark >>> a:after {
+.dark >>> p a:after {
   content: '」';
   color: wheat;
   opacity: 0.4;
   transition: all 0.3s ease;
 }
 
-.dark >>> a:before {
+.dark >>> p a:before {
   content: '「';
   color: wheat;
   opacity: 0.4;
   transition: all 0.3s ease;
 }
 
-.dark >>> a:hover:after {
+.dark >>> p a:hover:after {
   opacity: 1;
 }
 
-.dark >>> a:hover:before {
+.dark >>> p a:hover:before {
   opacity: 1;
 }
 
@@ -207,4 +184,11 @@
   top: 0em;
   height: 100%;
   border-radius: 0.3em;
+}
+
+.dark >>> .href {
+  color: navajowhite;
+  text-decoration: none;
+  position: absolute;
+  left: -1em;
 }

@@ -46,6 +46,10 @@ export default {
     };
     md.set(highlight);
     md.use(markdownItAnchor, {
+      permalink: true,
+      permalinkSymbol: '#',
+      permalinkBefore: true,
+      permalinkClass: 'href',
       slugify: string => `${string.split(' ').join('-')}`
     });
     const tokens = md.render(`

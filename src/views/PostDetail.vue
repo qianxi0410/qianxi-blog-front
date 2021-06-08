@@ -109,7 +109,7 @@ export default class PostsDetail extends Vue {
           this.toc.push({
             level: e.nodeName.slice(1),
             hook: e.id,
-            title: e.textContent!
+            title: e.textContent!.slice(2)
           });
         }
       });

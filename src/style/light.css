@@ -57,29 +57,6 @@
   margin-bottom: 0.5em;
 }
 
-.light >>> h1:before,
-.light >>> h2:before,
-.light >>> h3:before,
-.light >>> h4:before,
-.light >>> h5:before,
-.light >>> h6:before {
-  content: '#';
-  position: absolute;
-  left: -1em;
-  color: var(--v-primary-base);
-  font-weight: lighter;
-  display: none;
-}
-
-.light >>> h1:hover:before,
-.light >>> h2:hover:before,
-.light >>> h3:hover:before,
-.light >>> h4:hover:before,
-.light >>> h5:hover:before,
-.light >>> h6:hover:before {
-  display: block;
-}
-
 .light >>> p {
   text-indent: 2em;
   font-size: 0.95em;
@@ -101,13 +78,13 @@
 }
 
 /* 超连接部分 */
-.light >>> a {
+.light >>> p > a {
   text-decoration: none;
   color: var(--v-accent-base);
   position: relative;
 }
 
-.light >>> a:after {
+.light >>> p > a:after {
   content: '';
   position: absolute;
   top: 60%;
@@ -121,7 +98,7 @@
   margin-left: 0.1rem;
 }
 
-.light >>> a:hover:after {
+.light >>> p > a:hover:after {
   top: 0%;
 }
 
@@ -203,4 +180,11 @@
   top: 0em;
   height: 100%;
   border-radius: 0.3em;
+}
+
+.light >>> .href {
+  color: var(--v-primary-base);
+  text-decoration: none;
+  position: absolute;
+  left: -1em;
 }

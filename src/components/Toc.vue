@@ -43,6 +43,7 @@ export default class Toc extends Vue {
       easing: 'easeOutQuart'
     });
     this.activeIndex = index;
+    window.location.hash = id;
   }
 
   toggleTocClass(): void {
@@ -99,7 +100,7 @@ ul li {
 }
 
 .dark .li-active::before {
-  content: '#';
+  content: '>';
   color: navajowhite;
   position: absolute;
   left: -1em;
@@ -110,7 +111,7 @@ ul li {
 }
 
 .light .li-active::before {
-  content: '#';
+  content: '>';
   color: var(--v-primary-base);
   position: absolute;
   left: -1em;
