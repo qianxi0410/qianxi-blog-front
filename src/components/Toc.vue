@@ -4,9 +4,12 @@
       <li
         v-for="(item, index) in $props.toc"
         :key="index"
-        :class="`pl-${(Number(item.level) - 2) * 3}`"
+        :class="[
+          `pl-${(Number(item.level) - 2) * 3}`,
+          activeIndex === index ? 'li-active' : ''
+        ]"
         class="mb-1"
-        @click="goTo(item.hook)"
+        @click="goTo(item.hook, index)"
       >
         {{ item.title }}
       </li>
@@ -30,13 +33,16 @@ const inner = namespace('inner');
   }
 })
 export default class Toc extends Vue {
+  activeIndex = -1;
+
   @inner.Getter('getPostBannerHeight') getPostBannerHeight!: number;
 
-  goTo(id: string): void {
+  goTo(id: string, index: number): void {
     this.$vuetify.goTo(`#${id}`, {
       duration: 500,
       easing: 'easeOutQuart'
     });
+    this.activeIndex = index;
   }
 
   toggleTocClass(): void {
@@ -47,6 +53,7 @@ export default class Toc extends Vue {
       (this.$refs.toc as Element).classList.add('toc');
     } else if (this.$refs.toc !== undefined) {
       (this.$refs.toc as Element).classList.remove('toc');
+      this.activeIndex = -1;
     }
   }
 
@@ -64,17 +71,18 @@ export default class Toc extends Vue {
 ul li {
   list-style: none;
   cursor: pointer;
+  position: relative;
 }
 
 .ul {
   width: 100%;
-  font-size: 0.7em;
+  font-size: 0.8em;
 }
 
 .toc {
   position: fixed;
-  right: 8em;
-  top: 4em;
+  right: 6em;
+  top: 2em;
 }
 
 .light li:hover {
@@ -84,5 +92,27 @@ ul li {
 .dark li:hover {
   text-decoration: none;
   color: navajowhite;
+}
+
+.dark .li-active {
+  color: navajowhite;
+}
+
+.dark .li-active::before {
+  content: '#';
+  color: navajowhite;
+  position: absolute;
+  left: -1em;
+}
+
+.light .li-active {
+  color: var(--v-primary-base);
+}
+
+.light .li-active::before {
+  content: '#';
+  color: var(--v-primary-base);
+  position: absolute;
+  left: -1em;
 }
 </style>

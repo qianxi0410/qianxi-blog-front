@@ -10,8 +10,16 @@
     <v-container>
       <v-row>
         <v-col
-          :cols="this.$vuetify.breakpoint.xs ? 12 : 10"
-          :class="this.$vuetify.breakpoint.xs ? 'pa-10' : ''"
+          :cols="
+            !(this.$vuetify.breakpoint.lg || this.$vuetify.breakpoint.xl)
+              ? 12
+              : 10
+          "
+          :class="
+            !(this.$vuetify.breakpoint.lg || this.$vuetify.breakpoint.xl)
+              ? 'pa-10'
+              : ''
+          "
         >
           <v-chip-group active-class="primary--text" column>
             <v-chip v-for="tag in post.tags" :key="tag" class="mr-3">
@@ -22,7 +30,9 @@
             <Markdown id="markdown" />
           </div>
         </v-col>
-        <v-col v-if="!this.$vuetify.breakpoint.xs">
+        <v-col
+          v-if="this.$vuetify.breakpoint.lg || this.$vuetify.breakpoint.xl"
+        >
           <Toc :toc="toc" />
         </v-col>
       </v-row>
@@ -90,7 +100,8 @@ export default class PostsDetail extends Vue {
 
   getToc(): void {
     this.$nextTick(() => {
-      const container = document.querySelector('.dark');
+      const theme = this.$vuetify.theme.dark ? '.dark' : '.light';
+      const container = document.querySelector(theme);
       const children = container?.childNodes;
       // eslint-disable-next-line no-unused-expressions
       children?.forEach(e => {
