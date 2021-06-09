@@ -37,6 +37,19 @@
         </v-col>
       </v-row>
     </v-container>
+    <v-container>
+      <v-row justify="center" class="py-5">
+        <v-avatar class="elevation-3">
+          <img src="../assets/avatar.jpg" alt="qianxi" />
+        </v-avatar>
+        <v-chip draggable class="ml-2" @click="go">
+          本文采用CC BY 4.0协议
+        </v-chip>
+      </v-row>
+      <v-row justify="center" class="pb-10">
+        Last edit at: {{ new Date() }}
+      </v-row>
+    </v-container>
   </div>
 </template>
 
@@ -114,6 +127,11 @@ export default class PostsDetail extends Vue {
         }
       });
     });
+  }
+
+  // eslint-disable-next-line class-methods-use-this
+  go(): void {
+    window.open('https://creativecommons.org/licenses/by/4.0/');
   }
 
   mounted(): void {
