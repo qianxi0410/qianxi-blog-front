@@ -46,8 +46,24 @@
           本文采用CC BY 4.0协议
         </v-chip>
       </v-row>
-      <v-row justify="center" class="pb-10">
+      <v-row justify="center" class="pb-5">
         Last edit at: {{ new Date() }}
+      </v-row>
+      <v-row class="pb-5 d-flex justify-space-around">
+        <v-btn
+          rounded
+          :color="this.$vuetify.theme.dark ? 'accent' : 'primary'"
+          plain
+        >
+          <v-icon>mdi-menu-left</v-icon> Rounded Button
+        </v-btn>
+        <v-btn
+          rounded
+          :color="this.$vuetify.theme.dark ? 'accent' : 'primary'"
+          plain
+        >
+          Rounded Button <v-icon>mdi-menu-right</v-icon>
+        </v-btn>
       </v-row>
     </v-container>
   </div>
