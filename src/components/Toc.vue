@@ -47,13 +47,14 @@ export default class Toc extends Vue {
   }
 
   toggleTocClass(): void {
+    const toc = this.$refs.toc as Element;
     if (
       window.pageYOffset >= this.getPostBannerHeight &&
-      this.$refs.toc !== undefined
+      toc !== undefined
     ) {
-      (this.$refs.toc as Element).classList.add('toc');
+      toc.classList.add('toc');
     } else if (this.$refs.toc !== undefined) {
-      (this.$refs.toc as Element).classList.remove('toc');
+      toc.classList.remove('toc');
       this.activeIndex = -1;
     }
   }

@@ -137,7 +137,7 @@ export default class PostsDetail extends Vue {
         if (e.nodeName.includes('H')) {
           this.toc.push({
             level: e.nodeName.slice(1),
-            hook: e.id,
+            hook: (e as any as {id : string}).id,
             title: e.textContent!.slice(2)
           });
         }
