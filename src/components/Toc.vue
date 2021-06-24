@@ -43,17 +43,15 @@ export default class Toc extends Vue {
       easing: 'easeOutQuart'
     });
     this.activeIndex = index;
-    window.location.hash = id;
   }
 
   toggleTocClass(): void {
-    const toc = this.$refs.toc as Element;
+    const toc = this.$refs.toc as HTMLElement;
     if (
-      window.pageYOffset >= this.getPostBannerHeight &&
-      toc !== undefined
+      window.pageYOffset >= this.getPostBannerHeight
     ) {
       toc.classList.add('toc');
-    } else if (this.$refs.toc !== undefined) {
+    } else {
       toc.classList.remove('toc');
       this.activeIndex = -1;
     }

@@ -106,6 +106,34 @@
   color: var(--v-primary-base);
 }
 
+.light >>> li > a {
+  text-decoration: none;
+  color: var(--v-accent-base);
+  position: relative;
+}
+
+.light >>> li > a:after {
+  content: '';
+  position: absolute;
+  top: 60%;
+  left: -0.1em;
+  right: -0.1em;
+  bottom: 0;
+  transition: top 200ms cubic-bezier(0, 0.8, 0.13, 1);
+  background-color: var(--v-primary-base);
+  opacity: 0.2;
+  margin-right: 0.1rem;
+  margin-left: 0.1rem;
+}
+
+.light >>> li > a:hover:after {
+  top: 0%;
+}
+
+.light >>> li > code {
+  color: var(--v-primary-base);
+}
+
 .light >>> pre {
   display: block;
   margin-bottom: 1.2em;

@@ -106,6 +106,34 @@
   opacity: 1;
 }
 
+.dark >>> li > a {
+  text-decoration: none;
+  color: var(--v-accent-base);
+  position: relative;
+}
+
+.dark >>> li > a:after {
+  content: '」';
+  color: wheat;
+  opacity: 0.4;
+  transition: all 0.3s ease;
+}
+
+.dark >>> li > a:before {
+  content: '「';
+  color: wheat;
+  opacity: 0.4;
+  transition: all 0.3s ease;
+}
+
+.dark >>> li > a:hover:after {
+  opacity: 1;
+}
+
+.dark >>> li > a:hover:before {
+  opacity: 1;
+}
+
 .dark >>> p > code {
   color: navajowhite;
 }
