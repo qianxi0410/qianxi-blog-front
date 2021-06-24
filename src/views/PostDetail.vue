@@ -66,6 +66,31 @@
         </v-btn>
       </v-row>
     </v-container>
+    <v-container>
+      <v-divider class="my-6"></v-divider>
+      <v-row>
+        <v-timeline dense>
+          <v-timeline-item v-for="n in 2" :key="n">
+            <span slot="opposite">Tus eu perfecto</span>
+            <v-card class="elevation-2">
+              <v-card-text>
+                Lorem ipsum dolor sit amet, no nam oblique veritus. Commune
+                scaevola imperdiet nec ut, sed euismod convenire principes at.
+                Est et nobis iisque percipit, an vim zril disputando
+                voluptatibus, vix an salutandi sententiae. Lorem ipsum dolor sit
+                amet, no nam oblique veritus. Commune scaevola imperdiet nec ut,
+                sed euismod convenire principes at. Est et nobis iisque
+                percipit, an vim zril disputando voluptatibus, vix an salutandi
+                sententiae. Lorem ipsum dolor sit amet, no nam oblique veritus.
+                Commune scaevola imperdiet nec ut, sed euismod convenire
+                principes at. Est et nobis iisque percipit, an vim zril
+                disputando voluptatibus, vix an salutandi sententiae.
+              </v-card-text>
+            </v-card>
+          </v-timeline-item>
+        </v-timeline>
+      </v-row>
+    </v-container>
   </div>
 </template>
 
@@ -137,7 +162,7 @@ export default class PostsDetail extends Vue {
         if (e.nodeName.includes('H')) {
           this.toc.push({
             level: e.nodeName.slice(1),
-            hook: (e as any as {id : string}).id,
+            hook: ((e as any) as { id: string }).id,
             title: e.textContent!.slice(2)
           });
         }
