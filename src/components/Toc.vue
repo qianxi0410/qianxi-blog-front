@@ -47,9 +47,7 @@ export default class Toc extends Vue {
 
   toggleTocClass(): void {
     const toc = this.$refs.toc as HTMLElement;
-    if (
-      window.pageYOffset >= this.getPostBannerHeight
-    ) {
+    if (window.pageYOffset >= this.getPostBannerHeight) {
       toc.classList.add('toc');
     } else {
       toc.classList.remove('toc');
@@ -77,6 +75,7 @@ ul li {
 .ul {
   width: 100%;
   font-size: 0.8em;
+  margin-top: 2em;
 }
 
 .toc {
