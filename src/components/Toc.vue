@@ -80,8 +80,8 @@ ul li {
 
 .toc {
   position: fixed;
-  right: 6em;
   top: 2em;
+  margin: auto;
 }
 
 .light li:hover {
