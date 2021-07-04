@@ -1,5 +1,9 @@
 <template>
-  <div :class="this.$vuetify.theme.dark ? 'dark' : 'light'" ref="toc">
+  <div
+    :class="this.$vuetify.theme.dark ? 'dark' : 'light'"
+    class="toc"
+    ref="toc"
+  >
     <ul class="ul">
       <li
         v-for="(item, index) in $props.toc"
@@ -44,24 +48,6 @@ export default class Toc extends Vue {
     });
     this.activeIndex = index;
   }
-
-  toggleTocClass(): void {
-    const toc = this.$refs.toc as HTMLElement;
-    if (window.pageYOffset >= this.getPostBannerHeight) {
-      toc.classList.add('toc');
-    } else {
-      toc.classList.remove('toc');
-      this.activeIndex = -1;
-    }
-  }
-
-  mounted(): void {
-    window.addEventListener('scroll', this.toggleTocClass);
-  }
-
-  destroyed(): void {
-    window.removeEventListener('scroll', this.toggleTocClass);
-  }
 }
 </script>
 
@@ -81,9 +67,9 @@ ul li {
 }
 
 .toc {
-  position: fixed;
+  position: -webkit-sticky;
+  position: sticky;
   top: 2em;
-  width: fit-content;
 }
 
 .light li:hover {

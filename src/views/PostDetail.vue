@@ -70,7 +70,7 @@
       <v-divider class="my-6"></v-divider>
       <v-row>
         <v-timeline dense>
-          <v-timeline-item v-for="n in 2" :key="n">
+          <v-timeline-item v-for="n in 5" :key="n">
             <span slot="opposite">Tus eu perfecto</span>
             <v-card class="elevation-2">
               <v-card-text>
