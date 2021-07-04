@@ -69,42 +69,9 @@
     <v-container>
       <v-divider class="my-3"></v-divider>
       <v-row>
-        <v-timeline dense>
-          <v-timeline-item
-            v-for="n in 5"
-            :key="n"
-            color="primary"
-            class="timeline_item"
-          >
-            <v-card class="elevation-2 mt-1">
-              <v-card-text>
-                Lorem ipsum dolor sit amet, no nam oblique veritus. Commune
-                scaevola imperdiet nec ut, sed euismod convenire principes at.
-                Lorem ipsum dolor sit amet, no nam oblique veritus. Commune
-                scaevola imperdiet nec ut, sed euismod convenire principes at.
-                Lorem ipsum dolor sit amet, no nam oblique veritus. Commune
-                scaevola imperdiet nec ut, sed euismod convenire principes at.
-                Lorem ipsum dolor sit amet, no nam oblique veritus. Commune
-                scaevola imperdiet nec ut, sed euismod convenire principes at.
-                Lorem ipsum dolor sit amet, no nam oblique veritus. Commune
-                scaevola imperdiet nec ut, sed euismod convenire principes at.
-                Lorem ipsum dolor sit amet, no nam oblique veritus. Commune
-                scaevola imperdiet nec ut, sed euismod convenire principes at.
-                Lorem ipsum dolor sit amet, no nam oblique veritus. Commune
-                scaevola imperdiet nec ut, sed euismod convenire principes at.
-                Lorem ipsum dolor sit amet, no nam oblique veritus. Commune
-                scaevola imperdiet nec ut, sed euismod convenire principes at.
-                Lorem ipsum dolor sit amet, no nam oblique veritus. Commune
-                scaevola imperdiet nec ut, sed euismod convenire principes at.
-                Lorem ipsum dolor sit amet, no nam oblique veritus. Commune
-                scaevola imperdiet nec ut, sed euismod convenire principes at.
-                Lorem ipsum dolor sit amet, no nam oblique veritus. Commune
-                scaevola imperdiet nec ut, sed euismod convenire principes at.
-              </v-card-text>
-            </v-card>
-          </v-timeline-item>
-        </v-timeline>
+        <CommentShow />
       </v-row>
+      <v-divider class="my-3"></v-divider>
     </v-container>
   </div>
 </template>
@@ -114,6 +81,7 @@ import Component from 'vue-class-component';
 import Vue from 'vue';
 import PostBanner from '@/components/PostBanner.vue';
 import Markdown from '@/components/Markdown.vue';
+import CommentShow from '@/components/CommentShow.vue';
 import Toc from '@/components/Toc.vue';
 import { namespace } from 'vuex-class';
 import { BlogName } from '@/config/index';
@@ -124,7 +92,8 @@ const inner = namespace('inner');
   components: {
     PostBanner,
     Markdown,
-    Toc
+    Toc,
+    CommentShow
   }
 })
 export default class PostsDetail extends Vue {
@@ -202,9 +171,5 @@ export default class PostsDetail extends Vue {
 .top_container {
   background-color: var(--v-secondary-base);
   color: var(--v-accent-base);
-}
-
-.timeline_item {
-  padding-right: 2em;
 }
 </style>
