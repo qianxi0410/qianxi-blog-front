@@ -76,12 +76,14 @@ ul li {
   width: 100%;
   font-size: 0.8em;
   margin-top: 2em;
+  width: fit-content;
+  box-sizing: content-box;
 }
 
 .toc {
   position: fixed;
   top: 2em;
-  margin: auto;
+  width: fit-content;
 }
 
 .light li:hover {
