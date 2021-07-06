@@ -75,9 +75,7 @@
         <CommentShow />
       </v-row>
       <v-divider class="my-3"></v-divider>
-      <v-row>
-        <CommentInput />
-      </v-row>
+      <CommentInput />
     </v-container>
   </div>
 </template>
