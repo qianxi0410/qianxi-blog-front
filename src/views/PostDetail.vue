@@ -67,11 +67,17 @@
       </v-row>
     </v-container>
     <v-container>
+      <v-icon>
+        mdi-comment
+      </v-icon>
       <v-divider class="my-3"></v-divider>
       <v-row>
         <CommentShow />
       </v-row>
       <v-divider class="my-3"></v-divider>
+      <v-row>
+        <CommentInput />
+      </v-row>
     </v-container>
   </div>
 </template>
@@ -82,6 +88,7 @@ import Vue from 'vue';
 import PostBanner from '@/components/PostBanner.vue';
 import Markdown from '@/components/Markdown.vue';
 import CommentShow from '@/components/CommentShow.vue';
+import CommentInput from '@/components/CommentInput.vue';
 import Toc from '@/components/Toc.vue';
 import { namespace } from 'vuex-class';
 import { BlogName } from '@/config/index';
@@ -93,7 +100,8 @@ const inner = namespace('inner');
     PostBanner,
     Markdown,
     Toc,
-    CommentShow
+    CommentShow,
+    CommentInput
   }
 })
 export default class PostsDetail extends Vue {
