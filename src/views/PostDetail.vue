@@ -67,14 +67,7 @@
       </v-row>
     </v-container>
     <v-container>
-      <v-icon>
-        mdi-comment
-      </v-icon>
-      <v-divider class="my-3"></v-divider>
-      <v-row>
-        <CommentShow />
-      </v-row>
-      <v-divider class="my-3"></v-divider>
+      <CommentShow />
       <CommentInput />
     </v-container>
   </div>
