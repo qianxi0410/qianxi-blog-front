@@ -30,4 +30,9 @@ import Component from 'vue-class-component';
 export default class CommentShow extends Vue {}
 </script>
 
-<style scoped></style>
+<style scoped>
+::selection {
+  background: wheat;
+  color: var(--v-primary-base);
+}
+</style>

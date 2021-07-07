@@ -54,3 +54,10 @@ import Component from 'vue-class-component';
 @Component
 export default class CommentInput extends Vue {}
 </script>
+
+<style scoped>
+::selection {
+  background: wheat;
+  color: var(--v-primary-base);
+}
+</style>
