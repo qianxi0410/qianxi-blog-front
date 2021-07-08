@@ -6,8 +6,7 @@
       :src="parallax.src"
       :title="parallax.title"
     />
-    <h1>This is an timeline page</h1>
-    <div style="height: 1000px"></div>
+    <CTimeLine />
   </div>
 </template>
 
@@ -15,11 +14,13 @@
 import Component from 'vue-class-component';
 import Vue from 'vue';
 import Parallax from '@/components/Parallax.vue';
+import CTimeLine from '@/components/TimeLine.vue';
 import { TimeLineSrc, TimeLineTitle, TimeLineMotto } from '@/config/index';
 
 @Component({
   components: {
-    Parallax
+    Parallax,
+    CTimeLine
   }
 })
 export default class TimeLine extends Vue {
