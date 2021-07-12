@@ -51,6 +51,7 @@
                   outlined
                   v-for="tag in post.tags"
                   :key="tag"
+                  @click="goToTagPage(tag)"
                 >
                   {{ tag }}
                 </v-chip>
@@ -132,6 +133,12 @@ export default class PostCard extends Vue {
   handleRead(): void {
     this.setBlogId(this.$props.post.id);
     this.$router.push({ path: `/post/${this.$props.post.title}` });
+  }
+
+  goToTagPage(tag: string): void {
+    this.$router
+      .push({ path: `/posts/tag/${tag}` })
+      .catch(() => console.log('you are already in this page!'));
   }
 
   mounted(): void {

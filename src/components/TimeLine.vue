@@ -20,7 +20,12 @@
             </p>
             <v-row>
               <v-col>
-                <v-chip class="mr-2" v-for="(tag, idx) in item.tags" :key="idx">
+                <v-chip
+                  class="mr-2"
+                  v-for="(tag, idx) in item.tags"
+                  :key="idx"
+                  @click="goToTagPage(tag)"
+                >
                   {{ tag }}
                 </v-chip>
               </v-col>
@@ -99,6 +104,12 @@ export default class TimeLine extends Vue {
   toPostDetail(id: number, title: string): void {
     this.setBlogId(id);
     this.$router.push({ path: `/post/${title}` });
+  }
+
+  goToTagPage(tag: string): void {
+    this.$router
+      .push({ path: `/timeline/tag/${tag}` })
+      .catch(() => console.log('you are already in this page!'));
   }
 }
 </script>

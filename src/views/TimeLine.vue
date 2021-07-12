@@ -17,10 +17,16 @@ import Parallax from '@/components/Parallax.vue';
 import CTimeLine from '@/components/TimeLine.vue';
 import { TimeLineSrc, TimeLineTitle, TimeLineMotto } from '@/config/index';
 
-@Component({
+// eslint-disable-next-line no-use-before-define
+@Component<TimeLine>({
   components: {
     Parallax,
     CTimeLine
+  },
+  watch: {
+    $route(to: any, from: any): void {
+      this.handleRouteChange();
+    }
   }
 })
 export default class TimeLine extends Vue {
@@ -29,6 +35,26 @@ export default class TimeLine extends Vue {
     title: TimeLineTitle,
     motto: TimeLineMotto
   };
+
+  handleRouteChange(): void {
+    if (this.$route.params.tagName) {
+      this.parallax = {
+        src: TimeLineSrc,
+        title: `TimeLine: ${this.$route.params.tagName}`,
+        motto: `Whatever begins, also ends.`
+      };
+    } else {
+      this.parallax = {
+        src: TimeLineSrc,
+        title: TimeLineTitle,
+        motto: TimeLineMotto
+      };
+    }
+    this.$vuetify.goTo(0, {
+      duration: 0,
+      easing: 'easeInOutQuint'
+    });
+  }
 }
 </script>
 

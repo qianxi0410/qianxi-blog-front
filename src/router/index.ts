@@ -19,6 +19,12 @@ const routes: Array<RouteConfig> = [
           import(/* webpackChunkName: "posts" */ '../views/Posts.vue')
       },
       {
+        path: 'posts/tag/:tagName',
+        name: 'PostsTag',
+        component: () =>
+          import(/* webpackChunkName: "posts" */ '../views/Posts.vue')
+      },
+      {
         path: 'about',
         name: 'About',
         component: () =>
@@ -27,6 +33,12 @@ const routes: Array<RouteConfig> = [
       {
         path: 'timeline',
         name: 'TimeLine',
+        component: () =>
+          import(/* webpackChunkName: "timeline" */ '../views/TimeLine.vue')
+      },
+      {
+        path: 'timeline/tag/:tagName',
+        name: 'TimeLineTag',
         component: () =>
           import(/* webpackChunkName: "timeline" */ '../views/TimeLine.vue')
       },

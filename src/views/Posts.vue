@@ -32,10 +32,16 @@ import { namespace } from 'vuex-class';
 
 const inner = namespace('inner');
 
-@Component({
+// eslint-disable-next-line no-use-before-define
+@Component<Posts>({
   components: {
     Parallax,
     PostCard
+  },
+  watch: {
+    $route(to: any, from: any): void {
+      this.handleRouteChange();
+    }
   }
 })
 export default class Posts extends Vue {
@@ -60,7 +66,7 @@ export default class Posts extends Vue {
       title: 'promise.js简要实现',
       description: '简单实现了一个promise',
       publishDate: '2021-05-19',
-      tags: ['vue', 'javascript']
+      tags: ['vue', 'javascript1']
     },
     {
       id: 1,
@@ -69,7 +75,7 @@ export default class Posts extends Vue {
       description:
         '简单实现了一个promise简单实现了一个promise简单实现了一个promise简单实现了一个promise简单实现了一个promise简单实现了一个promise简单实现了一个promise简单实现了一个promise简单实现了一个promise简单实现了一个promise',
       publishDate: '2021-05-20',
-      tags: ['vue', 'javascript']
+      tags: ['vue', 'javascript2']
     },
     {
       id: 2,
@@ -77,7 +83,7 @@ export default class Posts extends Vue {
       title: 'promise.js简要实现3',
       description: '简单实现了一个promise',
       publishDate: '2021-05-19',
-      tags: ['vue', 'javascript']
+      tags: ['vue', 'javascript3']
     },
     {
       id: 3,
@@ -86,7 +92,7 @@ export default class Posts extends Vue {
       description:
         '简单实现了一个promise简单实现了一个promise简单实现了一个promise简单实现了一个promise简单实现了一个promise简单实现了一个promise简单实现了一个promise简单实现了一个promise简单实现了一个promise简单实现了一个promise',
       publishDate: '2021-05-20',
-      tags: ['vue', 'javascript']
+      tags: ['vue', 'javascript4']
     }
   ];
 
@@ -102,6 +108,30 @@ export default class Posts extends Vue {
     this.$vuetify.goTo(this.getPostBannerHeight, {
       duration: 0,
       easing: 'easeInOutQuad'
+    });
+  }
+
+  handleRouteChange(): void {
+    if (this.$route.params.tagName) {
+      this.parallax = {
+        src: IndexSrc,
+        title: `Tag: ${this.$route.params.tagName}`,
+        motto: `too simple, sometimes naive.`
+      };
+      this.post = this.arr.filter(e =>
+        e.tags.includes(this.$route.params.tagName)
+      );
+    } else {
+      this.parallax = {
+        src: IndexSrc,
+        title: IndexTitle,
+        motto: IndexMotto
+      };
+      this.handleInput();
+    }
+    this.$vuetify.goTo(0, {
+      duration: 0,
+      easing: 'easeInOutQuint'
     });
   }
 
