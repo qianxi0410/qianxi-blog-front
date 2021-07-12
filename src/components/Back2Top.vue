@@ -81,7 +81,7 @@ export default class Back2Top extends Vue {
 
   back2Top(): void {
     this.$vuetify.goTo(0, {
-      duration: 500,
+      duration: 0,
       easing: 'easeOutQuart'
     });
   }

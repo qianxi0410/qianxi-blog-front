@@ -8,14 +8,10 @@
       <li
         v-for="(item, index) in $props.toc"
         :key="index"
-        :class="[
-          `pl-${(Number(item.level) - 2) * 3}`,
-          activeIndex === index ? 'li-active' : ''
-        ]"
+        :class="[`pl-${(Number(item.level) - 2) * 3}`]"
         class="mb-1"
-        @click="goTo(item.hook, index)"
       >
-        {{ item.title }}
+        <a :href="`#${item.hook}`">{{ item.title }}</a>
       </li>
     </ul>
   </div>
@@ -40,14 +36,6 @@ export default class Toc extends Vue {
   activeIndex = -1;
 
   @inner.Getter('getPostBannerHeight') getPostBannerHeight!: number;
-
-  goTo(id: string, index: number): void {
-    this.$vuetify.goTo(`#${id}`, {
-      duration: 500,
-      easing: 'easeOutQuart'
-    });
-    this.activeIndex = index;
-  }
 }
 </script>
 
@@ -72,34 +60,8 @@ ul li {
   top: 2em;
 }
 
-.light li:hover {
+a {
   text-decoration: none;
-  color: var(--v-primary-base);
-}
-.dark li:hover {
-  text-decoration: none;
-  color: navajowhite;
-}
-
-.dark .li-active {
-  color: navajowhite;
-}
-
-.dark .li-active::before {
-  content: '>';
-  color: navajowhite;
-  position: absolute;
-  left: -1em;
-}
-
-.light .li-active {
-  color: var(--v-primary-base);
-}
-
-.light .li-active::before {
-  content: '>';
-  color: var(--v-primary-base);
-  position: absolute;
-  left: -1em;
+  color: var(--v-accent);
 }
 </style>
