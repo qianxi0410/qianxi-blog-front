@@ -25,13 +25,20 @@
                 </v-chip>
               </v-col>
               <v-col cols="2">
-                <v-btn
-                  class="mx-0"
-                  plain
-                  @click="toPostDetail(item.id, item.title)"
-                >
-                  <v-icon>mdi-airplane</v-icon>
-                </v-btn>
+                <v-tooltip left>
+                  <template v-slot:activator="{ on, attrs }">
+                    <v-btn
+                      class="mx-0"
+                      plain
+                      @click="toPostDetail(item.id, item.title)"
+                      v-bind="attrs"
+                      v-on="on"
+                    >
+                      <v-icon>mdi-airplane</v-icon>
+                    </v-btn>
+                  </template>
+                  <span>Read</span>
+                </v-tooltip>
               </v-col>
             </v-row>
           </v-card-text>
