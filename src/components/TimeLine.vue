@@ -3,27 +3,37 @@
     <v-timeline align-top :dense="$vuetify.breakpoint.smAndDown">
       <v-timeline-item v-for="(item, i) in items" :key="i" fill-dot>
         <template v-slot:opposite>
-          <span>Tus eu perfecto</span>
+          <h3 class="">{{ item.publishDate }}</h3>
         </template>
         <template v-slot:icon>
           <v-avatar>
             <img src="@/assets/avatar.jpg" alt="qianxi" />
           </v-avatar>
         </template>
-        <v-card>
+        <v-card class="elevation-4">
           <v-card-title class="text-h6">
-            Lorem Ipsum Dolor
+            {{ item.title }}
           </v-card-title>
           <v-card-text class="text--accent">
             <p>
-              Lorem ipsum dolor sit amet, no nam oblique veritus. Commune
-              scaevola imperdiet nec ut, sed euismod convenire principes at. Est
-              et nobis iisque percipit, an vim zril disputando voluptatibus, vix
-              an salutandi sententiae.
+              {{ item.description }}
             </p>
-            <v-btn class="mx-0" plain>
-              <v-icon>mdi-airplane</v-icon>
-            </v-btn>
+            <v-row>
+              <v-col>
+                <v-chip class="mr-2" v-for="(tag, idx) in item.tags" :key="idx">
+                  {{ tag }}
+                </v-chip>
+              </v-col>
+              <v-col cols="2">
+                <v-btn
+                  class="mx-0"
+                  plain
+                  @click="toPostDetail(item.id, item.title)"
+                >
+                  <v-icon>mdi-airplane</v-icon>
+                </v-btn>
+              </v-col>
+            </v-row>
           </v-card-text>
         </v-card>
       </v-timeline-item>
@@ -34,45 +44,54 @@
 <script lang="ts">
 import Vue from 'vue';
 import Component from 'vue-class-component';
+import { namespace } from 'vuex-class';
+
+const inner = namespace('inner');
 
 @Component
 export default class TimeLine extends Vue {
   items = [
     {
-      color: 'red lighten-2'
+      id: 0,
+      src: 'https://w.wallhaven.cc/full/z8/wallhaven-z8p9rj.jpg',
+      title: 'promise.js简要实现',
+      description: '简单实现了一个promise',
+      publishDate: '2021-05-19',
+      tags: ['vue', 'javascript']
     },
     {
-      color: 'purple darken-1'
+      id: 1,
+      src: 'https://w.wallhaven.cc/full/28/wallhaven-281d5y.png',
+      title: 'promise.js简要实现2',
+      description:
+        '简单实现了一个promise简单实现了一个promise简单实现了一个promise简单实现了一个promise简单实现了一个promise简单实现了一个promise简单实现了一个promise简单实现了一个promise简单实现了一个promise简单实现了一个promise',
+      publishDate: '2021-05-20',
+      tags: ['vue', 'javascript']
     },
     {
-      color: 'green lighten-1'
+      id: 2,
+      src: 'https://w.wallhaven.cc/full/rd/wallhaven-rddgwm.jpg',
+      title: 'promise.js简要实现3',
+      description: '简单实现了一个promise',
+      publishDate: '2021-05-19',
+      tags: ['vue', 'javascript']
     },
     {
-      color: 'indigo'
+      id: 3,
+      src: 'https://w.wallhaven.cc/full/72/wallhaven-7232p9.jpg',
+      title: 'promise.js简要实现4',
+      description:
+        '简单实现了一个promise简单实现了一个promise简单实现了一个promise简单实现了一个promise简单实现了一个promise简单实现了一个promise简单实现了一个promise简单实现了一个promise简单实现了一个promise简单实现了一个promise',
+      publishDate: '2021-05-20',
+      tags: ['vue', 'javascript']
     }
   ];
 
-  years = [
-    {
-      color: 'cyan',
-      year: '1960'
-    },
-    {
-      color: 'green',
-      year: '1970'
-    },
-    {
-      color: 'pink',
-      year: '1980'
-    },
-    {
-      color: 'amber',
-      year: '1990'
-    },
-    {
-      color: 'orange',
-      year: '2000'
-    }
-  ];
+  @inner.Mutation('setBlogId') setBlogId!: (id: number) => void;
+
+  toPostDetail(id: number, title: string): void {
+    this.setBlogId(id);
+    this.$router.push({ path: `/post/${title}` });
+  }
 }
 </script>
