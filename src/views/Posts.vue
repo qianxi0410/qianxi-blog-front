@@ -43,6 +43,8 @@ export default class Posts extends Vue {
 
   @inner.Getter('getCurrentPage') getCurrentPage!: number;
 
+  @inner.Getter('getPostBannerHeight') getPostBannerHeight!: number;
+
   parallax = {
     src: IndexSrc,
     title: IndexTitle,
@@ -97,6 +99,10 @@ export default class Posts extends Vue {
     } else {
       this.post = this.arr.slice(2, 4);
     }
+    this.$vuetify.goTo(this.getPostBannerHeight, {
+      duration: 0,
+      easing: 'easeInOutQuad'
+    });
   }
 
   mounted(): void {

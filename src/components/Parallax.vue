@@ -61,10 +61,11 @@ export default class Parallax extends Vue {
   handleHeight(): void {
     if (this.$vuetify.breakpoint.xs) {
       this.height = window.innerHeight - 55;
+      this.setPostBannerHeight(this.height + 70);
     } else {
       this.height = window.innerHeight * (2 / 3);
+      this.setPostBannerHeight(this.height + 80);
     }
-    this.setPostBannerHeight(this.height);
   }
 
   mounted(): void {

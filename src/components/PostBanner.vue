@@ -62,10 +62,11 @@ export default class PostBanner extends Vue {
   handleHeight(): void {
     if (this.$vuetify.breakpoint.xs) {
       this.height = window.innerHeight - 55;
+      this.setPostBannerHeight(this.height + 70);
     } else {
       this.height = window.innerHeight * (2 / 3);
+      this.setPostBannerHeight(this.height + 80);
     }
-    this.setPostBannerHeight(this.height);
   }
 
   back2Top(): void {
@@ -76,9 +77,9 @@ export default class PostBanner extends Vue {
   }
 
   mounted(): void {
-    window.addEventListener('resize', this.handleHeight);
     this.handleHeight();
     this.back2Top();
+    window.addEventListener('resize', this.handleHeight);
   }
 
   destroyed(): void {
