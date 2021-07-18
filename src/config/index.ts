@@ -28,4 +28,4 @@ export const AboutSrc = [
 export const AboutTitle = 'About';
 export const AboutMotto = 'U wanna know something about me ?';
 
-export const baseUrl = 'localhost:8080';
+export const baseUrl = 'http://127.0.0.1:8081';
