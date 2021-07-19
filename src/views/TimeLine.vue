@@ -15,7 +15,12 @@ import Component from 'vue-class-component';
 import Vue from 'vue';
 import Parallax from '@/components/Parallax.vue';
 import CTimeLine from '@/components/TimeLine.vue';
-import { TimeLineSrc, TimeLineTitle, TimeLineMotto } from '@/config/index';
+import {
+  TimeLineSrc,
+  TimeLineTitle,
+  TimeLineMotto,
+  BlogName
+} from '@/config/index';
 
 // eslint-disable-next-line no-use-before-define
 @Component<TimeLine>({
@@ -54,6 +59,11 @@ export default class TimeLine extends Vue {
       duration: 0,
       easing: 'easeInOutQuint'
     });
+  }
+
+  // eslint-disable-next-line class-methods-use-this
+  mounted(): void {
+    document.title = `${BlogName} | TimeLine`;
   }
 }
 </script>

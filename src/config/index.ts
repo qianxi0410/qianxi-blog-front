@@ -29,3 +29,5 @@ export const AboutTitle = 'About';
 export const AboutMotto = 'U wanna know something about me ?';
 
 export const baseUrl = 'http://127.0.0.1:8081';
+
+export const size = 2;

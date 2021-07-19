@@ -29,6 +29,7 @@ import Parallax from '@/components/Parallax.vue';
 import PostCard from '@/components/PostCard.vue';
 import { IndexSrc, IndexTitle, IndexMotto } from '@/config/index';
 import { namespace } from 'vuex-class';
+import { getPosts } from '../api/post';
 
 const inner = namespace('inner');
 
@@ -59,52 +60,13 @@ export default class Posts extends Vue {
 
   page = 1;
 
-  arr = [
-    {
-      id: 0,
-      src: 'https://w.wallhaven.cc/full/z8/wallhaven-z8p9rj.jpg',
-      title: 'promise.js简要实现',
-      description: '简单实现了一个promise',
-      publishDate: '2021-05-19',
-      tags: ['vue', 'javascript1']
-    },
-    {
-      id: 1,
-      src: 'https://w.wallhaven.cc/full/28/wallhaven-281d5y.png',
-      title: 'promise.js简要实现2',
-      description:
-        '简单实现了一个promise简单实现了一个promise简单实现了一个promise简单实现了一个promise简单实现了一个promise简单实现了一个promise简单实现了一个promise简单实现了一个promise简单实现了一个promise简单实现了一个promise',
-      publishDate: '2021-05-20',
-      tags: ['vue', 'javascript2']
-    },
-    {
-      id: 2,
-      src: 'https://w.wallhaven.cc/full/rd/wallhaven-rddgwm.jpg',
-      title: 'promise.js简要实现3',
-      description: '简单实现了一个promise',
-      publishDate: '2021-05-19',
-      tags: ['vue', 'javascript3']
-    },
-    {
-      id: 3,
-      src: 'https://w.wallhaven.cc/full/72/wallhaven-7232p9.jpg',
-      title: 'promise.js简要实现4',
-      description:
-        '简单实现了一个promise简单实现了一个promise简单实现了一个promise简单实现了一个promise简单实现了一个promise简单实现了一个promise简单实现了一个promise简单实现了一个promise简单实现了一个promise简单实现了一个promise',
-      publishDate: '2021-05-20',
-      tags: ['vue', 'javascript4']
-    }
-  ];
-
-  post = this.arr.slice(0, 2);
+  post = [];
 
   handleInput(): void {
     this.setCurrentPage(this.page);
-    if (this.page === 1) {
-      this.post = this.arr.slice(0, 2);
-    } else {
-      this.post = this.arr.slice(2, 4);
-    }
+    getPosts(this.page).then(res => {
+      this.post = res.data;
+    });
     this.$vuetify.goTo(this.getPostBannerHeight, {
       duration: 0,
       easing: 'easeInOutQuad'
@@ -118,9 +80,7 @@ export default class Posts extends Vue {
         title: `Tag: ${this.$route.params.tagName}`,
         motto: `too simple, sometimes naive.`
       };
-      this.post = this.arr.filter(e =>
-        e.tags.includes(this.$route.params.tagName)
-      );
+      // todo find with tage name
     } else {
       this.parallax = {
         src: IndexSrc,

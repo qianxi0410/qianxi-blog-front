@@ -38,7 +38,7 @@ import Component from 'vue-class-component';
 import Vue from 'vue';
 import Parallax from '@/components/Parallax.vue';
 import Link from '@/components/Link.vue';
-import { AboutSrc, AboutTitle, AboutMotto } from '@/config/index';
+import { AboutSrc, AboutTitle, AboutMotto, BlogName } from '@/config/index';
 
 @Component({
   components: {
@@ -52,6 +52,11 @@ export default class About extends Vue {
     title: AboutTitle,
     motto: AboutMotto
   };
+
+  // eslint-disable-next-line class-methods-use-this
+  mounted(): void {
+    document.title = `${BlogName} | About`;
+  }
 }
 </script>
 

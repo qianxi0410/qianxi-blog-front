@@ -3,9 +3,9 @@
     <PostBanner
       blur
       :description="post.description"
-      :src="post.src"
+      :src="post.url"
       :title="post.title"
-      :publishDate="new Date()"
+      :publishDate="new Date(post.created_at)"
     />
     <v-container>
       <v-row>
@@ -22,12 +22,12 @@
           "
         >
           <v-chip-group active-class="primary--text" column>
-            <v-chip v-for="tag in post.tags" :key="tag" class="mr-3">
+            <v-chip v-for="tag in post.tags.split('-')" :key="tag" class="mr-3">
               {{ tag }}
             </v-chip>
           </v-chip-group>
           <div class="mt-10">
-            <Markdown id="markdown" />
+            <Markdown id="markdown" :content="content" />
           </div>
         </v-col>
         <v-col
@@ -47,7 +47,7 @@
         </v-chip>
       </v-row>
       <v-row justify="center" class="pb-5">
-        Last edit at: {{ new Date() }}
+        Last edit at: {{ new Date(post.updated_at).toDateString() }}
       </v-row>
       <v-row class="pb-5 d-flex justify-space-around">
         <v-btn
@@ -83,6 +83,7 @@ import CommentInput from '@/components/CommentInput.vue';
 import Toc from '@/components/Toc.vue';
 import { namespace } from 'vuex-class';
 import { BlogName } from '@/config/index';
+import { getPost } from '../api/post';
 
 const inner = namespace('inner');
 
@@ -98,40 +99,13 @@ const inner = namespace('inner');
 export default class PostsDetail extends Vue {
   @inner.Getter('getBlogId') getBlogId!: number;
 
-  arr = [
-    {
-      src: 'https://w.wallhaven.cc/full/z8/wallhaven-z8p9rj.jpg',
-      title: 'promise 日记',
-      description: '简单实现了一个promise',
-      publishDate: '2021-05-19',
-      tags: ['vue', 'javascript']
-    },
-    {
-      src: 'https://w.wallhaven.cc/full/28/wallhaven-281d5y.png',
-      title: 'promise.js简要实现2',
-      description:
-        '简单实现了一个promise简单实现了一个promise简单实现了一个promise简单实现了一个promise简单实现了一个promise简单实现了一个promise简单实现了一个promise简单实现了一个promise简单实现了一个promise简单实现了一个promise',
-      publishDate: '2021-05-20',
-      tags: ['vue', 'javascript']
-    },
-    {
-      src: 'https://w.wallhaven.cc/full/rd/wallhaven-rddgwm.jpg',
-      title: 'promise.js简要实现3',
-      description: '简单实现了一个promise',
-      publishDate: '2021-05-19',
-      tags: ['vue', 'javascript']
-    },
-    {
-      src: 'https://w.wallhaven.cc/full/72/wallhaven-7232p9.jpg',
-      title: 'promise.js简要实现4',
-      description:
-        '简单实现了一个promise简单实现了一个promise简单实现了一个promise简单实现了一个promise简单实现了一个promise简单实现了一个promise简单实现了一个promise简单实现了一个promise简单实现了一个promise简单实现了一个promise',
-      publishDate: '2021-05-20',
-      tags: ['vue', 'javascript']
-    }
-  ];
+  post = {
+    tags: '',
+    title: '',
+    path: ''
+  };
 
-  post = {};
+  content = '';
 
   toc: Array<{ level: string; hook: string; title: string }> = [];
 
@@ -159,9 +133,14 @@ export default class PostsDetail extends Vue {
   }
 
   mounted(): void {
-    this.post = this.arr[this.getBlogId];
-    document.title = `${BlogName} | ${(this.post as { title: string }).title}`;
-    this.getToc();
+    getPost(this.getBlogId).then(res => {
+      this.post = res.data;
+      this.content = res.data.path;
+      document.title = `${BlogName} | ${
+        (this.post as { title: string }).title
+      }`;
+      this.getToc();
+    });
   }
 }
 </script>

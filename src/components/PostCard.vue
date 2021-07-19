@@ -19,8 +19,8 @@
         <div style="overflow: hidden">
           <v-img
             class="img"
-            v-if="post.src !== ''"
-            :src="post.src"
+            v-if="post.url !== ''"
+            :src="post.url"
             :max-height="maxHeight"
           >
           </v-img>
@@ -34,7 +34,7 @@
                 {{ post.title }}
               </div>
               <div class="accent--text d-flex-end">
-                {{ post.publishDate }}
+                {{ new Date(post.created_at).toLocaleDateString() }}
               </div>
             </div>
             <br />
@@ -49,7 +49,7 @@
                   pill
                   class="accent--text"
                   outlined
-                  v-for="tag in post.tags"
+                  v-for="tag in post.tags.split('-')"
                   :key="tag"
                   @click="goToTagPage(tag)"
                 >

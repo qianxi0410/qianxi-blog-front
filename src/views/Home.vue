@@ -28,7 +28,6 @@ import Footer from '@/components/Footer.vue';
 import Back2Top from '@/components/Back2Top.vue';
 import Colorpick from '@/components/Colorpick.vue';
 import { namespace } from 'vuex-class';
-import { test } from '@/api/post';
 
 const inner = namespace('inner');
 
@@ -64,7 +63,6 @@ export default class Home extends Vue {
   }
 
   mounted(): void {
-    test().then(res => console.log(res));
     window.addEventListener('scroll', this.handleProgress);
   }
 
