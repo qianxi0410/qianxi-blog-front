@@ -14,7 +14,7 @@
         :color="this.$vuetify.theme.dark ? '#3f3f5f' : 'primary'"
         circle
         v-model="page"
-        :length="2"
+        :length="10"
         :total-visible="7"
         @input="handleInput"
       ></v-pagination>
@@ -61,6 +61,8 @@ export default class Posts extends Vue {
   page = 1;
 
   post = [];
+
+  length = -1;
 
   handleInput(): void {
     this.setCurrentPage(this.page);

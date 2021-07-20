@@ -17,48 +17,55 @@ export default {
       html: 'loading ...'
     };
   },
+  watch: {
+    content() {
+      this.markDownRender();
+    }
+  },
   props: {
     content: {
       type: String,
       require: true
     }
   },
-  mounted() {
-    const md = new MarkdownIt();
+  methods: {
+    markDownRender() {
+      const md = new MarkdownIt();
 
-    const highlight = {
-      highlight(str, lang) {
-        if (lang && hljs.getLanguage(lang)) {
-          try {
-            const preCode = hljs.highlight(lang, str, true).value;
-            const lines = preCode.split(/\n/).slice(0, -1);
-            let html = lines.map(item => `<li>${item}</li>`).join('');
-            html = `<ol>${html}</ol>`;
-            if (lines.length) {
-              html += `<b class="name">${lang}</b>`;
+      const highlight = {
+        highlight(str, lang) {
+          if (lang && hljs.getLanguage(lang)) {
+            try {
+              const preCode = hljs.highlight(lang, str, true).value;
+              const lines = preCode.split(/\n/).slice(0, -1);
+              let html = lines.map(item => `<li>${item}</li>`).join('');
+              html = `<ol>${html}</ol>`;
+              if (lines.length) {
+                html += `<b class="name">${lang}</b>`;
+              }
+              return `<pre><code class="hljs">${html}</code></pre>`;
+            } catch (__) {
+              // to make eslint happy
             }
-            return `<pre><code class="hljs">${html}</code></pre>`;
-          } catch (__) {
-            // to make eslint happy
           }
+          const preCode = md.utils.escapeHtml(str);
+          const lines = preCode.split(/\n/).slice(0, -1);
+          let html = lines.map(item => `<li>${item}</li>`).join('');
+          html = `<ol>${html}</ol>`;
+          return `<pre><code class="hljs">${html}</code></pre>`;
         }
-        const preCode = md.utils.escapeHtml(str);
-        const lines = preCode.split(/\n/).slice(0, -1);
-        let html = lines.map(item => `<li>${item}</li>`).join('');
-        html = `<ol>${html}</ol>`;
-        return `<pre><code class="hljs">${html}</code></pre>`;
+      };
+      md.set(highlight);
+      md.use(markdownItAnchor, {
+        permalink: true,
+        permalinkSymbol: '#',
+        permalinkBefore: true,
+        permalinkClass: 'href',
+        slugify: string => `${string.split(' ').join('-')}`
+      });
+      if (this.content !== undefined) {
+        this.html = md.render(this.content);
       }
-    };
-    md.set(highlight);
-    md.use(markdownItAnchor, {
-      permalink: true,
-      permalinkSymbol: '#',
-      permalinkBefore: true,
-      permalinkClass: 'href',
-      slugify: string => `${string.split(' ').join('-')}`
-    });
-    if (this.content !== undefined) {
-      this.html = md.render(this.content);
     }
   }
 };
