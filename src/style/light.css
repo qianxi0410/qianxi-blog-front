@@ -216,3 +216,15 @@
   position: absolute;
   left: -1em;
 }
+
+.light >>> s {
+  background-color: var(--v-primary-base);
+  color: var(--v-primary-base);
+  text-decoration: none;
+  transition: 0.6s;
+}
+
+.light >>> s:hover {
+  color: var(--v-accent-base);
+  background-color: var(--v-secondary-base);
+}

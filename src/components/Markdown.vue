@@ -55,6 +55,7 @@ export default {
           return `<pre><code class="hljs">${html}</code></pre>`;
         }
       };
+
       md.set(highlight);
       md.use(markdownItAnchor, {
         permalink: true,
