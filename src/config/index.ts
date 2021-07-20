@@ -2,7 +2,10 @@ export const BlogName = "千禧's Blog";
 // export const Avatar = '@/assets/avatar.jpg'; bug todo
 
 // 每页展示的博文项目数量
-export const pageSize = 5;
+export const pageSize = 2;
+
+// 分页条展示张图
+export const totalVisible = 6;
 
 // index 1 is dark mode img
 export const IndexSrc = [
@@ -29,5 +32,3 @@ export const AboutTitle = 'About';
 export const AboutMotto = 'U wanna know something about me ?';
 
 export const baseUrl = 'http://127.0.0.1:8081';
-
-export const size = 2;

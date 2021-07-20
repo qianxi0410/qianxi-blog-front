@@ -14,8 +14,7 @@
         :color="this.$vuetify.theme.dark ? '#3f3f5f' : 'primary'"
         circle
         v-model="page"
-        :length="10"
-        :total-visible="7"
+        :length="length"
         @input="handleInput"
       ></v-pagination>
     </v-row>
@@ -27,9 +26,14 @@ import Component from 'vue-class-component';
 import Vue from 'vue';
 import Parallax from '@/components/Parallax.vue';
 import PostCard from '@/components/PostCard.vue';
-import { IndexSrc, IndexTitle, IndexMotto } from '@/config/index';
+import { IndexSrc, IndexTitle, IndexMotto, pageSize } from '@/config/index';
 import { namespace } from 'vuex-class';
-import { getPosts } from '../api/post';
+import {
+  getPosts,
+  getCount,
+  getPostsWithTag,
+  getCountWithTag
+} from '../api/post';
 
 const inner = namespace('inner');
 
@@ -66,9 +70,17 @@ export default class Posts extends Vue {
 
   handleInput(): void {
     this.setCurrentPage(this.page);
-    getPosts(this.page).then(res => {
-      this.post = res.data;
-    });
+
+    const { tagName } = this.$route.params;
+    if (!tagName) {
+      getPosts(this.page).then(res => {
+        this.post = res.data;
+      });
+    } else {
+      getPostsWithTag(this.page, tagName).then(res => {
+        this.post = res.data;
+      });
+    }
     this.$vuetify.goTo(this.getPostBannerHeight, {
       duration: 0,
       easing: 'easeInOutQuad'
@@ -76,30 +88,52 @@ export default class Posts extends Vue {
   }
 
   handleRouteChange(): void {
-    if (this.$route.params.tagName) {
+    const { tagName } = this.$route.params;
+    if (tagName) {
       this.parallax = {
         src: IndexSrc,
-        title: `Tag: ${this.$route.params.tagName}`,
+        title: `Tag: ${tagName}`,
         motto: `too simple, sometimes naive.`
       };
-      // todo find with tage name
     } else {
       this.parallax = {
         src: IndexSrc,
         title: IndexTitle,
         motto: IndexMotto
       };
-      this.handleInput();
     }
+    this.page = 1;
+    this.handleInput();
+    this.getLength();
+
     this.$vuetify.goTo(0, {
       duration: 0,
       easing: 'easeInOutQuint'
     });
   }
 
+  getLength(): void {
+    const { tagName } = this.$route.params;
+
+    if (!tagName) {
+      getCount().then(res => {
+        const total = res.data;
+        this.length =
+          Math.floor(total / pageSize) + (total % pageSize === 0 ? 0 : 1);
+      });
+    } else {
+      getCountWithTag(tagName).then(res => {
+        const total = res.data;
+        this.length =
+          Math.floor(total / pageSize) + (total % pageSize === 0 ? 0 : 1);
+      });
+    }
+  }
+
   mounted(): void {
     this.page = this.getCurrentPage;
     this.handleInput();
+    this.getLength();
   }
 }
 </script>
