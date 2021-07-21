@@ -6,8 +6,8 @@
           mdi-comment
         </v-icon>
         <v-divider></v-divider>
-        <v-timeline dense>
-          <v-timeline-item v-for="n in 5" :key="n" color="primary">
+        <v-timeline dense v-if="comments">
+          <v-timeline-item v-for="n in comments" :key="n" color="primary">
             <v-card class="elevation-2 mt-1">
               <v-card-text>
                 Lorem ipsum dolor sit amet, no nam oblique veritus. Commune
@@ -16,7 +16,7 @@
             </v-card>
           </v-timeline-item>
         </v-timeline>
-        <v-divider></v-divider>
+        <v-divider v-if="comments"></v-divider>
       </v-col>
     </v-row>
   </v-container>
@@ -26,7 +26,14 @@
 import Vue from 'vue';
 import Component from 'vue-class-component';
 
-@Component
+@Component({
+  props: {
+    comments: {
+      type: Array,
+      required: true
+    }
+  }
+})
 export default class CommentShow extends Vue {}
 </script>
 

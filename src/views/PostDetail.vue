@@ -54,16 +54,22 @@
           rounded
           :color="this.$vuetify.theme.dark ? 'accent' : 'primary'"
           plain
+          v-if="post.pre !== -1"
+          @click="changePost(post.pre)"
         >
-          <v-icon>mdi-menu-left</v-icon> Rounded Button
+          <v-icon>mdi-menu-left</v-icon> {{ post.pre_title }}
         </v-btn>
+        <span v-else></span>
         <v-btn
           rounded
           :color="this.$vuetify.theme.dark ? 'accent' : 'primary'"
           plain
+          v-if="post.next !== -1"
+          @click="changePost(post.next)"
         >
-          Rounded Button <v-icon>mdi-menu-right</v-icon>
+          {{ post.next_title }} <v-icon>mdi-menu-right</v-icon>
         </v-btn>
+        <span v-else></span>
       </v-row>
     </v-container>
     <v-container>
@@ -99,6 +105,8 @@ const inner = namespace('inner');
 export default class PostsDetail extends Vue {
   @inner.Getter('getBlogId') getBlogId!: number;
 
+  @inner.Mutation('setBlogId') setBlogId!: (id: number) => void;
+
   post = {
     tags: '',
     title: '',
@@ -127,20 +135,30 @@ export default class PostsDetail extends Vue {
     });
   }
 
-  // eslint-disable-next-line class-methods-use-this
-  go(): void {
-    window.open('https://creativecommons.org/licenses/by/4.0/');
-  }
-
-  mounted(): void {
+  changePost(id: number): void {
+    this.setBlogId(id);
+    this.$vuetify.goTo(0, {
+      easing: 'easeInOutQuart',
+      duration: 0
+    });
     getPost(this.getBlogId).then(res => {
       this.post = res.data;
       this.content = res.data.path;
       document.title = `${BlogName} | ${
         (this.post as { title: string }).title
       }`;
+      this.toc = [];
       this.getToc();
     });
+  }
+
+  // eslint-disable-next-line class-methods-use-this
+  go(): void {
+    window.open('https://creativecommons.org/licenses/by/4.0/');
+  }
+
+  mounted(): void {
+    this.changePost(this.getBlogId);
   }
 }
 </script>
