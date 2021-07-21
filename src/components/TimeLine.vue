@@ -1,16 +1,16 @@
 <template>
   <v-container>
     <v-timeline align-top :dense="$vuetify.breakpoint.smAndDown">
-      <v-timeline-item v-for="(item, i) in items" :key="i" fill-dot>
+      <v-timeline-item v-for="(item, i) in posts" :key="i" fill-dot>
         <template v-slot:opposite>
-          <h3 class="">{{ item.publishDate }}</h3>
+          <h3>{{ new Date(item.created_at).toLocaleDateString() }}</h3>
         </template>
         <template v-slot:icon>
           <v-avatar>
             <img src="@/assets/avatar.jpg" alt="qianxi" />
           </v-avatar>
         </template>
-        <v-card class="elevation-4">
+        <v-card class="elevation-2">
           <v-card-title class="text-h6">
             {{ item.title }}
           </v-card-title>
@@ -22,7 +22,7 @@
               <v-col>
                 <v-chip
                   class="mr-2"
-                  v-for="(tag, idx) in item.tags"
+                  v-for="(tag, idx) in item.tags.split('-')"
                   :key="idx"
                   @click="goToTagPage(tag)"
                 >
@@ -50,6 +50,17 @@
         </v-card>
       </v-timeline-item>
     </v-timeline>
+    <v-row justify="center" class="my-1">
+      <v-card-title v-if="showEndText">
+        Congratulations, you have reached the end of the world :)
+      </v-card-title>
+      <v-progress-circular
+        v-else
+        :size="30"
+        :color="$vuetify.theme.dark ? 'accent' : 'primary'"
+        indeterminate
+      ></v-progress-circular>
+    </v-row>
   </v-container>
 </template>
 
@@ -57,47 +68,17 @@
 import Vue from 'vue';
 import Component from 'vue-class-component';
 import { namespace } from 'vuex-class';
+import { getPosts } from '../api/post';
 
 const inner = namespace('inner');
 
 @Component
 export default class TimeLine extends Vue {
-  items = [
-    {
-      id: 0,
-      src: 'https://w.wallhaven.cc/full/z8/wallhaven-z8p9rj.jpg',
-      title: 'promise.js简要实现',
-      description: '简单实现了一个promise',
-      publishDate: '2021-05-19',
-      tags: ['vue', 'javascript']
-    },
-    {
-      id: 1,
-      src: 'https://w.wallhaven.cc/full/28/wallhaven-281d5y.png',
-      title: 'promise.js简要实现2',
-      description:
-        '简单实现了一个promise简单实现了一个promise简单实现了一个promise简单实现了一个promise简单实现了一个promise简单实现了一个promise简单实现了一个promise简单实现了一个promise简单实现了一个promise简单实现了一个promise',
-      publishDate: '2021-05-20',
-      tags: ['vue', 'javascript']
-    },
-    {
-      id: 2,
-      src: 'https://w.wallhaven.cc/full/rd/wallhaven-rddgwm.jpg',
-      title: 'promise.js简要实现3',
-      description: '简单实现了一个promise',
-      publishDate: '2021-05-19',
-      tags: ['vue', 'javascript']
-    },
-    {
-      id: 3,
-      src: 'https://w.wallhaven.cc/full/72/wallhaven-7232p9.jpg',
-      title: 'promise.js简要实现4',
-      description:
-        '简单实现了一个promise简单实现了一个promise简单实现了一个promise简单实现了一个promise简单实现了一个promise简单实现了一个promise简单实现了一个promise简单实现了一个promise简单实现了一个promise简单实现了一个promise',
-      publishDate: '2021-05-20',
-      tags: ['vue', 'javascript']
-    }
-  ];
+  posts = [] as Array<any>;
+
+  page = 0;
+
+  showEndText = false;
 
   @inner.Mutation('setBlogId') setBlogId!: (id: number) => void;
 
@@ -110,6 +91,32 @@ export default class TimeLine extends Vue {
     this.$router
       .push({ path: `/timeline/tag/${tag}` })
       .catch(() => console.log('you are already in this page!'));
+  }
+
+  nextPage(): void {
+    this.page += 1;
+    getPosts(this.page).then(res => {
+      if (res.data === null) {
+        window.removeEventListener('scroll', this.handleScroll);
+        this.showEndText = true;
+      } else {
+        this.posts.push(...res.data);
+      }
+    });
+  }
+
+  handleScroll(): void {
+    if (
+      (window.pageYOffset + window.innerHeight) / document.body.clientHeight >=
+      0.99
+    ) {
+      this.nextPage();
+    }
+  }
+
+  mounted(): void {
+    this.nextPage();
+    window.addEventListener('scroll', this.handleScroll);
   }
 }
 </script>
