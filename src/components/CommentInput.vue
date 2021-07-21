@@ -9,6 +9,7 @@
           class="mt-10"
           clearable
           counter
+          v-model="comment"
           clear-icon="mdi-close-circle"
           :color="$vuetify.theme.dark ? 'accent' : 'primary'"
           label="Leave a comment"
@@ -21,6 +22,7 @@
           <v-col cols="4">
             <v-text-field
               label="Nickname"
+              v-model="nickname"
               :color="$vuetify.theme.dark ? 'accent' : 'primary'"
             ></v-text-field>
           </v-col>
@@ -28,7 +30,7 @@
             <v-tooltip top>
               <template v-slot:activator="{ on, attrs }">
                 <v-btn
-                  disabled
+                  :disabled="!submit"
                   class="mt-4"
                   :color="$vuetify.theme.dark ? 'accent' : 'primary'"
                   plain
@@ -50,9 +52,21 @@
 <script lang="ts">
 import Vue from 'vue';
 import Component from 'vue-class-component';
+import { checkStr } from '../utils/checkStr';
 
-@Component
-export default class CommentInput extends Vue {}
+// eslint-disable-next-line no-use-before-define
+@Component<CommentInput>({
+  computed: {
+    submit(): boolean {
+      return checkStr(this.nickname) && checkStr(this.comment);
+    }
+  }
+})
+export default class CommentInput extends Vue {
+  nickname = '';
+
+  comment = '';
+}
 </script>
 
 <style scoped>

@@ -73,7 +73,7 @@
       </v-row>
     </v-container>
     <v-container>
-      <CommentShow />
+      <CommentShow :comments="[]" />
       <CommentInput />
     </v-container>
   </div>

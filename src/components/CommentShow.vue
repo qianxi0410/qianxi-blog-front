@@ -6,7 +6,7 @@
           mdi-comment
         </v-icon>
         <v-divider></v-divider>
-        <v-timeline dense v-if="comments">
+        <v-timeline dense v-if="comments.length > 0">
           <v-timeline-item v-for="n in comments" :key="n" color="primary">
             <v-card class="elevation-2 mt-1">
               <v-card-text>
@@ -16,7 +16,7 @@
             </v-card>
           </v-timeline-item>
         </v-timeline>
-        <v-divider v-if="comments"></v-divider>
+        <v-divider v-if="comments.length > 0"></v-divider>
       </v-col>
     </v-row>
   </v-container>
