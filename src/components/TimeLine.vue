@@ -68,11 +68,18 @@
 import Vue from 'vue';
 import Component from 'vue-class-component';
 import { namespace } from 'vuex-class';
-import { getPosts } from '../api/post';
+import { getPosts, getPostsWithTag } from '../api/post';
 
 const inner = namespace('inner');
 
-@Component
+// eslint-disable-next-line no-use-before-define
+@Component<TimeLine>({
+  watch: {
+    $route(to: any, from: any): void {
+      this.handleRouteChange();
+    }
+  }
+})
 export default class TimeLine extends Vue {
   posts = [] as Array<any>;
 
@@ -95,14 +102,33 @@ export default class TimeLine extends Vue {
 
   nextPage(): void {
     this.page += 1;
-    getPosts(this.page).then(res => {
-      if (res.data === null) {
-        window.removeEventListener('scroll', this.handleScroll);
-        this.showEndText = true;
-      } else {
-        this.posts.push(...res.data);
-      }
-    });
+    const { tagName } = this.$route.params;
+
+    if (!tagName) {
+      getPosts(this.page).then(res => {
+        if (res.data === null) {
+          window.removeEventListener('scroll', this.handleScroll);
+          this.showEndText = true;
+        } else {
+          this.posts.push(...res.data);
+        }
+      });
+    } else {
+      getPostsWithTag(this.page, tagName).then(res => {
+        if (res.data === null) {
+          window.removeEventListener('scroll', this.handleScroll);
+          this.showEndText = true;
+        } else {
+          this.posts.push(...res.data);
+        }
+      });
+    }
+  }
+
+  handleRouteChange(): void {
+    this.page = 0;
+    this.posts = [];
+    this.nextPage();
   }
 
   handleScroll(): void {

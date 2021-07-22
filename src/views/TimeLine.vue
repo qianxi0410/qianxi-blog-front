@@ -64,6 +64,7 @@ export default class TimeLine extends Vue {
   // eslint-disable-next-line class-methods-use-this
   mounted(): void {
     document.title = `${BlogName} | TimeLine`;
+    this.handleRouteChange();
   }
 }
 </script>
