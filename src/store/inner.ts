@@ -62,6 +62,25 @@ class Inner extends VuexModule {
   get getPostBannerHeight(): number {
     return this.postBannerHeight;
   }
+
+  // 表达是否退
+  public isBack = false;
+
+  @Mutation
+  public setIsBack(b: boolean) {
+    this.isBack = b;
+    if (b) {
+      localStorage.setItem('isBack', 'true');
+    } else {
+      localStorage.setItem('isBack', 'false');
+    }
+  }
+
+  get getIsBack(): boolean {
+    const tmp = localStorage.getItem('isBack');
+
+    return this.isBack && tmp === 'true';
+  }
 }
 
 export default Inner;

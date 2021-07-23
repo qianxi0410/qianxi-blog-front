@@ -25,6 +25,13 @@ const routes: Array<RouteConfig> = [
           import(/* webpackChunkName: "posts" */ '../views/Posts.vue')
       },
       {
+        path: 'posts/back/:page',
+        redirect: 'posts',
+        name: 'PostsBack',
+        component: () =>
+          import(/* webpackChunkName: "posts" */ '../views/Posts.vue')
+      },
+      {
         path: 'about',
         name: 'About',
         component: () =>

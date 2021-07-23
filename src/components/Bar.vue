@@ -46,7 +46,7 @@
           class="mr-10"
         >
           <v-tabs-slider color="white" />
-          <v-tab to="/posts">Posts</v-tab>
+          <v-tab @click="toPosts">Posts</v-tab>
           <v-tab to="/timeline">TimeLine</v-tab>
           <v-tab to="/about">About</v-tab>
         </v-tabs>
@@ -66,6 +66,9 @@
 import Component from 'vue-class-component';
 import Vue from 'vue';
 import { BlogName } from '@/config/index';
+import { namespace } from 'vuex-class';
+
+const inner = namespace('inner');
 
 @Component({
   computed: {
@@ -81,16 +84,19 @@ export default class Bar extends Vue {
 
   blogName = BlogName;
 
+  @inner.Mutation('setIsBack') setIsBack!: (b: boolean) => void;
+
   toAbout(): void {
-    this.$router.push({ path: 'about' });
+    this.$router.push({ path: '/about' });
   }
 
   toPosts(): void {
-    this.$router.push({ path: 'posts' });
+    this.setIsBack(false);
+    this.$router.push({ path: '/posts' });
   }
 
   toTimeLine(): void {
-    this.$router.push({ path: 'timeline' });
+    this.$router.push({ path: '/timeline' });
   }
 }
 </script>

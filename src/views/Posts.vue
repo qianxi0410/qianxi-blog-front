@@ -56,6 +56,8 @@ export default class Posts extends Vue {
 
   @inner.Getter('getPostBannerHeight') getPostBannerHeight!: number;
 
+  @inner.Getter('getIsBack') getIsBack!: boolean;
+
   parallax = {
     src: IndexSrc,
     title: IndexTitle,
@@ -131,10 +133,27 @@ export default class Posts extends Vue {
   }
 
   mounted(): void {
-    this.page = this.getCurrentPage;
-    this.handleRouteChange();
-    this.handleInput();
-    this.getLength();
+    if (this.getIsBack) {
+      this.page = this.getCurrentPage;
+      const { tagName } = this.$route.params;
+      if (tagName) {
+        this.parallax = {
+          src: IndexSrc,
+          title: `Tag: ${tagName}`,
+          motto: `too simple, sometimes naive.`
+        };
+      } else {
+        this.parallax = {
+          src: IndexSrc,
+          title: IndexTitle,
+          motto: IndexMotto
+        };
+      }
+      this.handleInput();
+      this.getLength();
+    } else {
+      this.handleRouteChange();
+    }
   }
 }
 </script>

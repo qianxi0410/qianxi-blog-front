@@ -21,11 +21,31 @@
               : ''
           "
         >
-          <v-chip-group active-class="primary--text" column>
-            <v-chip v-for="tag in post.tags.split('-')" :key="tag" class="mr-3">
-              {{ tag }}
-            </v-chip>
-          </v-chip-group>
+          <v-row>
+            <v-col cols="10">
+              <v-chip-group active-class="primary--text" column>
+                <v-chip
+                  v-for="tag in post.tags.split('-')"
+                  :key="tag"
+                  class="mr-3"
+                >
+                  {{ tag }}
+                </v-chip>
+              </v-chip-group>
+            </v-col>
+            <v-col>
+              <v-btn
+                @click="back"
+                fab
+                small
+                rounded
+                color="primary"
+                class="mt-1"
+              >
+                <v-icon>mdi-arrow-left</v-icon>
+              </v-btn>
+            </v-col>
+          </v-row>
           <div class="mt-10">
             <Markdown id="markdown" :content="content" />
           </div>
@@ -107,6 +127,8 @@ export default class PostsDetail extends Vue {
 
   @inner.Mutation('setBlogId') setBlogId!: (id: number) => void;
 
+  @inner.Mutation('setIsBack') setIsBack!: (b: boolean) => void;
+
   post = {
     tags: '',
     title: '',
@@ -116,6 +138,10 @@ export default class PostsDetail extends Vue {
   content = '';
 
   toc: Array<{ level: string; hook: string; title: string }> = [];
+
+  back(): void {
+    this.$router.push({ path: `/posts` });
+  }
 
   getToc(): void {
     this.$nextTick(() => {
@@ -158,6 +184,7 @@ export default class PostsDetail extends Vue {
   }
 
   mounted(): void {
+    this.setIsBack(true);
     this.changePost(this.getBlogId);
   }
 }
