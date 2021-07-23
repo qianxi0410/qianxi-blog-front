@@ -132,6 +132,7 @@ export default class Posts extends Vue {
 
   mounted(): void {
     this.page = this.getCurrentPage;
+    this.handleRouteChange();
     this.handleInput();
     this.getLength();
   }
