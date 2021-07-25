@@ -54,6 +54,12 @@ const routes: Array<RouteConfig> = [
         name: 'PostDetail',
         component: () =>
           import(/* webpackChunkName: "PostDetail" */ '../views/PostDetail.vue')
+      },
+      {
+        path: '/oauth2',
+        name: 'OAuth',
+        component: () =>
+          import(/* webpackChunkName: "oauth2" */ '../views/GithubLogin.vue')
       }
     ]
   }

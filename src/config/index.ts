@@ -32,3 +32,10 @@ export const AboutTitle = 'About';
 export const AboutMotto = 'U wanna know something about me ?';
 
 export const baseUrl = 'http://127.0.0.1:8081';
+
+export const github = {
+  oauth_uri: 'https://github.com/login/oauth/authorize',
+  // redirect_uri: 'http://192.168.0.105:8080/oauth2',
+  client_id: 'eb0d983c962d6461c2cd',
+  client_secret: 'ba188ae374c5e8609f63bcc5e1adf88ca0868727 '
+};

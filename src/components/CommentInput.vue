@@ -8,6 +8,7 @@
           name="comment-input"
           class="mt-10"
           clearable
+          disabled
           counter
           v-model="comment"
           clear-icon="mdi-close-circle"
@@ -20,11 +21,21 @@
       <v-col cols="9">
         <v-row justify="space-between">
           <v-col cols="4">
-            <v-text-field
-              label="Nickname"
-              v-model="nickname"
-              :color="$vuetify.theme.dark ? 'accent' : 'primary'"
-            ></v-text-field>
+            <v-tooltip top>
+              <template v-slot:activator="{ on, attrs }">
+                <v-btn
+                  @click="login"
+                  v-bind="attrs"
+                  v-on="on"
+                  plain
+                  rounded
+                  class="mt-4"
+                >
+                  <v-icon>mdi-github</v-icon>
+                </v-btn>
+              </template>
+              <span>Login With GitHub</span>
+            </v-tooltip>
           </v-col>
           <v-col cols="2">
             <v-tooltip top>
@@ -50,6 +61,7 @@
 </template>
 
 <script lang="ts">
+import { github } from '@/config';
 import Vue from 'vue';
 import Component from 'vue-class-component';
 import { checkStr } from '../utils/checkStr';
@@ -66,6 +78,12 @@ export default class CommentInput extends Vue {
   nickname = '';
 
   comment = '';
+
+  // eslint-disable-next-line class-methods-use-this
+  login(): void {
+    window.localStorage.preventHref = window.location.href;
+    window.location.href = `${github.oauth_uri}?client_id=${github.client_id}&redirect_uri=${window.location}`;
+  }
 }
 </script>
 
