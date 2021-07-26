@@ -18,6 +18,8 @@ module.exports = {
     'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     eqeqeq: 'error',
     'import/extensions': 'off',
-    'import/prefer-default-export': 'off'
+    'import/prefer-default-export': 'off',
+    'import/newline-after-import': 'off',
+    'no-else-return': 'off'
   }
 };

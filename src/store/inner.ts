@@ -1,7 +1,9 @@
 // 无关api的数据流
+
 import { VuexModule, Module, Mutation } from 'vuex-module-decorators';
 import { BlogName } from '@/config/index';
 
+import { GitHubUserInfo } from '@/types/index';
 @Module({ namespaced: true, name: 'inner' })
 class Inner extends VuexModule {
   // 是否显示取色板
@@ -80,6 +82,32 @@ class Inner extends VuexModule {
     const tmp = localStorage.getItem('isBack');
 
     return this.isBack && tmp === 'true';
+  }
+
+  // github用户信息
+  public githubUser: GitHubUserInfo | undefined = undefined;
+
+  @Mutation
+  public setGithubUserInfo(u: GitHubUserInfo): void {
+    this.githubUser = u;
+    localStorage.setItem('githubUserInfo', JSON.stringify(u));
+  }
+
+  @Mutation
+  public logout(): void {
+    this.githubUser = undefined;
+    localStorage.removeItem('githubUserInfo');
+  }
+
+  get getGitHubUserInfo(): GitHubUserInfo | undefined {
+    if (this.githubUser !== undefined) {
+      return this.githubUser;
+    } else if (localStorage.getItem('githubUserInfo')) {
+      return JSON.parse(
+        localStorage.getItem('githubUserInfo')!
+      ) as GitHubUserInfo;
+    }
+    return undefined;
   }
 }
 
