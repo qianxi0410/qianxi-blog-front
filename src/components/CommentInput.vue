@@ -20,10 +20,38 @@
       <v-col cols="9">
         <v-row justify="space-between">
           <v-col cols="7">
-            <v-avatar @click="logout" size="50" v-if="info.name !== ''">
-              <img :src="info.avatar" />
-            </v-avatar>
-            <span class="ml-2" v-if="info.name !== ''">{{ info.name }}</span>
+            <v-menu
+              bottom
+              min-width="200px"
+              rounded
+              offset-x
+              v-if="info.name !== ''"
+            >
+              <template v-slot:activator="{ on }">
+                <v-btn icon x-large v-on="on">
+                  <v-avatar size="50">
+                    <img :src="info.avatar" />
+                  </v-avatar>
+                </v-btn>
+              </template>
+              <v-card>
+                <v-list-item-content class="justify-center">
+                  <div class="mx-auto text-center">
+                    <v-avatar color="brown">
+                      <img :src="info.avatar" />
+                    </v-avatar>
+                    <h3>{{ info.name }}</h3>
+                    <p class="text-caption mt-1">
+                      {{ info.login }}
+                    </p>
+                    <v-divider class="my-3"></v-divider>
+                    <v-btn depressed @click="logout" rounded text>
+                      Logout
+                    </v-btn>
+                  </div>
+                </v-list-item-content>
+              </v-card>
+            </v-menu>
             <v-tooltip top v-else>
               <template v-slot:activator="{ on, attrs }">
                 <v-btn
