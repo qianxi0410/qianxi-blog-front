@@ -4,7 +4,10 @@ import { baseUrl } from '../config/index';
 
 const http = axios.create({
   baseURL: baseUrl,
-  timeout: 5000
+  timeout: 5000,
+  headers: {
+    'Content-Type': 'application/json'
+  }
 });
 
 http.interceptors.request.use(

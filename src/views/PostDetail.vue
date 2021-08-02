@@ -93,8 +93,8 @@
       </v-row>
     </v-container>
     <v-container>
-      <CommentShow :comments="[]" />
-      <CommentInput />
+      <CommentShow :comments="post.comments" @delete="handleDelete" />
+      <CommentInput @add="handleAdd" />
     </v-container>
   </div>
 </template>
@@ -132,12 +132,21 @@ export default class PostsDetail extends Vue {
   post = {
     tags: '',
     title: '',
-    path: ''
+    path: '',
+    comments: [] as any[]
   };
 
   content = '';
 
   toc: Array<{ level: string; hook: string; title: string }> = [];
+
+  handleDelete(id: string): void {
+    this.post.comments = this.post.comments.filter(e => (e as any).id !== id);
+  }
+
+  handleAdd(comment: any): void {
+    this.post.comments.push(comment);
+  }
 
   back(): void {
     this.$router.push({ path: `/posts` });

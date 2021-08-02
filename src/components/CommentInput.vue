@@ -78,6 +78,7 @@
                   plain
                   v-bind="attrs"
                   v-on="on"
+                  @click="saveComment"
                 >
                   <v-icon>mdi-share</v-icon>
                 </v-btn>
@@ -88,6 +89,15 @@
         </v-row>
       </v-col>
     </v-row>
+    <v-snackbar v-model="snackbar" color="primary" rounded="pill">
+      Comment Success
+
+      <template :timeout="-1" v-slot:action="{ attrs }">
+        <v-btn color="accent" text v-bind="attrs" @click="snackbar = false">
+          Close
+        </v-btn>
+      </template>
+    </v-snackbar>
   </v-container>
 </template>
 
@@ -99,7 +109,8 @@ import { namespace } from 'vuex-class';
 import { checkStr } from '../utils/checkStr';
 import { getQueryVariable } from '../utils/getQueryVariable';
 import { getUserInfo } from '../api/oauth2';
-import { GitHubUserInfo } from '../types/index';
+import { GitHubUserInfo, Comment } from '../types/index';
+import { saveComment } from '../api/comment';
 
 const inner = namespace('inner');
 // eslint-disable-next-line no-use-before-define
@@ -113,6 +124,8 @@ const inner = namespace('inner');
 export default class CommentInput extends Vue {
   comment = '';
 
+  snackbar = false;
+
   info: GitHubUserInfo = {
     name: '',
     avatar: '',
@@ -123,18 +136,36 @@ export default class CommentInput extends Vue {
     | GitHubUserInfo
     | undefined;
 
+  @inner.Getter('getBlogId') getBlogId!: number;
+
   @inner.Mutation('setGithubUserInfo') setGithubUserInfo!: (
     u: GitHubUserInfo
   ) => void;
 
   @inner.Mutation('logout') userLogout!: () => void;
 
+  saveComment(): void {
+    const comment: Comment = {
+      post_id: this.getBlogId,
+      content: this.comment,
+      ...this.info
+    };
+    saveComment(comment).then(res => {
+      this.comment = '';
+      this.snackbar = true;
+
+      this.$emit('add', {
+        id: res.data,
+        ...comment
+      });
+    });
+  }
+
   // eslint-disable-next-line class-methods-use-this
   login(): void {
     window.location.href = `${github.oauth_uri}?client_id=${github.client_id}&redirect_uri=${window.location}`;
   }
 
-  // eslint-disable-next-line class-methods-use-this
   logout(): void {
     this.info = {
       name: '',
