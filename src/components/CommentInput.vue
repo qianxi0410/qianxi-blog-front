@@ -153,7 +153,7 @@ export default class CommentInput extends Vue {
 
   saveComment(): void {
     const comment: Comment = {
-      postId: this.getBlogId,
+      post_id: this.getBlogId,
       content: this.comment,
       ...this.info
     };
