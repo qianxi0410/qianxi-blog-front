@@ -9,6 +9,7 @@
           class="mt-10"
           :disabled="info.name === ''"
           counter
+          :rules="rules"
           v-model="comment"
           clear-icon="mdi-close-circle"
           :color="$vuetify.theme.dark ? 'accent' : 'primary'"
@@ -117,7 +118,11 @@ const inner = namespace('inner');
 @Component<CommentInput>({
   computed: {
     submit(): boolean {
-      return checkStr(this.comment) && this.info.name !== '';
+      return (
+        checkStr(this.comment) &&
+        this.info.name !== '' &&
+        this.comment.length <= 255
+      );
     }
   }
 })
@@ -125,6 +130,8 @@ export default class CommentInput extends Vue {
   comment = '';
 
   snackbar = false;
+
+  rules = [(v: string | any[]) => v.length <= 255];
 
   info: GitHubUserInfo = {
     name: '',
@@ -146,7 +153,7 @@ export default class CommentInput extends Vue {
 
   saveComment(): void {
     const comment: Comment = {
-      post_id: this.getBlogId,
+      postId: this.getBlogId,
       content: this.comment,
       ...this.info
     };
