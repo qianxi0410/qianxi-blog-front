@@ -1,7 +1,3 @@
-# 🌈qianxi-blog-front
+this is the front-end for [myblog](http://qianx1.top)
 
-## on developing 🤔
-
-## LICENSE
-
-[MIT](./LICENSE)
+[LICENSE-MIT](./LICENSE)
