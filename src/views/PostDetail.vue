@@ -6,6 +6,7 @@
       :src="post.url"
       :title="post.title"
       :publishDate="new Date(post.created_at)"
+      :key="post.id"
     />
     <v-container>
       <v-row>
