@@ -1,9 +1,5 @@
 <template>
-  <div
-    :class="this.$vuetify.theme.dark ? 'dark' : 'light'"
-    class="toc"
-    ref="toc"
-  >
+  <div class="toc" ref="toc">
     <ul class="ul">
       <li
         v-for="(item, index) in $props.toc"
@@ -48,7 +44,7 @@ ul li {
 
 .ul {
   width: 100%;
-  font-size: 0.8em;
+  font-size: 0.7em;
   margin-top: 2em;
   width: fit-content;
   box-sizing: content-box;
