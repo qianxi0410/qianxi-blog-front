@@ -5,6 +5,7 @@
       :src="this.$vuetify.theme.dark ? src[1] : src[0]"
       ref="parallax"
       :class="blur ? 'blur' : ''"
+      :key="title"
     />
     <v-row align="center" justify="center" class="drag text--primary">
       <v-col class="text-center" cols="12">
