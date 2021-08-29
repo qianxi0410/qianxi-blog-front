@@ -10,14 +10,13 @@
       <h1>Hello.</h1>
       <p style="font-weight: 500; font-size: 2.2em">My name is Liu Yihan :D.</p>
       <p>
-        I am a senior student who is about to graduate from the Computer
-        Department of Hainan University. After graduating from university, I
-        will go to Northwestern Polytechnical University for postgraduate
-        studies.
+        I am a graduate student of Northwestern Polytechnical University. I am
+        currently learning the black magic of the front and back ends, and I am
+        more interested in distributed systems and functional programming.
       </p>
       <p>
-        In my spare time, I like to write some js/go code, all my code works are
-        open source and pinned on
+        In my spare time, I like to write some js/rust/go code, all my code
+        works are open source and pinned on
         <Link href="https://github.com/qianxi0410">GitHub</Link>. If you want,
         you can still contact me on
         <Link href="https://www.zhihu.com/people/qian-xi-8-12-94">ZhiHu</Link>.
@@ -25,7 +24,7 @@
       <p>
         An interesting (maybe not) fact about me is that I like to use qianxi as
         my code name on the Internet, so if you see someone whose code name is
-        qianxi(qianxi0410), there is a
+        qianxi(千禧/千禧0410/qianxi0410), there is a
         <Link href="https://taylorswift.fandom.com/wiki/13">13%</Link>
         chance that it is me.
       </p>
