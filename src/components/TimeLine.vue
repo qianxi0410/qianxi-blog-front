@@ -29,8 +29,8 @@
                   {{ tag }}
                 </v-chip>
               </v-col>
-              <v-col cols="2">
-                <v-tooltip left>
+              <v-col cols="2" class="mr-5">
+                <v-tooltip top>
                   <template v-slot:activator="{ on, attrs }">
                     <v-btn
                       class="mx-0"
