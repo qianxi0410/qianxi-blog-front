@@ -1,7 +1,12 @@
+@font-face {
+  font-family: qianxifont;
+  src: url('../font/FiraCode-Regular.ttf') ；;
+}
+
 .dark {
   font-size: calc(15px + 0.33vw);
   -webkit-font-smoothing: antialiased;
-  font-family: fira-code;
+  font-family: qianxifont;
 }
 
 .dark >>> ::selection {

@@ -61,14 +61,18 @@ export default class About extends Vue {
 </script>
 
 <style scoped>
+@font-face {
+  font-family: qianxifont;
+  src: url('../font/FiraCode-Regular.ttf') ；;
+}
+
 .top_container {
   background-color: var(--v-secondary-base);
   color: var(--v-accent-base);
 }
 
 .about {
-  font-family: 'fira code', -apple-system, BlinkMacSystemFont, 'Segoe UI',
-    Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-family: qianxifont;
   font-size: calc(10px + 0.33vw);
   -webkit-font-smoothing: antialiased;
   padding: 5vh 10vw;
