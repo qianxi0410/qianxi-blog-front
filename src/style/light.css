@@ -148,7 +148,6 @@
 .light >>> pre > code {
   font-family: 'Fira Code', monospace;
   font-size: 0.8em;
-  color: var(--v-primary-base);
   border-radius: 0.4em;
 }
 

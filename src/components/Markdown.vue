@@ -9,7 +9,7 @@
 import MarkdownIt from 'markdown-it';
 import hljs from 'highlight.js';
 import markdownItAnchor from 'markdown-it-anchor';
-import 'highlight.js/styles/atom-one-dark.css';
+import 'highlight.js/styles/solarized-dark.css';
 
 export default {
   data() {
