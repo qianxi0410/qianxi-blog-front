@@ -1,12 +1,16 @@
-@font-face {
-  font-family: qianxifont;
-  src: url('../font/FiraCode-Regular.ttf') ；;
-}
+/* @font-face {
+  font-family: qianxifont, serif;
+  src: url('../fonts/FiraCode-Regular.ttf') format('truetype')
+    url('../fonts/FiraCode-Regular.woff') format('woff')
+    url('../fonts/FiraCode-Regular.woff2') format('woff2');
+} */
+
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code&display=swap');
 
 .dark {
+  font-family: 'Fira Code', monospace;
   font-size: calc(15px + 0.33vw);
   -webkit-font-smoothing: antialiased;
-  font-family: qianxifont;
 }
 
 .dark >>> ::selection {
@@ -140,16 +144,19 @@
 }
 
 .dark >>> p > code {
+  font-family: 'Fira Code', monospace;
   color: navajowhite;
 }
 
 .dark >>> pre {
+  font-family: 'Fira Code', monospace;
   display: block;
   margin-bottom: 1.2em;
   margin-top: 1.2em;
 }
 
 .dark >>> pre > code {
+  font-family: 'Fira Code', monospace;
   font-size: 0.8em;
   color: rgb(179, 177, 115);
   border-radius: 0.4em;

@@ -60,10 +60,13 @@ export default class About extends Vue {
 </script>
 
 <style scoped>
-@font-face {
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code&display=swap');
+
+/* @font-face {
   font-family: qianxifont;
-  src: url('../font/FiraCode-Regular.ttf') ；;
-}
+  src: url('../fonts/FiraCode-Regular.ttf')
+    url('../fonts/FiraCode-Regular.woff') url('../fonts/FiraCode-Regular.woff2');
+} */
 
 .top_container {
   background-color: var(--v-secondary-base);
@@ -71,7 +74,7 @@ export default class About extends Vue {
 }
 
 .about {
-  font-family: qianxifont;
+  font-family: 'Fira Code', monospace;
   font-size: calc(10px + 0.33vw);
   -webkit-font-smoothing: antialiased;
   padding: 5vh 10vw;

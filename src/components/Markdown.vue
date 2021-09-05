@@ -14,7 +14,7 @@ import 'highlight.js/styles/atom-one-dark.css';
 export default {
   data() {
     return {
-      html: 'loading ...'
+      html: '<h2>loading ...</h2>'
     };
   },
   watch: {
