@@ -17,7 +17,7 @@ export const IndexMotto =
   'An ordinary person, an impure person, an ethical person, a person who has not escaped the low-level tastes, and a somewhat ambitious person.';
 
 export const TimeLineSrc = [
-  'https://w.wallhaven.cc/full/dp/wallhaven-dpeg9j.jpg',
+  'https://w.wallhaven.cc/full/x8/wallhaven-x8p2zz.jpg',
   'https://w.wallhaven.cc/full/v9/wallhaven-v9y2vm.jpg'
 ];
 export const TimeLineTitle = 'TimeLine';
@@ -31,7 +31,7 @@ export const AboutSrc = [
 export const AboutTitle = 'About';
 export const AboutMotto = 'U wanna know something about me ?';
 
-export const baseUrl = 'http://49.234.98.15:8080';
+export const baseUrl = 'http://localhost:8080';
 
 export const github = {
   oauth_uri: 'https://github.com/login/oauth/authorize',

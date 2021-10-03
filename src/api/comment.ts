@@ -4,7 +4,7 @@ import axios from '../axios/index';
 
 export function saveComment(comment: Comment): AxiosPromise {
   return axios({
-    url: `/comment/save`,
+    url: `/blog/comment/save`,
     method: 'POST',
     data: comment
   });
@@ -12,7 +12,7 @@ export function saveComment(comment: Comment): AxiosPromise {
 
 export function deleteComment(commentId: string): AxiosPromise {
   return axios({
-    url: `/comment/${commentId}`,
+    url: `/blog/comment/${commentId}`,
     method: 'DELETE'
   });
 }

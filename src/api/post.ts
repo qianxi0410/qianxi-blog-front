@@ -4,35 +4,35 @@ import { pageSize } from '../config/index';
 
 export function getPost(id: number): AxiosPromise {
   return axios({
-    url: `/post/${id}`,
+    url: `/blog/post/${id}`,
     method: 'GET'
   });
 }
 
 export function getPosts(page: number): AxiosPromise {
   return axios({
-    url: `/post/page/${page}/size/${pageSize}`,
+    url: `/blog/post/page/${page}/size/${pageSize}`,
     method: `GET`
   });
 }
 
 export function getPostsWithTag(page: number, tag: string): AxiosPromise {
   return axios({
-    url: `/post/page/${page}/size/${pageSize}/tag/${tag}`,
+    url: `/blog/post/page/${page}/size/${pageSize}/tag/${tag}`,
     method: 'GET'
   });
 }
 
 export function getCount(): AxiosPromise {
   return axios({
-    url: `/post/count`,
+    url: `/blog/post/count`,
     method: 'GET'
   });
 }
 
 export function getCountWithTag(tag: string): AxiosPromise {
   return axios({
-    url: `/post/count/tag/${tag}`,
+    url: `/blog/post/count/tag/${tag}`,
     method: 'GET'
   });
 }
