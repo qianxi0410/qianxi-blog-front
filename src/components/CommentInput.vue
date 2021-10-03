@@ -156,10 +156,6 @@ export default class CommentInput extends Vue {
       id: -1,
       post_id: this.getBlogId,
       content: this.comment,
-      deleted_at: {
-        Time: new Date(),
-        Valid: false
-      },
       created_at: new Date(),
       updated_at: new Date(),
       ...this.info

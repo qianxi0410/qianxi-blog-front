@@ -23,7 +23,6 @@ export interface Comment {
   created_at: Date;
   updated_at: Date;
   avatar: string;
-  deleted_at: NullDate;
   id: number;
 }
 
@@ -31,7 +30,6 @@ export interface Post {
   id: number;
   created_at: Date;
   updated_at: Date;
-  deleted_at: NullDate;
   title: string;
   description: NullString;
   pre: number;

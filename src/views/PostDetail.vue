@@ -139,10 +139,6 @@ export default class PostsDetail extends Vue {
         Valid: false
       },
       title: '',
-      deleted_at: {
-        Time: new Date(),
-        Valid: false
-      },
       url: '',
       id: -1,
       created_at: new Date(),
