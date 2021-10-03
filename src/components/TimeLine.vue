@@ -16,13 +16,13 @@
           </v-card-title>
           <v-card-text class="text--accent">
             <p>
-              {{ item.description }}
+              {{ item.description.String }}
             </p>
             <v-row>
               <v-col>
                 <v-chip
                   class="mr-2"
-                  v-for="(tag, idx) in item.tags.split('-')"
+                  v-for="(tag, idx) in item.tags.String.split('-')"
                   :key="idx"
                   @click="goToTagPage(tag)"
                 >
@@ -69,6 +69,7 @@ import Vue from 'vue';
 import Component from 'vue-class-component';
 import { namespace } from 'vuex-class';
 import { getPosts, getPostsWithTag } from '../api/post';
+import { Post } from '../types/index';
 
 const inner = namespace('inner');
 
@@ -81,7 +82,7 @@ const inner = namespace('inner');
   }
 })
 export default class TimeLine extends Vue {
-  posts = [] as Array<any>;
+  posts = [] as Array<Post>;
 
   page = 0;
 

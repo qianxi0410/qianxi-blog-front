@@ -2,11 +2,11 @@
   <div class="top_container">
     <PostBanner
       blur
-      :description="post.description"
-      :src="post.url"
-      :title="post.title"
-      :publishDate="new Date(post.created_at)"
-      :key="post.id"
+      :description="post.post.description.String"
+      :src="post.post.url"
+      :title="post.post.title"
+      :publishDate="new Date(post.post.created_at)"
+      :key="post.post.id"
     />
     <v-container>
       <v-row>
@@ -26,7 +26,7 @@
             <v-col cols="10">
               <v-chip-group active-class="primary--text" column>
                 <v-chip
-                  v-for="tag in post.tags.split('-')"
+                  v-for="tag in post.post.tags.String.split('-')"
                   :key="tag"
                   class="mr-3"
                 >
@@ -68,15 +68,15 @@
         </v-chip>
       </v-row>
       <v-row justify="center" class="pb-5">
-        Last edit at: {{ new Date(post.updated_at).toDateString() }}
+        Last edit at: {{ new Date(post.post.updated_at).toDateString() }}
       </v-row>
       <v-row class="pb-5 d-flex justify-space-around">
         <v-btn
           rounded
           :color="this.$vuetify.theme.dark ? 'accent' : 'primary'"
           plain
-          v-if="post.pre !== -1"
-          @click="changePost(post.pre)"
+          v-if="post.post.pre !== -1"
+          @click="changePost(post.post.pre)"
         >
           <v-icon>mdi-menu-left</v-icon> {{ post.pre_title }}
         </v-btn>
@@ -85,8 +85,8 @@
           rounded
           :color="this.$vuetify.theme.dark ? 'accent' : 'primary'"
           plain
-          v-if="post.next !== -1"
-          @click="changePost(post.next)"
+          v-if="post.post.next !== -1"
+          @click="changePost(post.post.next)"
         >
           {{ post.next_title }} <v-icon>mdi-menu-right</v-icon>
         </v-btn>
@@ -94,7 +94,7 @@
       </v-row>
     </v-container>
     <v-container>
-      <CommentShow :comments="post.comments" @delete="handleDelete" />
+      <CommentShow :comments="post.comments || []" @delete="handleDelete" />
       <CommentInput @add="handleAdd" />
     </v-container>
   </div>
@@ -111,10 +111,12 @@ import Toc from '@/components/Toc.vue';
 import { namespace } from 'vuex-class';
 import { BlogName } from '@/config/index';
 import { getPost } from '../api/post';
+import { Comment, Post, PostWrapper, Tocs } from '../types/index';
 
 const inner = namespace('inner');
 
-@Component({
+// eslint-disable-next-line no-use-before-define
+@Component<PostsDetail>({
   components: {
     PostBanner,
     Markdown,
@@ -130,22 +132,43 @@ export default class PostsDetail extends Vue {
 
   @inner.Mutation('setIsBack') setIsBack!: (b: boolean) => void;
 
-  post = {
-    tags: '',
-    title: '',
-    path: '',
-    comments: [] as any[]
+  post: PostWrapper = {
+    post: {
+      description: {
+        String: '',
+        Valid: false
+      },
+      title: '',
+      deleted_at: {
+        Time: new Date(),
+        Valid: false
+      },
+      url: '',
+      id: -1,
+      created_at: new Date(),
+      updated_at: new Date(),
+      pre: -1,
+      next: -1,
+      path: '',
+      tags: {
+        String: '',
+        Valid: false
+      }
+    },
+    pre_title: '',
+    next_title: '',
+    comments: []
   };
 
   content = '';
 
-  toc: Array<{ level: string; hook: string; title: string }> = [];
+  toc: Array<Tocs> = [];
 
-  handleDelete(id: string): void {
-    this.post.comments = this.post.comments.filter(e => (e as any).id !== id);
+  handleDelete(id: number): void {
+    this.post.comments = this.post.comments.filter(e => e.id !== id);
   }
 
-  handleAdd(comment: any): void {
+  handleAdd(comment: Comment): void {
     this.post.comments.push(comment);
   }
 
@@ -154,6 +177,7 @@ export default class PostsDetail extends Vue {
   }
 
   getToc(): void {
+    this.toc = [];
     this.$nextTick(() => {
       const theme = this.$vuetify.theme.dark ? '.dark' : '.light';
       const container = document.querySelector(theme);
@@ -179,11 +203,16 @@ export default class PostsDetail extends Vue {
     });
     getPost(this.getBlogId).then(res => {
       this.post = res.data;
-      this.content = res.data.path;
-      document.title = `${BlogName} | ${
-        (this.post as { title: string }).title
-      }`;
-      this.toc = [];
+
+      window.history.replaceState(
+        null,
+        '',
+        `/post/${decodeURI(this.post.post.title.replaceAll(' ', '-'))}`
+      );
+
+      this.content = res.data.post.path;
+      document.title = `${BlogName} | ${this.post.post.title}`;
+      // this.toc = [];
       this.getToc();
     });
   }

@@ -91,7 +91,7 @@ export default class CommentShow extends Vue {
     | GitHubUserInfo
     | undefined;
 
-  deleteComment(id: string): void {
+  deleteComment(id: number): void {
     deleteComment(id).then(res => {
       this.snackbar = true;
       this.$emit('delete', id);

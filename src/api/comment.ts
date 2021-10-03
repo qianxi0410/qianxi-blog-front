@@ -10,7 +10,7 @@ export function saveComment(comment: Comment): AxiosPromise {
   });
 }
 
-export function deleteComment(commentId: string): AxiosPromise {
+export function deleteComment(commentId: number): AxiosPromise {
   return axios({
     url: `/blog/comment/${commentId}`,
     method: 'DELETE'

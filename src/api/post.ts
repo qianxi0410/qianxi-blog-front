@@ -4,7 +4,7 @@ import { pageSize } from '../config/index';
 
 export function getPost(id: number): AxiosPromise {
   return axios({
-    url: `/blog/post/${id}`,
+    url: `/blog/post/id/${id}`,
     method: 'GET'
   });
 }

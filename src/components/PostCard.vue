@@ -17,13 +17,7 @@
         v-else
       >
         <div style="overflow: hidden">
-          <v-img
-            class="img"
-            v-if="post.url !== ''"
-            :src="post.url"
-            :max-height="maxHeight"
-          >
-          </v-img>
+          <v-img class="img" :src="post.url" :max-height="maxHeight"> </v-img>
         </div>
         <div style="overflow: hidden">
           <v-card-text>
@@ -40,8 +34,9 @@
             <br />
             <div
               class="text-lg-h6 text-subtitle-1 font-weight-light accent--text"
+              v-if="post.description.Valid"
             >
-              {{ post.description }}
+              {{ post.description.String }}
             </div>
             <div class="mt-2 d-flex  justify-space-between">
               <v-chip-group active-class="primary--text">
@@ -49,7 +44,7 @@
                   pill
                   class="accent--text"
                   outlined
-                  v-for="tag in post.tags.split('-')"
+                  v-for="tag in this.tags"
                   :key="tag"
                   @click="goToTagPage(tag)"
                 >
@@ -85,7 +80,6 @@
 import Component from 'vue-class-component';
 import Vue from 'vue';
 import { namespace } from 'vuex-class';
-
 const inner = namespace('inner');
 
 @Component({
@@ -93,6 +87,14 @@ const inner = namespace('inner');
     post: {
       type: Object,
       required: true
+    }
+  },
+  computed: {
+    tags(): Array<string> {
+      if (this.$props.post.Valid === false) {
+        return [];
+      }
+      return this.$props.post.tags.String.split('-');
     }
   }
 })
