@@ -3,11 +3,16 @@
     <v-color-picker
       elevation="10"
       class="picker"
-      dot-size="25"
+      hide-canvas
+      hide-mode-switch
+      hide-sliders
+      show-swatches
       hide-inputs
       v-if="isShow"
-      swatches-max-height="200"
+      swatches-max-height="200px"
       v-model="value"
+      :swatches="swatches"
+      v-click-outside="handleClickOutside"
     ></v-color-picker>
   </v-expand-transition>
 </template>
@@ -16,45 +21,29 @@
 import Component from 'vue-class-component';
 import Vue from 'vue';
 import { namespace } from 'vuex-class';
-
-type Color = {
-  alpha: number;
-  hex: string;
-  hexa: string;
-  hsla: {
-    h: number;
-    s: number;
-    l: number;
-    a: number;
-  };
-  hsva: {
-    h: number;
-    s: number;
-    v: number;
-    a: number;
-  };
-  hue: number;
-  rgba: {
-    r: number;
-    g: number;
-    b: number;
-    a: number;
-  };
-};
+import { themes } from '../config/index';
 
 const inner = namespace('inner');
 
 @Component({
   watch: {
-    value(val: Color): void {
-      this.$vuetify.theme.themes.light.primary = val.hex;
+    value(val: string): void {
+      this.$vuetify.theme.themes.light.primary = val;
     }
   }
 })
 export default class Colorpick extends Vue {
-  value: Color = {} as Color;
+  value = '#2196F3';
 
   @inner.State('colorpickShow') isShow!: boolean;
+
+  @inner.Mutation('toggleColorpick') toggleColorpick!: () => void;
+
+  handleClickOutside(): void {
+    this.toggleColorpick();
+  }
+
+  swatches = themes;
 }
 </script>
 

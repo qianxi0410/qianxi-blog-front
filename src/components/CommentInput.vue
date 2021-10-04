@@ -131,7 +131,7 @@ export default class CommentInput extends Vue {
 
   snackbar = false;
 
-  rules = [(v: string | any[]) => v.length <= 255];
+  rules = [(v: string | any[]): boolean => v.length <= 255];
 
   info: GitHubUserInfo = {
     name: '',

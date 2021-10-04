@@ -1,5 +1,5 @@
 <template>
-  <div class="pic_container">
+  <div class="pic_container" v-resize="handleHeight">
     <v-parallax
       :height="height"
       :src="this.$vuetify.theme.dark ? src[1] : src[0]"
@@ -70,12 +70,7 @@ export default class Parallax extends Vue {
   }
 
   mounted(): void {
-    window.addEventListener('resize', this.handleHeight);
     this.handleHeight();
-  }
-
-  destroyed(): void {
-    window.removeEventListener('resize', this.handleHeight);
   }
 }
 </script>

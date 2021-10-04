@@ -38,3 +38,12 @@ export const github = {
   client_id: 'eb0d983c962d6461c2cd',
   client_secret: 'ba188ae374c5e8609f63bcc5e1adf88ca0868727 '
 };
+
+// 主题
+export const themes = [
+  ['#36896E', '#45AF8C', '#307C63', '#122F25'],
+  ['#F8D061', '#CCC861', '#FF8658', '#CC6B46'],
+  ['#B7B7B7', '#6A6A6A', '#94D2CF', '#5E8583'],
+  ['#E4AAAF', '#B18387', '#C9959A', '#DCA5B4'],
+  ['#C63A33', '#EC453C', '#9F2E28', '#B29C45']
+];

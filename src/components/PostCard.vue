@@ -3,7 +3,7 @@
     <transition name="fade-transition" mode="out-in">
       <v-skeleton-loader
         class="rounded-xl"
-        :class="this.$vuetify.breakpoint.xs ? '' : 'my-10'"
+        :class="$vuetify.breakpoint.xs ? '' : 'my-10'"
         :width="width"
         type="card"
         elevation="2"
@@ -17,14 +17,13 @@
         v-else
       >
         <div style="overflow: hidden">
-          <v-img class="img" :src="post.url" :max-height="maxHeight"> </v-img>
+          <v-img v-ripple class="img" :src="post.url" :max-height="maxHeight">
+          </v-img>
         </div>
         <div style="overflow: hidden">
           <v-card-text>
             <div class="d-flex justify-space-between">
-              <div
-                class="text-h5 text-lg-h4 font-weight-light accent--text mb-2"
-              >
+              <div class="text-h6 text-lg-h4 font-weight-light accent--text">
                 {{ post.title }}
               </div>
               <div class="accent--text d-flex-end">
@@ -33,7 +32,7 @@
             </div>
             <br />
             <div
-              class="text-lg-h6 text-subtitle-1 font-weight-light accent--text"
+              class="text-lg-h6 text-subtitle-2 font-weight-light accent--text"
               v-if="post.description.Valid"
             >
               {{ post.description.String }}
@@ -42,8 +41,7 @@
               <v-chip-group active-class="primary--text">
                 <v-chip
                   pill
-                  class="accent--text"
-                  outlined
+                  class="accent--text font-weight-light"
                   v-for="tag in this.tags"
                   :key="tag"
                   @click="goToTagPage(tag)"

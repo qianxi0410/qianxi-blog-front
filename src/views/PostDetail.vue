@@ -176,10 +176,10 @@ export default class PostsDetail extends Vue {
     this.toc = [];
     this.$nextTick(() => {
       const theme = this.$vuetify.theme.dark ? '.dark' : '.light';
-      const container = document.querySelector(theme);
-      const children = container?.childNodes;
+      const container = document.querySelector(theme)!;
+      const children = container.childNodes;
       // eslint-disable-next-line no-unused-expressions
-      children?.forEach(e => {
+      children.forEach(e => {
         if (e.nodeName.includes('H')) {
           this.toc.push({
             level: e.nodeName.slice(1),

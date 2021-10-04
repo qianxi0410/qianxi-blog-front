@@ -18,3 +18,22 @@ export default class App extends Vue {
   }
 }
 </script>
+
+<style>
+::-webkit-scrollbar {
+  width: 0.5rem;
+  height: 0.5rem;
+  background: hsla(0, 0%, 100%, 0.6);
+}
+
+::-webkit-scrollbar-track {
+  border-radius: 0;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 0;
+  background-color: var(--v-primary-base);
+  transition: all 0.2s;
+  border-radius: 0.5rem;
+}
+</style>
