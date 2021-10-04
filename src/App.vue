@@ -5,6 +5,7 @@
 <script lang="ts">
 import Vue from 'vue';
 import Component from 'vue-class-component';
+import { show } from './console/index';
 
 @Component
 export default class App extends Vue {
@@ -15,6 +16,7 @@ export default class App extends Vue {
 
   mounted(): void {
     this.isDarkTheme();
+    show();
   }
 }
 </script>
