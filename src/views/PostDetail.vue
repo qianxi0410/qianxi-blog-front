@@ -101,8 +101,7 @@
 </template>
 
 <script lang="ts">
-import Component from 'vue-class-component';
-import Vue from 'vue';
+import { Vue, Component } from 'vue-property-decorator';
 import PostBanner from '@/components/PostBanner.vue';
 import Markdown from '@/components/Markdown.vue';
 import CommentShow from '@/components/CommentShow.vue';
@@ -111,12 +110,11 @@ import Toc from '@/components/Toc.vue';
 import { namespace } from 'vuex-class';
 import { BlogName } from '@/config/index';
 import { getPost } from '../api/post';
-import { Comment, Post, PostWrapper, Tocs } from '../types/index';
+import { Comment, PostWrapper, Tocs } from '../types/index';
 
 const inner = namespace('inner');
 
-// eslint-disable-next-line no-use-before-define
-@Component<PostsDetail>({
+@Component({
   components: {
     PostBanner,
     Markdown,

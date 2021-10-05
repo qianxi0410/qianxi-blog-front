@@ -21,35 +21,22 @@
 </template>
 
 <script lang="ts">
-import Component from 'vue-class-component';
-import Vue from 'vue';
+import { Vue, Component, Prop } from 'vue-property-decorator';
 import { namespace } from 'vuex-class';
 
 const inner = namespace('inner');
 
-@Component({
-  props: {
-    src: {
-      type: Array,
-      required: true
-    },
-    title: {
-      type: String,
-      required: true
-    },
-    motto: {
-      type: String,
-      required: true
-    },
-    blur: {
-      type: Boolean,
-      required: true,
-      default: false
-    }
-  }
-})
+@Component
 export default class Parallax extends Vue {
   height = 0;
+
+  @Prop(Array) src!: Array<string>;
+
+  @Prop(String) title!: string;
+
+  @Prop(String) motto!: string;
+
+  @Prop({ type: Boolean, default: false }) blur!: boolean;
 
   @inner.Mutation('setPostBannerHeight') setPostBannerHeight!: (
     n: number

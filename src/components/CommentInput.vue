@@ -103,9 +103,8 @@
 </template>
 
 <script lang="ts">
+import { Vue, Component } from 'vue-property-decorator';
 import { github } from '@/config';
-import Vue from 'vue';
-import Component from 'vue-class-component';
 import { namespace } from 'vuex-class';
 import { checkStr } from '../utils/checkStr';
 import { getQueryVariable } from '../utils/getQueryVariable';
@@ -114,18 +113,8 @@ import { GitHubUserInfo, Comment } from '../types/index';
 import { saveComment } from '../api/comment';
 
 const inner = namespace('inner');
-// eslint-disable-next-line no-use-before-define
-@Component<CommentInput>({
-  computed: {
-    submit(): boolean {
-      return (
-        checkStr(this.comment) &&
-        this.info.name !== '' &&
-        this.comment.length <= 255
-      );
-    }
-  }
-})
+
+@Component
 export default class CommentInput extends Vue {
   comment = '';
 
@@ -138,6 +127,14 @@ export default class CommentInput extends Vue {
     avatar: '',
     login: ''
   };
+
+  get submit(): boolean {
+    return (
+      checkStr(this.comment) &&
+      this.info.name !== '' &&
+      this.comment.length <= 255
+    );
+  }
 
   @inner.Getter('getGitHubUserInfo') getGitHubUserInfo!:
     | GitHubUserInfo

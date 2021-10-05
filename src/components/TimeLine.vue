@@ -65,22 +65,14 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
-import Component from 'vue-class-component';
+import { Vue, Component, Watch } from 'vue-property-decorator';
 import { namespace } from 'vuex-class';
 import { getPosts, getPostsWithTag } from '../api/post';
 import { Post } from '../types/index';
 
 const inner = namespace('inner');
 
-// eslint-disable-next-line no-use-before-define
-@Component<TimeLine>({
-  watch: {
-    $route(to: any, from: any): void {
-      this.handleRouteChange();
-    }
-  }
-})
+@Component
 export default class TimeLine extends Vue {
   posts = [] as Array<Post>;
 
@@ -89,6 +81,11 @@ export default class TimeLine extends Vue {
   showEndText = false;
 
   @inner.Mutation('setBlogId') setBlogId!: (id: number) => void;
+
+  @Watch('$route')
+  onRouteChange(): void {
+    this.handleRouteChange();
+  }
 
   toPostDetail(id: number, title: string): void {
     this.setBlogId(id);

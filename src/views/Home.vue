@@ -21,8 +21,7 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
-import Component from 'vue-class-component';
+import { Vue, Component } from 'vue-property-decorator';
 import Bar from '@/components/Bar.vue';
 import Footer from '@/components/Footer.vue';
 import Back2Top from '@/components/Back2Top.vue';

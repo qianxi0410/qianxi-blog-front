@@ -11,8 +11,7 @@
 </template>
 
 <script lang="ts">
-import Component from 'vue-class-component';
-import Vue from 'vue';
+import { Vue, Component, Watch } from 'vue-property-decorator';
 import Parallax from '@/components/Parallax.vue';
 import CTimeLine from '@/components/TimeLine.vue';
 import {
@@ -22,16 +21,10 @@ import {
   BlogName
 } from '@/config/index';
 
-// eslint-disable-next-line no-use-before-define
-@Component<TimeLine>({
+@Component({
   components: {
     Parallax,
     CTimeLine
-  },
-  watch: {
-    $route(to: any, from: any): void {
-      this.handleRouteChange();
-    }
   }
 })
 export default class TimeLine extends Vue {
@@ -40,6 +33,11 @@ export default class TimeLine extends Vue {
     title: TimeLineTitle,
     motto: TimeLineMotto
   };
+
+  @Watch('$route')
+  onRouteChange(): void {
+    this.handleRouteChange();
+  }
 
   handleRouteChange(): void {
     if (this.$route.params.tagName) {

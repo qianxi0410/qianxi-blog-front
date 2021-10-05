@@ -38,8 +38,7 @@
 </template>
 
 <script lang="ts">
-import Component from 'vue-class-component';
-import Vue from 'vue';
+import { Vue, Component } from 'vue-property-decorator';
 import { namespace } from 'vuex-class';
 
 const inner = namespace('inner');

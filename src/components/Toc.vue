@@ -2,7 +2,7 @@
   <div class="toc" ref="toc">
     <ul class="ul">
       <li
-        v-for="(item, index) in $props.toc"
+        v-for="(item, index) in this.toc"
         :key="index"
         :class="[`pl-${(Number(item.level) - 2) * 3}`]"
         class="mb-1"
@@ -14,24 +14,19 @@
 </template>
 
 <script lang="ts">
-import Component from 'vue-class-component';
-import Vue from 'vue';
+import { Tocs } from '@/types';
+import { Vue, Component, Prop } from 'vue-property-decorator';
 import { namespace } from 'vuex-class';
 
 const inner = namespace('inner');
 
-@Component({
-  props: {
-    toc: {
-      type: Array,
-      required: true
-    }
-  }
-})
+@Component
 export default class Toc extends Vue {
   activeIndex = -1;
 
   @inner.Getter('getPostBannerHeight') getPostBannerHeight!: number;
+
+  @Prop({ type: Array, required: true }) toc!: Array<Tocs>;
 }
 </script>
 

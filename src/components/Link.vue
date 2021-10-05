@@ -9,18 +9,12 @@
 </template>
 
 <script lang="ts">
-import Component from 'vue-class-component';
-import Vue from 'vue';
+import { Vue, Component, Prop } from 'vue-property-decorator';
 
-@Component({
-  props: {
-    href: {
-      type: String,
-      required: true
-    }
-  }
-})
-export default class Link extends Vue {}
+@Component
+export default class Link extends Vue {
+  @Prop(String) href!: string;
+}
 </script>
 
 <style scoped>

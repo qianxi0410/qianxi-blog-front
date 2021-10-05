@@ -75,27 +75,12 @@
 </template>
 
 <script lang="ts">
-import Component from 'vue-class-component';
-import Vue from 'vue';
+import { Post } from '@/types';
+import { Vue, Component, Prop } from 'vue-property-decorator';
 import { namespace } from 'vuex-class';
 const inner = namespace('inner');
 
-@Component({
-  props: {
-    post: {
-      type: Object,
-      required: true
-    }
-  },
-  computed: {
-    tags(): Array<string> {
-      if (this.$props.post.Valid === false) {
-        return [];
-      }
-      return this.$props.post.tags.String.split('-');
-    }
-  }
-})
+@Component
 export default class PostCard extends Vue {
   maxHeight = 0;
 
@@ -103,7 +88,16 @@ export default class PostCard extends Vue {
 
   show = true;
 
+  @Prop({ type: Object, required: true }) post!: Post;
+
   @inner.Mutation('setBlogId') setBlogId!: (id: number) => void;
+
+  get tags(): Array<string> {
+    if (this.post.tags.Valid === false) {
+      return [];
+    }
+    return this.$props.post.tags.String.split('-');
+  }
 
   getImgSize(): void {
     if (this.$vuetify.breakpoint.name !== 'xs') {
@@ -116,9 +110,9 @@ export default class PostCard extends Vue {
   }
 
   handleLoad(): void {
-    if (this.$props.post.src) {
+    if (this.post.url) {
       const img = new Image();
-      img.src = this.$props.post.src;
+      img.src = this.post.url;
       img.onload = () => {
         this.show = false;
       };
@@ -131,8 +125,8 @@ export default class PostCard extends Vue {
   }
 
   handleRead(): void {
-    this.setBlogId(this.$props.post.id);
-    this.$router.push({ path: `/post/${this.$props.post.title}` });
+    this.setBlogId(this.post.id);
+    this.$router.push({ path: `/post/${this.post.title}` });
   }
 
   goToTagPage(tag: string): void {

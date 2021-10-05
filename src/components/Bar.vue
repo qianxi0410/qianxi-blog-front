@@ -63,20 +63,13 @@
 </template>
 
 <script lang="ts">
-import Component from 'vue-class-component';
-import Vue from 'vue';
+import { Vue, Component } from 'vue-property-decorator';
 import { BlogName } from '@/config/index';
 import { namespace } from 'vuex-class';
 
 const inner = namespace('inner');
 
-@Component({
-  computed: {
-    isMobile(): boolean {
-      return this.$vuetify.breakpoint.xs;
-    }
-  }
-})
+@Component
 export default class Bar extends Vue {
   mobile = {
     drawer: null
@@ -85,6 +78,10 @@ export default class Bar extends Vue {
   blogName = BlogName;
 
   @inner.Mutation('setIsBack') setIsBack!: (b: boolean) => void;
+
+  get isMobile(): boolean {
+    return this.$vuetify.breakpoint.xs;
+  }
 
   toAbout(): void {
     this.$router.push({ path: '/about' });

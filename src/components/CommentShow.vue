@@ -69,23 +69,18 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
-import Component from 'vue-class-component';
+import { Vue, Component, Prop } from 'vue-property-decorator';
 import { namespace } from 'vuex-class';
-import { GitHubUserInfo } from '../types/index';
+import { Comment, GitHubUserInfo } from '../types/index';
 import { deleteComment } from '../api/comment';
 
 const inner = namespace('inner');
-@Component({
-  props: {
-    comments: {
-      type: Array,
-      required: true
-    }
-  }
-})
+
+@Component
 export default class CommentShow extends Vue {
   snackbar = false;
+
+  @Prop({ type: Array, default: [] }) readonly comments!: Array<Comment>;
 
   @inner.Getter('getGitHubUserInfo') getGitHubUserInfo!:
     | GitHubUserInfo

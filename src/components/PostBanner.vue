@@ -18,42 +18,24 @@
 </template>
 
 <script lang="ts">
-import Component from 'vue-class-component';
-import Vue from 'vue';
+import { Vue, Component, Prop } from 'vue-property-decorator';
 import { namespace } from 'vuex-class';
 
 const inner = namespace('inner');
 
-@Component({
-  props: {
-    src: {
-      type: String,
-      required: true,
-      default: ''
-    },
-    title: {
-      type: String,
-      required: true,
-      default: ''
-    },
-    description: {
-      type: String,
-      required: false,
-      default: ''
-    },
-    publishDate: {
-      type: Date,
-      required: true
-    },
-    blur: {
-      type: Boolean,
-      required: true,
-      default: false
-    }
-  }
-})
+@Component
 export default class PostBanner extends Vue {
   height = 0;
+
+  @Prop(String) src!: string;
+
+  @Prop(String) title!: string;
+
+  @Prop(String) description!: string;
+
+  @Prop({ type: Date, default: new Date() }) publishDate!: Date;
+
+  @Prop({ type: Boolean, default: false }) blur!: boolean;
 
   @inner.Mutation('setPostBannerHeight') setPostBannerHeight!: (
     n: number

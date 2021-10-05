@@ -18,26 +18,24 @@
 </template>
 
 <script lang="ts">
-import Component from 'vue-class-component';
-import Vue from 'vue';
+import { Vue, Component, Watch } from 'vue-property-decorator';
 import { namespace } from 'vuex-class';
 import { themes } from '../config/index';
 
 const inner = namespace('inner');
 
-@Component({
-  watch: {
-    value(val: string): void {
-      this.$vuetify.theme.themes.light.primary = val;
-    }
-  }
-})
+@Component
 export default class Colorpick extends Vue {
   value = '#2196F3';
 
   @inner.State('colorpickShow') isShow!: boolean;
 
   @inner.Mutation('toggleColorpick') toggleColorpick!: () => void;
+
+  @Watch('value')
+  onValueChange(val: string): void {
+    this.$vuetify.theme.themes.light.primary = val;
+  }
 
   handleClickOutside(): void {
     this.toggleColorpick();

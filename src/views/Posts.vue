@@ -22,8 +22,7 @@
 </template>
 
 <script lang="ts">
-import Component from 'vue-class-component';
-import Vue from 'vue';
+import { Vue, Component, Watch } from 'vue-property-decorator';
 import Parallax from '@/components/Parallax.vue';
 import PostCard from '@/components/PostCard.vue';
 import { IndexSrc, IndexTitle, IndexMotto, pageSize } from '@/config/index';
@@ -37,16 +36,10 @@ import {
 
 const inner = namespace('inner');
 
-// eslint-disable-next-line no-use-before-define
-@Component<Posts>({
+@Component({
   components: {
     Parallax,
     PostCard
-  },
-  watch: {
-    $route(to: any, from: any): void {
-      this.handleRouteChange();
-    }
   }
 })
 export default class Posts extends Vue {
@@ -57,6 +50,11 @@ export default class Posts extends Vue {
   @inner.Getter('getPostBannerHeight') getPostBannerHeight!: number;
 
   @inner.Getter('getIsBack') getIsBack!: boolean;
+
+  @Watch('$route')
+  onRouteChange(): void {
+    this.handleRouteChange();
+  }
 
   parallax = {
     src: IndexSrc,

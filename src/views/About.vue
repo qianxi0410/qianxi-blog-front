@@ -33,8 +33,7 @@
 </template>
 
 <script lang="ts">
-import Component from 'vue-class-component';
-import Vue from 'vue';
+import { Vue, Component } from 'vue-property-decorator';
 import Parallax from '@/components/Parallax.vue';
 import Link from '@/components/Link.vue';
 import { AboutSrc, AboutTitle, AboutMotto, BlogName } from '@/config/index';
