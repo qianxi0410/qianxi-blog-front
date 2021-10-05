@@ -33,7 +33,7 @@ export default class Link extends Vue {
   bottom: 0;
   transition: top 200ms cubic-bezier(0, 0.8, 0.13, 1);
   background-color: var(--v-primary-base);
-  opacity: 0.2;
+  opacity: 0.4;
   margin-right: 0.1rem;
   margin-left: 0.1rem;
 }
