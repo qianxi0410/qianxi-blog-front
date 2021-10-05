@@ -84,16 +84,22 @@ export default class Bar extends Vue {
   }
 
   toAbout(): void {
-    this.$router.push({ path: '/about' });
+    this.$router.push({ path: '/about' }).catch(err => {
+      console.log(`%c ${err}`, 'color: pink; font-size: 15px;');
+    });
   }
 
   toPosts(): void {
     this.setIsBack(false);
-    this.$router.push({ path: '/posts' });
+    this.$router.push({ path: '/posts' }).catch(err => {
+      console.log(`%c ${err}`, 'color: pink; font-size: 15px;');
+    });
   }
 
   toTimeLine(): void {
-    this.$router.push({ path: '/timeline' });
+    this.$router.push({ path: '/timeline' }).catch(err => {
+      console.log(`%c ${err}`, 'color: pink; font-size: 15px;');
+    });
   }
 }
 </script>
