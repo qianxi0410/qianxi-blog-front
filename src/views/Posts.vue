@@ -27,6 +27,7 @@ import Parallax from '@/components/Parallax.vue';
 import PostCard from '@/components/PostCard.vue';
 import { IndexSrc, IndexTitle, IndexMotto, pageSize } from '@/config/index';
 import { namespace } from 'vuex-class';
+import { Post } from '@/types';
 import {
   getPosts,
   getCount,
@@ -70,7 +71,7 @@ export default class Posts extends Vue {
 
   page = 1;
 
-  post = [];
+  post: Post[] = [];
 
   length = -1;
 
@@ -80,11 +81,11 @@ export default class Posts extends Vue {
     const { tagName } = this.$route.params;
     if (!tagName) {
       getPosts(this.page).then(res => {
-        this.post = res.data;
+        this.post = res.data.data;
       });
     } else {
       getPostsWithTag(this.page, tagName).then(res => {
-        this.post = res.data;
+        this.post = res.data.data;
       });
     }
     this.$vuetify.goTo(this.getPostBannerHeight, {
@@ -129,13 +130,13 @@ export default class Posts extends Vue {
 
     if (!tagName) {
       getCount().then(res => {
-        const total = res.data;
+        const total = res.data.data;
         this.length =
           Math.floor(total / pageSize) + (total % pageSize === 0 ? 0 : 1);
       });
     } else {
       getCountWithTag(tagName).then(res => {
-        const total: number = res.data;
+        const total: number = res.data.data;
         this.length =
           Math.floor(total / pageSize) + (total % pageSize === 0 ? 0 : 1);
       });

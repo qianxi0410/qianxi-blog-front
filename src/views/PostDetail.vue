@@ -201,7 +201,7 @@ export default class PostsDetail extends Vue {
       duration: 0
     });
     getPost(this.getBlogId).then(res => {
-      this.post = res.data;
+      this.post = res.data.data;
 
       window.history.replaceState(
         null,
@@ -209,7 +209,7 @@ export default class PostsDetail extends Vue {
         `/post/${decodeURI(this.post.post.title.replaceAll(' ', '-'))}`
       );
 
-      this.content = res.data.post.path;
+      this.content = this.post.post.path;
       document.title = `${BlogName} | ${this.post.post.title}`;
       // this.toc = [];
       this.getToc();

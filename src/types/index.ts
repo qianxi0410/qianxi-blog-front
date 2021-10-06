@@ -76,3 +76,9 @@ export interface Color {
     a: number;
   };
 }
+
+export interface Response<T> {
+  code: number;
+  msg: string;
+  data: T;
+}

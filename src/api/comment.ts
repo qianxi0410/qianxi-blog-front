@@ -1,8 +1,8 @@
 import { AxiosPromise } from 'axios';
-import { Comment } from '@/types/index';
+import { Comment, Response } from '@/types/index';
 import axios from '../axios/index';
 
-export function saveComment(comment: Comment): AxiosPromise {
+export function saveComment(comment: Comment): AxiosPromise<Response<number>> {
   return axios({
     url: `/blog/comment/save`,
     method: 'POST',
@@ -10,9 +10,12 @@ export function saveComment(comment: Comment): AxiosPromise {
   });
 }
 
-export function deleteComment(commentId: number): AxiosPromise {
+export function deleteComment(
+  commentId: number,
+  login: string
+): AxiosPromise<Response<null>> {
   return axios({
-    url: `/blog/comment/${commentId}`,
+    url: `/blog/comment/id/${commentId}/login/${login}`,
     method: 'DELETE'
   });
 }

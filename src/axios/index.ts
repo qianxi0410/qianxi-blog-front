@@ -23,7 +23,7 @@ http.interceptors.request.use(
 );
 
 http.interceptors.response.use(
-  response => response.data,
+  response => response,
   error => {
     console.log(`err -> ${error}`); // for debug
     return Promise.reject(error);

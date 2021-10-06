@@ -104,11 +104,11 @@ export default class TimeLine extends Vue {
 
     if (!tagName) {
       getPosts(this.page).then(res => {
-        if (res.data === null) {
+        if (res.data.data === null) {
           window.removeEventListener('scroll', this.handleScroll);
           this.showEndText = true;
         } else {
-          this.posts.push(...res.data);
+          this.posts.push(...res.data.data);
         }
       });
     } else {
@@ -117,7 +117,7 @@ export default class TimeLine extends Vue {
           window.removeEventListener('scroll', this.handleScroll);
           this.showEndText = true;
         } else {
-          this.posts.push(...res.data);
+          this.posts.push(...res.data.data);
         }
       });
     }

@@ -109,7 +109,7 @@ import { namespace } from 'vuex-class';
 import { checkStr } from '../utils/checkStr';
 import { getQueryVariable } from '../utils/getQueryVariable';
 import { getUserInfo } from '../api/oauth2';
-import { GitHubUserInfo, Comment } from '../types/index';
+import { GitHubUserInfo, Comment, Response } from '../types/index';
 import { saveComment } from '../api/comment';
 
 const inner = namespace('inner');
@@ -158,13 +158,15 @@ export default class CommentInput extends Vue {
       ...this.info
     };
     saveComment(comment).then(res => {
-      this.comment = '';
-      this.snackbar = true;
+      if (res.data.code === 666) {
+        this.comment = '';
+        this.snackbar = true;
 
-      comment.id = res.data;
-      this.$emit('add', {
-        ...comment
-      });
+        comment.id = res.data.data;
+        this.$emit('add', {
+          ...comment
+        });
+      }
     });
   }
 
@@ -194,7 +196,7 @@ export default class CommentInput extends Vue {
     url = url.replace(/(\?|#)[^'"]*/, '');
     window.history.pushState({}, '0', url);
     getUserInfo(code).then(res => {
-      const obj = JSON.parse(res.data);
+      const obj = JSON.parse(res.data.data);
       this.info = obj as GitHubUserInfo;
       this.setGithubUserInfo({
         name: obj.name as string,

@@ -47,7 +47,7 @@
                 "
                 class="mt-2"
                 plain
-                @click="deleteComment(comment.id)"
+                @click="deleteComment(comment.id, comment.login)"
                 ><v-icon>mdi-delete</v-icon></v-btn
               >
             </v-card>
@@ -86,8 +86,8 @@ export default class CommentShow extends Vue {
     | GitHubUserInfo
     | undefined;
 
-  deleteComment(id: number): void {
-    deleteComment(id).then(res => {
+  deleteComment(id: number, login: string): void {
+    deleteComment(id, login).then(res => {
       this.snackbar = true;
       this.$emit('delete', id);
     });
