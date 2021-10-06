@@ -1,5 +1,5 @@
 export const BlogName = "千禧's Blog";
-// export const Avatar = '@/assets/avatar.jpg'; bug todo
+export const Avatar = '@/assets/avatar.jpg';
 
 // 每页展示的博文项目数量
 export const pageSize = 5;

@@ -33,7 +33,7 @@
       </div>
 
       <v-avatar class="ml-6">
-        <img src="@/assets/avatar.jpg" alt="qianxi" />
+        <img :src="avatar" alt="qianxi" />
       </v-avatar>
 
       <v-spacer></v-spacer>
@@ -66,6 +66,7 @@
 import { Vue, Component } from 'vue-property-decorator';
 import { BlogName } from '@/config/index';
 import { namespace } from 'vuex-class';
+import Avatar from '@/assets/avatar.jpg';
 
 const inner = namespace('inner');
 
@@ -74,6 +75,8 @@ export default class Bar extends Vue {
   mobile = {
     drawer: null
   };
+
+  avatar = Avatar;
 
   blogName = BlogName;
 
