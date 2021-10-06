@@ -25,11 +25,7 @@
           <v-row>
             <v-col cols="10">
               <v-chip-group active-class="primary--text" column>
-                <v-chip
-                  v-for="tag in post.post.tags.String.split('-')"
-                  :key="tag"
-                  class="mr-3"
-                >
+                <v-chip v-for="tag in tags" :key="tag" class="mr-3">
                   {{ tag }}
                 </v-chip>
               </v-chip-group>
@@ -158,6 +154,13 @@ export default class PostsDetail extends Vue {
 
   toc: Array<Tocs> = [];
 
+  get tags(): Array<string> {
+    if (this.post.post.tags.Valid === false) {
+      return [];
+    }
+    return this.post.post.tags.String.split('-');
+  }
+
   handleDelete(id: number): void {
     this.post.comments = this.post.comments.filter(e => e.id !== id);
   }
@@ -166,8 +169,10 @@ export default class PostsDetail extends Vue {
     this.post.comments.push(comment);
   }
 
+  // eslint-disable-next-line class-methods-use-this
   back(): void {
-    this.$router.push({ path: `/posts` });
+    // this.$router.push({ path: `/posts` });
+    window.history.go(-1);
   }
 
   getToc(): void {

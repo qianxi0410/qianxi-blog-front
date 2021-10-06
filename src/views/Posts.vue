@@ -9,7 +9,7 @@
     <v-container>
       <PostCard :post="item" v-for="(item, index) in post" :key="index" />
     </v-container>
-    <v-row justify="center" class="mb-10 mt-n10">
+    <v-row justify="center" v-if="length > 0" class="mb-10 mt-n10">
       <v-pagination
         :color="this.$vuetify.theme.dark ? '#3f3f5f' : 'primary'"
         circle
@@ -35,6 +35,12 @@ import {
 } from '../api/post';
 
 const inner = namespace('inner');
+
+Component.registerHooks([
+  'beforeRouteEnter',
+  'beforeRouteLeave',
+  'beforeRouteUpdate'
+]);
 
 @Component({
   components: {
@@ -102,7 +108,13 @@ export default class Posts extends Vue {
         motto: IndexMotto
       };
     }
-    this.page = 1;
+
+    if (!this.getIsBack) {
+      this.page = 1;
+    } else {
+      this.page = this.getCurrentPage;
+    }
+
     this.handleInput();
     this.getLength();
 
@@ -123,7 +135,7 @@ export default class Posts extends Vue {
       });
     } else {
       getCountWithTag(tagName).then(res => {
-        const total = res.data;
+        const total: number = res.data;
         this.length =
           Math.floor(total / pageSize) + (total % pageSize === 0 ? 0 : 1);
       });
@@ -131,27 +143,7 @@ export default class Posts extends Vue {
   }
 
   mounted(): void {
-    if (this.getIsBack) {
-      this.page = this.getCurrentPage;
-      const { tagName } = this.$route.params;
-      if (tagName) {
-        this.parallax = {
-          src: IndexSrc,
-          title: `Tag: ${tagName}`,
-          motto: `too simple, sometimes naive.`
-        };
-      } else {
-        this.parallax = {
-          src: IndexSrc,
-          title: IndexTitle,
-          motto: IndexMotto
-        };
-      }
-      this.handleInput();
-      this.getLength();
-    } else {
-      this.handleRouteChange();
-    }
+    this.handleRouteChange();
   }
 }
 </script>
