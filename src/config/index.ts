@@ -31,7 +31,7 @@ export const AboutSrc = [
 export const AboutTitle = 'About';
 export const AboutMotto = 'U wanna know something about me ?';
 
-export const baseUrl = 'http://localhost:8080';
+export const baseUrl = 'https://api.qianx1.xyz';
 
 export const github = {
   oauth_uri: 'https://github.com/login/oauth/authorize',
