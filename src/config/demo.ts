@@ -35,8 +35,8 @@ export const baseUrl = 'https://api.qianx1.xyz';
 
 export const github = {
   oauth_uri: 'https://github.com/login/oauth/authorize',
-  client_id: 'eb0d983c962d6461c2cd',
-  client_secret: 'ba188ae374c5e8609f63bcc5e1adf88ca0868727 '
+  client_id: '',
+  client_secret: ''
 };
 
 // 主题

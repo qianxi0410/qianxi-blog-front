@@ -23,3 +23,5 @@ pnpm-debug.log*
 *.sw?
 
 ssl/
+
+src/config/index.ts
