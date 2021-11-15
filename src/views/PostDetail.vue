@@ -1,7 +1,7 @@
 <template>
   <div class="top_container">
     <PostBanner
-      blur
+      :blur="post.post.blur === 1"
       :description="post.post.description.String"
       :src="post.post.url"
       :title="post.post.title"

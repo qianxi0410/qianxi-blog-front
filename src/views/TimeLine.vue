@@ -14,12 +14,7 @@
 import { Vue, Component, Watch } from 'vue-property-decorator';
 import Parallax from '@/components/Parallax.vue';
 import CTimeLine from '@/components/TimeLine.vue';
-import {
-  TimeLineSrc,
-  TimeLineTitle,
-  TimeLineMotto,
-  BlogName
-} from '@/config/index';
+import { TimeLineTitle, TimeLineMotto, BlogName } from '@/config/index';
 
 import { namespace } from 'vuex-class';
 
