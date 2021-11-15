@@ -20,6 +20,8 @@ module.exports = {
     'import/extensions': 'off',
     'import/prefer-default-export': 'off',
     'import/newline-after-import': 'off',
-    'no-else-return': 'off'
+    'no-else-return': 'off',
+    'class-methods-use-this': 'off',
+    'no-underscore-dangle': 'off'
   }
 };

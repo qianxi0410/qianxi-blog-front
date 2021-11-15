@@ -3,7 +3,7 @@
     <Parallax
       blur
       :motto="parallax.motto"
-      :src="parallax.src"
+      :src="TIMELINE_SRC"
       :title="parallax.title"
     />
     <CTimeLine />
@@ -21,6 +21,10 @@ import {
   BlogName
 } from '@/config/index';
 
+import { namespace } from 'vuex-class';
+
+const system = namespace('system');
+
 @Component({
   components: {
     Parallax,
@@ -28,8 +32,9 @@ import {
   }
 })
 export default class TimeLine extends Vue {
+  @system.Getter('TIMELINE_SRC') TIMELINE_SRC!: string[];
+
   parallax = {
-    src: TimeLineSrc,
     title: TimeLineTitle,
     motto: TimeLineMotto
   };
@@ -42,13 +47,11 @@ export default class TimeLine extends Vue {
   handleRouteChange(): void {
     if (this.$route.params.tagName) {
       this.parallax = {
-        src: TimeLineSrc,
         title: `TimeLine: ${this.$route.params.tagName}`,
         motto: `Whatever begins, also ends.`
       };
     } else {
       this.parallax = {
-        src: TimeLineSrc,
         title: TimeLineTitle,
         motto: TimeLineMotto
       };

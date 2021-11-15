@@ -4,7 +4,10 @@
 
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator';
+import { namespace } from 'vuex-class';
 import { show } from './console/index';
+
+const system = namespace('system');
 
 @Component
 export default class App extends Vue {
@@ -13,9 +16,12 @@ export default class App extends Vue {
     this.$vuetify.theme.dark = !(time >= 7 && time < 20);
   }
 
+  @system.Action('getSystemInfo') getSystemInfo!: () => Promise<null>;
+
   mounted(): void {
     this.isDarkTheme();
     show();
+    this.getSystemInfo();
   }
 }
 </script>

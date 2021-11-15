@@ -3,7 +3,7 @@
     <Parallax
       blur
       :motto="parallax.motto"
-      :src="parallax.src"
+      :src="INDEX_SRC"
       :title="parallax.title"
     />
     <v-container>
@@ -25,7 +25,7 @@
 import { Vue, Component, Watch } from 'vue-property-decorator';
 import Parallax from '@/components/Parallax.vue';
 import PostCard from '@/components/PostCard.vue';
-import { IndexSrc, IndexTitle, IndexMotto, pageSize } from '@/config/index';
+import { IndexTitle, IndexMotto, pageSize } from '@/config/index';
 import { namespace } from 'vuex-class';
 import { Post } from '@/types';
 import {
@@ -36,6 +36,7 @@ import {
 } from '../api/post';
 
 const inner = namespace('inner');
+const system = namespace('system');
 
 Component.registerHooks([
   'beforeRouteEnter',
@@ -58,13 +59,14 @@ export default class Posts extends Vue {
 
   @inner.Getter('getIsBack') getIsBack!: boolean;
 
+  @system.Getter('INDEX_SRC') INDEX_SRC!: string[];
+
   @Watch('$route')
   onRouteChange(): void {
     this.handleRouteChange();
   }
 
   parallax = {
-    src: IndexSrc,
     title: IndexTitle,
     motto: IndexMotto
   };
@@ -98,13 +100,11 @@ export default class Posts extends Vue {
     const { tagName } = this.$route.params;
     if (tagName) {
       this.parallax = {
-        src: IndexSrc,
         title: `Tag: ${tagName}`,
         motto: `too simple, sometimes naive.`
       };
     } else {
       this.parallax = {
-        src: IndexSrc,
         title: IndexTitle,
         motto: IndexMotto
       };

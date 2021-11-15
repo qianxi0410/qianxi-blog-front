@@ -7,7 +7,7 @@
         </template>
         <template v-slot:icon>
           <v-avatar>
-            <img src="@/assets/avatar.jpg" alt="qianxi" />
+            <img :src="AVATAR" alt="qianxi" />
           </v-avatar>
         </template>
         <v-card class="elevation-2">
@@ -71,6 +71,7 @@ import { getPosts, getPostsWithTag } from '../api/post';
 import { Post } from '../types/index';
 
 const inner = namespace('inner');
+const system = namespace('system');
 
 @Component
 export default class TimeLine extends Vue {
@@ -81,6 +82,8 @@ export default class TimeLine extends Vue {
   showEndText = false;
 
   @inner.Mutation('setBlogId') setBlogId!: (id: number) => void;
+
+  @system.Getter('AVATAR') AVATAR!: string;
 
   @Watch('$route')
   onRouteChange(): void {

@@ -5,14 +5,14 @@ import { pageSize } from '../config/index';
 
 export function getPost(id: number): AxiosPromise<Response<PostWrapper>> {
   return axios({
-    url: `/blog/post/id/${id}`,
+    url: `/post/id/${id}`,
     method: 'GET'
   });
 }
 
 export function getPosts(page: number): AxiosPromise<Response<Post[]>> {
   return axios({
-    url: `/blog/post/page/${page}/size/${pageSize}`,
+    url: `/post/page/${page}/size/${pageSize}`,
     method: `GET`
   });
 }
@@ -22,21 +22,21 @@ export function getPostsWithTag(
   tag: string
 ): AxiosPromise<Response<Post[]>> {
   return axios({
-    url: `/blog/post/page/${page}/size/${pageSize}/tag/${tag}`,
+    url: `/post/page/${page}/size/${pageSize}/tag/${tag}`,
     method: 'GET'
   });
 }
 
 export function getCount(): AxiosPromise<Response<number>> {
   return axios({
-    url: `/blog/post/count`,
+    url: `/post/count`,
     method: 'GET'
   });
 }
 
 export function getCountWithTag(tag: string): AxiosPromise<Response<number>> {
   return axios({
-    url: `/blog/post/count/tag/${tag}`,
+    url: `/post/count/tag/${tag}`,
     method: 'GET'
   });
 }

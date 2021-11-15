@@ -77,8 +77,19 @@ export interface Color {
   };
 }
 
-export interface Response<T> {
+export interface Response<T = any> {
   code: number;
   msg: string;
   data: T;
+}
+
+export interface SystemInfo {
+  [index: string]: string;
+  AVATAR: string;
+  'BG-1-LIGHT': string;
+  'BG-1-DARK': string;
+  'BG-2-LIGHT': string;
+  'BG-2-DARK': string;
+  'BG-3-LIGHT': string;
+  'BG-3-DARK': string;
 }

@@ -33,7 +33,7 @@
       </div>
 
       <v-avatar class="ml-6">
-        <img :src="avatar" alt="qianxi" />
+        <img :src="AVATAR" alt="qianxi" />
       </v-avatar>
 
       <v-spacer></v-spacer>
@@ -66,9 +66,10 @@
 import { Vue, Component } from 'vue-property-decorator';
 import { BlogName } from '@/config/index';
 import { namespace } from 'vuex-class';
-import Avatar from '@/assets/avatar.jpg';
+import { SystemInfo } from '@/types';
 
 const inner = namespace('inner');
+const system = namespace('system');
 
 @Component
 export default class Bar extends Vue {
@@ -76,11 +77,11 @@ export default class Bar extends Vue {
     drawer: null
   };
 
-  avatar = Avatar;
-
   blogName = BlogName;
 
   @inner.Mutation('setIsBack') setIsBack!: (b: boolean) => void;
+
+  @system.Getter('AVATAR') AVATAR!: string;
 
   get isMobile(): boolean {
     return this.$vuetify.breakpoint.xs;

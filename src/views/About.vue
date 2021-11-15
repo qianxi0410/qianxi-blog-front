@@ -3,7 +3,7 @@
     <Parallax
       blur
       :motto="parallax.motto"
-      :src="parallax.src"
+      :src="ABOUT_SRC"
       :title="parallax.title"
     />
     <v-container class="about">
@@ -15,7 +15,7 @@
         more interested in distributed systems and functional programming.
       </p>
       <p>
-        In my spare time, I like to write some js/rust/go code, all my code
+        In my spare time, I like to write some ts/rust/go code, all my code
         works are open source and pinned on
         <Link href="https://github.com/qianxi0410">GitHub</Link>. If you want,
         you can still contact me on
@@ -36,7 +36,11 @@
 import { Vue, Component } from 'vue-property-decorator';
 import Parallax from '@/components/Parallax.vue';
 import Link from '@/components/Link.vue';
-import { AboutSrc, AboutTitle, AboutMotto, BlogName } from '@/config/index';
+import { AboutTitle, AboutMotto, BlogName } from '@/config/index';
+
+import { namespace } from 'vuex-class';
+
+const system = namespace('system');
 
 @Component({
   components: {
@@ -45,8 +49,9 @@ import { AboutSrc, AboutTitle, AboutMotto, BlogName } from '@/config/index';
   }
 })
 export default class About extends Vue {
+  @system.Getter('ABOUT_SRC') ABOUT_SRC!: string[];
+
   parallax = {
-    src: AboutSrc,
     title: AboutTitle,
     motto: AboutMotto
   };
