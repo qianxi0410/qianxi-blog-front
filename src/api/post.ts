@@ -2,8 +2,10 @@ import { Post, PostWrapper, Response } from '@/types';
 import { AxiosPromise } from 'axios';
 import axios from '../axios/index';
 import { pageSize } from '../config/index';
+import { systemVisit } from './system';
 
 export function getPost(id: number): AxiosPromise<Response<PostWrapper>> {
+  systemVisit(`/post/id/${id}`);
   return axios({
     url: `/post/id/${id}`,
     method: 'GET'

@@ -5,6 +5,7 @@
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator';
 import { namespace } from 'vuex-class';
+import { systemVisit } from './api/system';
 import { show } from './console/index';
 
 const system = namespace('system');
@@ -22,6 +23,10 @@ export default class App extends Vue {
     this.isDarkTheme();
     show();
     this.getSystemInfo();
+  }
+
+  created(): void {
+    systemVisit('/');
   }
 }
 </script>

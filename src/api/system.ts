@@ -8,3 +8,13 @@ export function systemInfo(): AxiosPromise<Response<SystemInfo>> {
     method: 'get'
   });
 }
+
+export function systemVisit(uri: string): AxiosPromise<Response<null>> {
+  return axios({
+    url: `/system/visit`,
+    method: 'POST',
+    data: {
+      uri
+    }
+  });
+}
