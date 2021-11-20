@@ -57,7 +57,7 @@
     <v-container>
       <v-row justify="center" class="py-5">
         <v-avatar class="elevation-3">
-          <img src="../assets/avatar.jpg" alt="qianxi" />
+          <img :src="AVATAR" alt="qianxi" />
         </v-avatar>
         <v-chip draggable class="ml-2" @click="go">
           本文采用CC BY 4.0协议
@@ -109,6 +109,7 @@ import { getPost } from '../api/post';
 import { Comment, PostWrapper, Tocs } from '../types/index';
 
 const inner = namespace('inner');
+const system = namespace('system');
 
 @Component({
   components: {
@@ -125,6 +126,8 @@ export default class PostsDetail extends Vue {
   @inner.Mutation('setBlogId') setBlogId!: (id: number) => void;
 
   @inner.Mutation('setIsBack') setIsBack!: (b: boolean) => void;
+
+  @system.Getter('AVATAR') AVATAR!: string;
 
   post: PostWrapper = {
     post: {
@@ -143,7 +146,8 @@ export default class PostsDetail extends Vue {
       tags: {
         String: '',
         Valid: false
-      }
+      },
+      blur: 0
     },
     pre_title: '',
     next_title: '',

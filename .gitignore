@@ -25,3 +25,4 @@ pnpm-debug.log*
 ssl/
 
 src/config/index.ts
+dist_admin/
